@@ -1,10 +1,12 @@
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
   return (
-    <div className="App">
+    <>
+      <CssBaseline />
       <p>this is an App</p>
-    </div>
+    </>
   );
 }
 

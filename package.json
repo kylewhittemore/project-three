@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/kylewhittemore/project-three#readme",
   "dependencies": {
+    "@material-ui/core": "^4.3.2",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/styles": "^4.3.0",
     "express": "^4.17.1",
     "mongoose": "^5.6.9",
     "morgan": "^1.9.1",
