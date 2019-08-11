@@ -10,7 +10,7 @@ app.use(logger('dev'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'client/build')))
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/sampleDB'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://root:123root@ds261567.mlab.com:61567/heroku_b1fvqc7z'
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 const connection = mongoose.connection;
