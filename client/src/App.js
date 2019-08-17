@@ -1,11 +1,10 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import Button from 'react-bootstrap/Button'
 
 function App() {
   return (
     <>
-      <CssBaseline />
-      <p>this is an App</p>
+      <p>this is an app</p>
     </>
   );
 }
