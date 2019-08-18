@@ -67,7 +67,7 @@ const GrowSchema = new Schema({
         type: String,
         required: false
     },
-    conopyTechniqueNotes: {
+    canopyTechniqueNotes: {
         type: String,
         required: false
     },
