@@ -16,11 +16,14 @@ const path = require('path')
 const logger = require('morgan')
 const routes = require('./routes')
 const dbConnection = require('./database')
+const bodyParser = require('body-parser')
 
 const app = express()
 
 // Morgan Logger middleware
 app.use(logger('dev'))
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.urlencoded({ extended: true }))
 
