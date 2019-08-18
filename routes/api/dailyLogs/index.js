@@ -12,6 +12,8 @@ routes.post('/', dailyLogPost)
 const getAllLogs = require('./getAllLogs')
 routes.get('/', getAllLogs)
 
+// This route updates a log by its mongo ID
+// Tested working
 const updateById = require('./dailyLogPut')
 routes.put('/:id', updateById)
 
