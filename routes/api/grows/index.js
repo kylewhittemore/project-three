@@ -23,4 +23,9 @@ routes.get('/', getAllGrows)
 const deleteById = require('./growDelete')
 routes.delete('/:id', deleteById)
 
+// This route gets a daily log by its mongo ID
+// NOT TESTED
+const getById = require('./getGrowById')
+routes.get('/:id', getById)
+
 module.exports = routes
