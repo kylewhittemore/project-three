@@ -17,6 +17,8 @@ routes.get('/', getAllLogs)
 const updateById = require('./dailyLogPut')
 routes.put('/:id', updateById)
 
+// This route deletes a daily log by its mongo ID
+// Tested working
 const deleteById = require('./dailyLogDelete')
 routes.delete('/:id', deleteById)
 
