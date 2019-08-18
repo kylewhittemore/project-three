@@ -35,8 +35,6 @@ function homePage() {
         </Row>
     </Container>
 
-
-
 };
 
 export default homePage();

@@ -28,8 +28,8 @@ export default function DailyLog(props) {
     async function postDailyLog() {
         // for the post route, for now it just posts to the bucket of logs
         // once the grow & users collections are established the line below will read:
-        // let response = await Axios.post('api/daily/' + props.growId, newLog)
-        let response = await Axios.post('/api/daily', formData)
+        // let response = await Axios.post('api/daily/' + props.growId, newLog) or similar
+        let response = await Axios.post('/api/dailylogs', formData)
         return response
     }
 
