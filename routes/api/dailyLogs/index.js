@@ -2,8 +2,8 @@ const routes = require('express').Router()
 
 // This route posts the daily log form 
 // Tested working
-const dailyLog = require('./dailyLog')
-routes.post('/', dailyLog)
+const dailyLogPost = require('./dailyLogPost')
+routes.post('/', dailyLogPost)
 
 // This route returns all logs in the DB
 // It is only used for development, in production
@@ -11,5 +11,8 @@ routes.post('/', dailyLog)
 // Tested Working
 const getAllLogs = require('./getAllLogs')
 routes.get('/', getAllLogs)
+
+const updateById = require('./dailyLogPut')
+routes.put('/:id', updateById)
 
 module.exports = routes

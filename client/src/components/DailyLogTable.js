@@ -1,66 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Axios from 'axios'
+import LoadingSpinner from './LoadingSpinner'
 
 
 export default function DailyLogTable(props) {
 
-    const logData = [
-        {
-            _id: 1234567,
-            logId: 123456,
-            date: "12/12/2012",
-        },
-        {
-            _id: 1234561,
-            logId: 123456,
-            date: "12/12/2012",
-        },
-        {
-            _id: 1234562,
-            logId: 123456,
-            date: "12/12/2012",
-        },
-        {
-            _id: 1234563,
-            logId: 123456,
-            date: "12/12/2012",
-        },
-        {
-            _id: 1234564,
-            logId: 123456,
-            date: "12/12/2012",
-        },
-        {
-            _id: 1234565,
-            logId: 123456,
-            date: "12/12/2012",
-        },
-        {
-            _id: 1234566,
-            logId: 123456,
-            date: "12/12/2012",
-        }
-    ]
-
-    const [logs, setLogs] = useState(logData)
+    const [logs, setLogs] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function fetchLogs() {
-        //   setLoading(true);
-          let response = await Axios.get('/api/daily');
-          let data = response.data
-          return data;
+            setLoading(true);
+            let response = await Axios.get('/api/daily');
+            let data = response.data
+            return data;
         }
         fetchLogs().then(data => {
-          setLogs(data)
-        //   setLoading(false)
-        }).catch(err => console.log(err))
-        // }).catch(err => setLoading(false))
-      }, []);
+            setLogs(data)
+            setLoading(false)
+            // }).catch(err => console.log(err))
+        }).catch(err => setLoading(false))
+    }, []);
 
     function TableHead() {
-        
+
         return (
             <thead>
                 <tr>
@@ -99,10 +63,13 @@ export default function DailyLogTable(props) {
     }
 
     return (
-        <Table>
-            <TableHead />
-            <TableBody />
-        </Table>
+        loading ?
+            <LoadingSpinner />
+            :
+            <Table>
+                <TableHead />
+                <TableBody />
+            </Table>
     )
 
 }
