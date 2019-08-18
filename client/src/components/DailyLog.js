@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col';
+import Axios from 'axios'
 
 export default function DailyLog(props) {
 
     const initialFormState = {
         date: "",
-        plantAppearance: "",
+        plantAppearance: "happy",
         didWater: false,
         didFeed: false,
         didTransplant: false,
@@ -16,18 +17,55 @@ export default function DailyLog(props) {
 
     const [formData, setFormData] = useState(initialFormState)
 
+    async function postDailyLog() {
+
+        // let newLog = {
+        //     date: formData.date,
+        //     plantAppearance: formData.plantAppearance,
+        //     didWater: formData.didWater,
+        //     didFeed: formData.didFeed,
+        //     didTransplant: formData.didTransplant,
+        //     notes: formData.notes
+        // }
+
+        // for the post route, for now it just posts to the bucket of logs
+        // once the grow & users collections are established the line below will read:
+        // let response = await Axios.post('api/daily/' + props.growId, newLog)
+        let response = await Axios({
+            method: 'post',
+            url: '/api/daily',
+            data: {
+                date: formData.date,
+                plantAppearance: formData.plantAppearance,
+                didWater: formData.didWater,
+                didFeed: formData.didFeed,
+                didTransplant: formData.didTransplant,
+                notes: formData.notes
+            }
+        })
+        console.log(response)
+        return response
+    }
+
+    async function handleFormSubmit(event) {
+        event.preventDefault()
+        // console.log(formData)
+        await postDailyLog(formData)
+        setFormData(initialFormState)
+    }
+
     const handleInputChange = event => {
         const target = event.target
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
-        
+
         setFormData({ ...formData, [name]: value })
-        console.log(formData)
+        // console.log(formData)
     }
 
     return (
 
-        <Form>
+        <Form onSubmit={handleFormSubmit}>
             <Form.Row className="m-1">
                 <Col>
                     <Form.Group className="m-1" controlId="log.ControlInput1">
@@ -39,9 +77,9 @@ export default function DailyLog(props) {
                     <Form.Group className="m-1" controlId="log.ControlSelect1">
                         <Form.Label>Plant appearance:</Form.Label>
                         <Form.Control value={formData.plantAppearance} name="plantAppearance" onChange={handleInputChange} as="select">
-                            <option>Happy</option>
-                            <option>Neutral</option>
-                            <option>Sad</option>
+                            <option>happy</option>
+                            <option>neutral</option>
+                            <option>sad</option>
                         </Form.Control>
                     </Form.Group>
                 </Col>
@@ -75,5 +113,4 @@ export default function DailyLog(props) {
         </Form>
 
     )
-
 }
