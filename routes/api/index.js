@@ -1,8 +1,6 @@
-const routes = require('express').Router()
+const routes = require('express').Router();
 
-// This route posts the daily log form 
-// Tested working
-const dailyLog = require('./dailyLog')
-routes.post('/daily', dailyLog)
+const dailyLogs = require('./dailylogs')
+routes.use('/daily', dailyLogs)
 
 module.exports = routes
