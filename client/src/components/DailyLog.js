@@ -6,6 +6,11 @@ import Axios from 'axios'
 
 export default function DailyLog(props) {
 
+    // This is a functional, stateful component.  
+    // It is using the 'useState' hook to avoid requiring a class-based component
+    // The relevant state for this component is 'formData' and its updater is 'setFormdata'
+
+    // empty form object to set formData state to after submission
     const initialFormState = {
         date: "",
         plantAppearance: "happy",
@@ -15,42 +20,23 @@ export default function DailyLog(props) {
         notes: ""
     }
 
+    // This is where the component's formData state and its updater 
+    // are defined with the'useState' hook
     const [formData, setFormData] = useState(initialFormState)
 
+    
     async function postDailyLog() {
-
-        // let newLog = {
-        //     date: formData.date,
-        //     plantAppearance: formData.plantAppearance,
-        //     didWater: formData.didWater,
-        //     didFeed: formData.didFeed,
-        //     didTransplant: formData.didTransplant,
-        //     notes: formData.notes
-        // }
-
         // for the post route, for now it just posts to the bucket of logs
         // once the grow & users collections are established the line below will read:
         // let response = await Axios.post('api/daily/' + props.growId, newLog)
-        let response = await Axios({
-            method: 'post',
-            url: '/api/daily',
-            data: {
-                date: formData.date,
-                plantAppearance: formData.plantAppearance,
-                didWater: formData.didWater,
-                didFeed: formData.didFeed,
-                didTransplant: formData.didTransplant,
-                notes: formData.notes
-            }
-        })
-        console.log(response)
+        let response = await Axios.post('/api/daily', formData)
         return response
     }
 
     async function handleFormSubmit(event) {
         event.preventDefault()
-        // console.log(formData)
-        await postDailyLog(formData)
+        let response = await postDailyLog(formData)
+        console.log(response)
         setFormData(initialFormState)
     }
 
@@ -58,9 +44,7 @@ export default function DailyLog(props) {
         const target = event.target
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
-
         setFormData({ ...formData, [name]: value })
-        // console.log(formData)
     }
 
     return (

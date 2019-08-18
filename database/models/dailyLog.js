@@ -6,27 +6,27 @@ const DailyLogSchema = new Schema({
 
     date: {
         type: Date,
-        // required: true
+        required: true
     },
     plantAppearance: {
         type: String,
-        // required: true
+        required: true
     },
     didWater: {
         type: Boolean,
-        // required: true
+        required: true
     },
     didFeed: {
         type: Boolean,
-        // required: true
+        required: true
     },
     didTransplant: {
         type: Boolean,
-        // required: true
+        required: true
     },
     notes: {
         type: String,
-        // required: false
+        required: false
     }
 
 })
