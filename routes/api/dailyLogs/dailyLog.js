@@ -1,4 +1,4 @@
-const DailyLog = require('../../database/models/dailyLog.js')
+const DailyLog = require('../../../database/models/dailyLog')
 
 module.exports = (req, res) => {
     DailyLog.create(req.body)
