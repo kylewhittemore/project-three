@@ -17,4 +17,7 @@ routes.get('/', getAllLogs)
 const updateById = require('./dailyLogPut')
 routes.put('/:id', updateById)
 
+const deleteById = require('./dailyLogDelete')
+routes.delete('/:id', deleteById)
+
 module.exports = routes

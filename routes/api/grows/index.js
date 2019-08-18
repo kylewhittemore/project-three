@@ -16,4 +16,11 @@ routes.put('/:id', updateById)
 const getAllGrows = require('./getAllGrows')
 routes.get('/', getAllGrows)
 
+// This route will delete an entire grow by id
+// It will need to delete all of the associated
+// daily logs as well
+// It is not tested
+const deleteById = require('./growDelete')
+routes.delete('/:id', deleteById)
+
 module.exports = routes
