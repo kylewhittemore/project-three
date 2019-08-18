@@ -1,0 +1,19 @@
+const routes = require('express').Router()
+
+// This route posts a new grow
+// Tested working
+const growPost = require('./growPost')
+routes.post('/', growPost)
+
+// This route updates a grow by ID
+// Tested working
+const updateById = require('./growPut') 
+routes.put('/:id', updateById)
+
+// This route gets all the grows, it is for development only as 
+// in production the user should only be seeing their own grows
+// Tested working
+const getAllGrows = require('./getAllGrows')
+routes.get('/', getAllGrows)
+
+module.exports = routes
