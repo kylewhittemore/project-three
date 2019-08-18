@@ -5,7 +5,6 @@ mongoose.Promise = Promise
 const DailyLogSchema = new Schema({
     logId: {
         type: Number,
-        // unique: true,
         required: false,
         // required: true,   SET TO TRUE ONCE LOGIC IN PLACE
     },

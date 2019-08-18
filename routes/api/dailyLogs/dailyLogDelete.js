@@ -1,7 +1,7 @@
 const DailyLog = require('../../../database/models/dailyLog')
 
 module.exports = (req, res) => {
-    DailyLog.find()
-        .then(dbDailyLogs => res.json(dbDailyLogs))
+    DailyLog.deleteOne({ _id: req.params.id })
+        .then(dbDailyLog => res.json(dbDailyLog))
         .catch(err => res.json(err))
 }

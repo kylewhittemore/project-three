@@ -17,4 +17,14 @@ routes.get('/', getAllLogs)
 const updateById = require('./dailyLogPut')
 routes.put('/:id', updateById)
 
+// This route deletes a daily log by its mongo ID
+// Tested working
+const deleteById = require('./dailyLogDelete')
+routes.delete('/:id', deleteById)
+
+// This route gets a daily log by its mongo ID
+// NOT TESTED
+const getById = require('./getLogById')
+routes.get('/:id', getById)
+
 module.exports = routes
