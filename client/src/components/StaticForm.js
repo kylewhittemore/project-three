@@ -2,10 +2,13 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col"
 
-export default function staticForm() {
+export default function StaticForm() {
 
     return (
+        <div>
+
         <Form>
             <Form.Row>
                 <Form.Group as={Col} controlId="log.ControlInput1">
@@ -21,7 +24,7 @@ export default function staticForm() {
                 </Form.Group>
                 <Form.Group as={Col} controlId="log.ControlInput3">
                     <Form.Label>Planned Harvest Date:</Form.Label>
-                    <form.Control type="text" />
+                    <Form.Control type="text" />
                 </Form.Group>
             </Form.Row>
 
@@ -147,8 +150,8 @@ export default function staticForm() {
             <Button variant="outline" type="submit">
                 Submit
             </Button>
-
         </Form>
+        </div>
     );
 
 };
