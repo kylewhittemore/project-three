@@ -1,7 +1,11 @@
 const Grow = require('../../../database/models/grow')
 
 module.exports = (req, res) => {
-    Grow.find()
-        .then(dbGrows => res.json(dbGrows))
-        .catch(err => res.json(err))
+    Grow.find({}).populate("dailyLogs").exec(function (err, dailyLogs) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.json(dailyLogs)
+        };
+    });
 }

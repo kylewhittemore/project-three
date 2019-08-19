@@ -6,6 +6,12 @@ import LoadingSpinner from './LoadingSpinner'
 
 export default function DailyLogTable(props) {
 
+    const styles = {
+        icon: {
+            cursor: "pointer"
+        }
+    }
+
     // This is a functional, stateful component.  
     // It is using the 'useState' hook to avoid requiring a class-based component
     // The relevant states for this component are logs and loading.  The logs are fetched 
@@ -66,8 +72,12 @@ export default function DailyLogTable(props) {
                     <tr key={log._id}>
                         <td>{log.logId}</td>
                         <td>{log.date}</td>
-                        <td>log.grow</td>
-                        <td>notes</td>
+                        <td>season name</td>
+                        <td>
+                            <i style={styles.icon} className="p-1 far fa-sticky-note"></i>
+                            <i style={styles.icon} className="p-1 far fa-edit"></i>
+                            <i style={styles.icon} className="p-1 far fa-trash-alt"></i>
+                        </td>
                     </tr>
                 ))}
             </tbody>

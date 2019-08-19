@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-mongoose.Promise = Promise
 
 const DailyLogSchema = new Schema({
     logId: {
@@ -31,9 +30,12 @@ const DailyLogSchema = new Schema({
     notes: {
         type: String,
         required: false
+    },
+    grow: {
+        type: Schema.Types.ObjectId,
+        ref: "Grow"
     }
 
 })
 
-const DailyLog = mongoose.model('DailyLog', DailyLogSchema)
-module.exports = DailyLog
+module.exports = mongoose.model('DailyLog', DailyLogSchema)
