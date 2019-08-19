@@ -2,14 +2,15 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col"
+import Col from "react-bootstrap/Col";
+import "./style.css";
 
 export default function StaticForm() {
 
     return (
         <div>
 
-        <Form>
+        <Form className="mx-5 my-5">
             <Form.Row>
                 <Form.Group as={Col} controlId="log.ControlInput1">
                     <Form.Label>Season Name:</Form.Label>
