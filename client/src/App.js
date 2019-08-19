@@ -1,12 +1,15 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button'
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import HomePage from "./pages/Home/Home";
 
 function App() {
   return (
-    <>
-      <p>this is an app</p>
-    </>
+    <Router>
+      <div>
+        <Route exact path="/" component={HomePage} />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

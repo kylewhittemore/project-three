@@ -36,7 +36,7 @@ function HomePage() {
                 </Row>
             </Container>
         </div>
-    )
+    );
 };
 
 export default HomePage;
