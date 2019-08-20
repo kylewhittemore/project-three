@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import "./Home.css";
+import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -18,12 +18,7 @@ function HomePage() {
                 </Row>
                 <Row className="justify-content-center">
                     <Button variant="outline-success" size="lg">
-                        <Link to="/currentseason:id">Current Seasons</Link>
-                    </Button>
-                </Row>
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/pastseasons">Past Seasons</Link>
+                        <Link to="/seasons">Seasons</Link>
                     </Button>
                 </Row>
                 <Row className="justify-content-center">
