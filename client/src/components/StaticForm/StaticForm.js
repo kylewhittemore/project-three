@@ -35,8 +35,9 @@ class StaticForm extends Component {
 
     // setting each states value when the input is changed
     handleInputChange = event => {
-        let value = event.target.value;
-        const name = event.target.name;
+        let target = event.target;
+        const name = target.name;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
 
         this.setState({
             [name]: value
@@ -116,8 +117,6 @@ class StaticForm extends Component {
                         <Form.Group as={Col} controlId="log.ControlInput5">
                             <Form.Label>Lineage:</Form.Label>
                             <Form.Control name="lineage" value={this.state.lineage} onChange={this.handleInputChange} type="text" />
-                            {/* for the N/A checkbox if someone doesn't know the lineage, how do we set model? */}
-                            <Form.Check name="lineage" value={this.state.lineage} onChange={this.handleInputChange} type="checkbox" id="formGridCheckbox" label="N/A" />
                         </Form.Group>
 
                         <Form.Group as={Col} id="log.ControlInput6">
@@ -130,19 +129,18 @@ class StaticForm extends Component {
                         <Form.Group as={Col} controlId="log.ControlInput7">
                             <Form.Label>Breeder:</Form.Label>
                             <Form.Control name="breeder" value={this.state.breeder} onChange={this.handleInputChange} type="text" />
-                            <Form.Check name="breeder" value={this.state.breeder} onChange={this.handleInputChange} type="checkbox" id="formGridCheckbox" label="N/A" />
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group as={Col} id="formGridCheckbox">
-                            <Form.Check name="starterPlantType" value={this.state.starterPlantType} onChange={this.handleInputChange} type="checkbox" label="Seeds" />
+                        <Form.Group as={Col} controlId="log.ControlSelect3">
+                            <Form.Label>Starting Plant Type:</Form.Label>
+                            <Form.Control name="starterPlantType" value={this.state.starterPlantType} onChange={this.handleInputChange} as="select">
+                                <option>Seeds</option>
+                                <option>Clones</option>
+                                <option>Teens</option>
+                            </Form.Control>
                         </Form.Group>
-
-                        <Form.Group as={Col} id="formGridCheckbox">
-                            <Form.Check name="starterPlantType" value={this.state.starterPlantType} onChange={this.handleInputChange} type="checkbox" label="Clones" />
-                        </Form.Group>
-
                         <Form.Group as={Col} controlId="log.ControlInput8">
                             <Form.Label>Number of Plants:</Form.Label>
                             <Form.Control name="numPlants" value={this.state.numPlants} onChange={this.handleInputChange} type="number" />
