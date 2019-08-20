@@ -50,7 +50,7 @@ export default function DailyLogTable(props) {
 
     async function getNotes(id) {
         let response = await Axios.get(`/api/daily/${id}`)
-        console.log(response)
+        // console.log(response)
         return response.data.notes
     }
 
@@ -121,7 +121,7 @@ export default function DailyLogTable(props) {
                             ></i>
                             <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
                                 event.preventDefault()
-                                updateLog(log._id).then(response => console.log(response))
+                                updateLog(log._id).then(getLogs)
                             }}
                             ></i>
                             <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {
