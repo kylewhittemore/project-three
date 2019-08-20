@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
+import Axios from "axios";
 import "./style.css";
 
 class StaticForm extends Component {
@@ -26,6 +27,10 @@ class StaticForm extends Component {
         canopyTechniqueNotes: ""
     };
 
+    postNewSeasonStatic(formData) {
+        Axios.post('/api/grow', formData);
+    }
+
     handleInputChange = event => {
         let value = event.target.value;
         const name = event.target.name;
@@ -37,6 +42,12 @@ class StaticForm extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+
+        let formData = this.state;
+
+        this.postNewSeasonStatic(formData);
+
+        console.log(this.state.floweringTime);
 
         this.setState({
             seasonName: "",
@@ -100,7 +111,7 @@ class StaticForm extends Component {
 
                     <Form.Group as={Col} id="log.ControlInput6">
                         <Form.Label>Flowering Time (Days):</Form.Label>
-                        <Form.Control name="floweringTime" value={this.state.floweringTime} onChange={this.handleInputChange} type="text" />
+                        <Form.Control name="floweringTime" value={this.state.floweringTime} onChange={this.handleInputChange} type="number" />
                     </Form.Group>
                 </Form.Row>
 
