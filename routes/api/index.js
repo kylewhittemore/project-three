@@ -5,4 +5,7 @@ const routes = require('express').Router()
 const dailyLog = require('./dailyLog')
 routes.post('/daily', dailyLog)
 
+const users = require('./user')
+routes.use('/user', users)
+
 module.exports = routes
