@@ -1,11 +1,11 @@
 import React from 'react';
-import TestPage from './pages/UserLogin/UserLogin';
+import Test from './pages/UserSignup/UserSignup';
 
-export default function Test() {
+export default function App() {
 
     return (
         <>
-            <TestPage />
+            <Test />
         </>
     )
 }
