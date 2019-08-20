@@ -6,7 +6,7 @@ export default function Test() {
 
     return (
         <>
-            <DailyLog />
+            <DailyLogTable />
         </>
     )
 }

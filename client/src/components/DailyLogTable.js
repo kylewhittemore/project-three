@@ -20,6 +20,7 @@ export default function DailyLogTable(props) {
 
     const [logs, setLogs] = useState([])
     const [loading, setLoading] = useState(true)
+    
 
     useEffect(() => {
         async function fetchLogs() {
@@ -33,6 +34,44 @@ export default function DailyLogTable(props) {
             setLoading(false)
         }).catch(err => setLoading(false))
     }, []);
+
+    async function getLogs() {
+        let response = await Axios.get('/api/daily')
+        setLogs(response.data)
+    }
+
+    async function deleteLog(id) {
+        let response = await Axios({
+            method: 'delete',
+            url: `/api/daily/${id}`
+        })
+        return response
+    }
+
+    async function getNotes(id) {
+        let response = await Axios.get(`/api/daily/${id}`)
+        console.log(response)
+        return response.data.notes
+    }
+
+    async function updateLog(id) {
+
+        const log = {
+            date: "05/21/18",
+            didFeed: false,
+            didTransplant: false,
+            didWater: true,
+            notes: "put note",
+            plantAppearance: "mellow"
+        }
+
+        let response = await Axios({
+            method: 'put',
+            url: `/api/daily/${id}`,
+            data: log
+        })
+        console.log(response)
+    }
 
     // TableHead is a static component, and is rendered seperately from the dynamic TableBody below
     // My thought here is that the text in each cell will be a link. 
@@ -74,9 +113,22 @@ export default function DailyLogTable(props) {
                         <td>{log.date}</td>
                         <td>season name</td>
                         <td>
-                            <i style={styles.icon} className="p-1 far fa-sticky-note"></i>
-                            <i style={styles.icon} className="p-1 far fa-edit"></i>
-                            <i style={styles.icon} className="p-1 far fa-trash-alt"></i>
+                            <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
+                                event.preventDefault()
+                                getNotes(log._id).then(notes => console.log(notes))
+
+                            }}
+                            ></i>
+                            <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
+                                event.preventDefault()
+                                updateLog(log._id).then(response => console.log(response))
+                            }}
+                            ></i>
+                            <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {
+                                event.preventDefault()
+                                deleteLog(log._id).then(getLogs)
+                            }}
+                            ></i>
                         </td>
                     </tr>
                 ))}

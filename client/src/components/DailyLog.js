@@ -23,7 +23,6 @@ export default function DailyLog(props) {
     // This is where the component's formData state and its updater 
     // are defined with the'useState' hook
     const [formData, setFormData] = useState(initialFormState)
-
     
     async function postDailyLog() {
         // for the post route, for now it just posts to the bucket of logs
