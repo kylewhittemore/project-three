@@ -6,7 +6,7 @@ import NewSeason from "./pages/NewSeason/NewSeason";
 import Seasons from "./pages/Seasons/Seasons";
 import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/LogOut/LogOut";
-import Register from "./pages/LogOut/LogOut";
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
