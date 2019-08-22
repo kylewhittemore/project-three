@@ -20,7 +20,7 @@ export default function DailyLog(props) {
     const [formData, setFormData] = useState(initialFormState)
 
 
-    useEffect(() => {
+    useEffect((props) => {
 
         async function fetchLog(id) {
             let response = await Axios.get(`/api/daily/${id}`);

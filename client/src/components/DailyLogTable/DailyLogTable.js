@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Axios from 'axios'
-import LoadingSpinner from './LoadingSpinner'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 
 export default function DailyLogTable(props) {
@@ -87,7 +87,7 @@ export default function DailyLogTable(props) {
                 {logs.map(log => (
                     <tr key={log._id}>
                         <td>{log.logId}</td>
-                        <td>{log.date}</td>
+                        <td>{log.date.slice(0, 10)}</td>
                         <td>season name</td>
                         <td>
                             <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
