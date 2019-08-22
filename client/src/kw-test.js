@@ -6,7 +6,7 @@ export default function Test() {
 
     return (
         <>
-            <DailyLogTable />
+            <DailyLog logId={"5d5df0b8dc77d3484b38b845"}/>
         </>
     )
 }
