@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-mongoose.Promise = Promise
 
 const GrowSchema = new Schema({
     seasonName: {
@@ -71,8 +70,13 @@ const GrowSchema = new Schema({
         type: String,
         required: false
     },
+    dailyLogs: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "DailyLog"
+        }
+    ]
 
 })
 
-const Grow = mongoose.model('Grow', GrowSchema)
-module.exports = Grow
+module.exports = mongoose.model('Grow', GrowSchema)
