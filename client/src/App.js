@@ -6,6 +6,7 @@ import NewSeason from "./pages/NewSeason/NewSeason";
 import Seasons from "./pages/Seasons/Seasons";
 import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/LogOut/LogOut";
+import Register from "./pages/LogOut/LogOut";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/seasons" component={Seasons} />
         <Route exact path="/settings" component={Settings} />
         <Route exact path="/logout" component={LogOut} />
+        <Route exact path="/register" component={Register} />
       </div>
     </Router>
   );
