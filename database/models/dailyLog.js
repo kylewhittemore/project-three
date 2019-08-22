@@ -27,6 +27,18 @@ const DailyLogSchema = new Schema({
         type: Boolean,
         required: true
     },
+    didDefoliate: {
+        type: Boolean,
+        required: true
+    },
+    didFlip: {
+        type: Boolean,
+        required: true
+    },
+    didFlush: {
+        type: Boolean,
+        required: true
+    },
     notes: {
         type: String,
         required: false
