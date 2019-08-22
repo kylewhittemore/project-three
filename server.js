@@ -32,6 +32,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(passport.initialize());
 app.use(passport.session());
 
+require('./config/passport')(passport)
 
 // serve the client/build folder as the static/public directory
 app.use(express.static(path.join(__dirname, 'client/build')))
