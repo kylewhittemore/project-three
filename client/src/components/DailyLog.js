@@ -51,9 +51,19 @@ export default function DailyLog(props) {
         return response
     }
 
+    async function putDailyLog() {
+        let response = await Axios({
+            method: "PUT",
+            url: `/api/daily/${props.logId}`,
+            data: formData
+        })
+
+        return response
+    }
+
     async function handleFormSubmit(event) {
         event.preventDefault()
-        let response = await postDailyLog(formData)
+        let response = props.logId ? await putDailyLog() : await postDailyLog()
         console.log(response)
         setFormData(initialFormState)
     }

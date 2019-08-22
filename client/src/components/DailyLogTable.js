@@ -12,12 +12,6 @@ export default function DailyLogTable(props) {
         }
     }
 
-    // This is a functional, stateful component.  
-    // It is using the 'useState' hook to avoid requiring a class-based component
-    // The relevant states for this component are logs and loading.  The logs are fetched 
-    // on component render useing the useEffect hook.  Loading is used to toggle the 
-    // LoadingSpinner display.
-
     const [logs, setLogs] = useState([])
     const [loading, setLoading] = useState(true)
     
