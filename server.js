@@ -17,6 +17,7 @@ const logger = require('morgan')
 const routes = require('./routes')
 const dbConnection = require('./database')
 const bodyParser = require('body-parser')
+const passport = require('passport')
 
 const app = express()
 
@@ -26,6 +27,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.urlencoded({ extended: true }))
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // serve the client/build folder as the static/public directory
 app.use(express.static(path.join(__dirname, 'client/build')))

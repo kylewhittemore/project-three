@@ -7,13 +7,14 @@ const userSchema = new Schema({
 
     username: { 
         type: String, 
-        // I may be mistaken, but I am not sure if adding "unique" here will actually require the username to be unique.  If it is, we should still have authentication prior to submission on the front end. (KW)
-        unique: false, 
-        required: false 
+        required: true 
+    },
+    email: { 
+        type: String, 
+        required: true 
     },
     password: {
         type: String,
-        unique: false,
         required: true
     }
 
@@ -25,6 +26,12 @@ userSchema.methods = {
     },
     hashPassword: plainTextPassword => {
         return bcrypt.hashSync(plainTextPassword, 10)
+    // },
+    // getUserById: function (id) {
+    //     return User.findById(id)
+    // },
+    // getUserByUnsername: function (username) {
+    //     return User.findOne({username})
     }
 }
 
