@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
+// import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-// import Axios from 'axios';
+import Axios from 'axios';
 import './style.css';
 
 
@@ -12,10 +13,9 @@ class UserSignup extends Component {
 
    state = {
         userid: "",
-        // email: "",
+        email: "",
         password: "",
-        password2: "",
-        errors: {}
+        password2: ""
         }; 
     
     handleInputChange = e => {
@@ -24,18 +24,37 @@ class UserSignup extends Component {
 
     handleFormSubmit = e => {
         e.preventDefault();
-        const formData = {
-          name: this.state.username,
-        //   email: this.state.email,
-          password: this.state.password,
-          password2: this.state.password2
-        };
-        console.log(formData);
-    };
+        console.log("submit clicked")
+        if (this.state.password !== this.state.password2) {
+            alert("passwords are not the same");
+            console.log("passwords are not the same");
+        } else {
+            if (!this.state.username || !this.state.email || !this.state.password) {
+                alert("All fields are required");
+            } else if (this.state.password.length < 6) {
+                alert(
+                `Choose a more secure password `);
+            //   } else {
+                //   }
+            } else {
+                const newUser = {
+                        username: this.state.username,
+                        email: this.state.email,
+                        password: this.state.password
+                    };
+                    console.log(newUser);
+                    Axios.post('/api/user', newUser)
+                    .then(user => {
+                        console.log(`${user.username} is registered`) 
+                        alert(`Thank You for registering ${user.userame}`)
+                        window.location.href = '/'
+                    })
+                }
+            };
+        }
+    
 
     render () {
-
-        // const { errors } = this.state;
 
         return ( 
             <Container >
@@ -47,6 +66,12 @@ class UserSignup extends Component {
                         <Form.Group controlId="formUsername" >
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange}  />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row >
+                        <Form.Group controlId="formUserEmail" >
+                            <Form.Label>Email Address</Form.Label>
+                            <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleInputChange}  />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row >

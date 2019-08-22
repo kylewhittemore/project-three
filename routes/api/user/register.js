@@ -1,12 +1,13 @@
 const User= require('../../../database/models/user')
+const bcrypt=require('bcryptjs')
 
 module.exports = (req, res) => {
 
-    const { username, password, password2 } = req.body
+    const { username, email, password } = req.body
 
-    if (password != password2) {
-        console.log('Passwords do not match');
-    }
+    // if (password != password2) {
+    //     console.log('Passwords do not match');
+    // }
 
     User.findOne({username})
         .then(user => {
@@ -15,18 +16,19 @@ module.exports = (req, res) => {
             } else {
                 const newUser = ({
                     username,
+                    email,
                     password
                 })
 
-                bcrypt.genSalt(13, (err, salt) => {
+                bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if (err) throw err;
                         newUser.password = hash;
                         User.create( newUser )
                             .then(user => {
                                 console.log("new user: " + JSON.stringify(user));
-                                // res.redirect('/login');
-                                res.status(200);
+                                // res.redirect('/');
+                                // return user
                             })
                             .catch(err => console.log(err));
                         });
