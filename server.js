@@ -18,7 +18,6 @@ const routes = require('./routes')
 const dbConnection = require('./database')
 const bodyParser = require('body-parser')
 const passport = require('passport')
-
 const app = express()
 
 // Morgan Logger middleware
