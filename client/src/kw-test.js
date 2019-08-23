@@ -3,13 +3,14 @@ import React from 'react'
 // import DailyLogTable from './components/DailyLogTable/DailyLogTable'
 import GrowTable from './components/GrowTable/GrowTable'
 import PopulateDB from './components/populate/populateDB'
+import DailyLogTable from './components/DailyLogTable/DailyLogTable';
 
 
 export default function Test() {
 
     return (
         <>
-            <GrowTable />
+            <DailyLogTable />
         </>
     )
 }
