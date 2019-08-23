@@ -6,7 +6,7 @@ const DailyLog = require('../../../database/models/dailyLog')
 //         .catch(err => res.json(err))
 // }
 module.exports = (req, res) => {
-    DailyLog.find({}).populate("grow", "seasonName").exec(function (err, grow) {
+    DailyLog.find({}).populate("grow", "seasonName strainName").exec(function (err, grow) {
         if (err) {
             console.log(err)
         } else {

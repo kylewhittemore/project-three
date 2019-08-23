@@ -13,14 +13,16 @@ export default function DailyLog(props) {
         didWater: false,
         didFeed: false,
         didTransplant: false,
+        didFlush: false,
+        didFlip: false,
+        didDefoliate: false,
         notes: ""
     }
     // This is where the component's formData state and its updater 
     // are defined with the'useState' hook
     const [formData, setFormData] = useState(initialFormState)
 
-
-    useEffect((props) => {
+    useEffect(() => {
 
         async function fetchLog(id) {
             let response = await Axios.get(`/api/daily/${id}`);
@@ -30,21 +32,21 @@ export default function DailyLog(props) {
 
         if (props.logId) {
             fetchLog(props.logId).then(data => {
-
-                console.log("logdata", data)
-
                 const form = {
                     date: data.date.slice(0, 10),
                     plantAppearance: data.plantAppearance,
                     didWater: data.didWater,
                     didFeed: data.didFeed,
                     didTransplant: data.didTransplant,
+                    didFlush: data.didFlush,
+                    didFlip: data.didFlip,
+                    didDefoliate: data.didDefoliate,
                     notes: data.notes
                 }
                 setFormData(form)
             }).catch(err => console.log(err))
         }
-    }, []);
+    }, [props]);
 
     async function postDailyLog() {
         let data = formData
@@ -71,11 +73,11 @@ export default function DailyLog(props) {
     }
 
     const handleInputChange = event => {
+        event.preventDefault()
         const target = event.target
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
         setFormData({ ...formData, [name]: value })
-
     }
 
     return (
@@ -113,6 +115,23 @@ export default function DailyLog(props) {
                 <Col>
                     <Form.Group className="m-1" controlId="formBasicCheckbox">
                         <Form.Check name="didTransplant" checked={formData.didTransplant} onChange={handleInputChange} type="checkbox" label="Transplant" />
+                    </Form.Group>
+                </Col>
+            </Form.Row>
+            <Form.Row>
+                <Col>
+                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                        <Form.Check name="didFlush" checked={formData.didFlush} onChange={handleInputChange} type="checkbox" label="Flush" />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                        <Form.Check name="didFlip" checked={formData.didFlip} onChange={handleInputChange} type="checkbox" label="Flip to Flower" />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                        <Form.Check name="didDefoliate" checked={formData.didDefoliate} onChange={handleInputChange} type="checkbox" label="Defoliate" />
                     </Form.Group>
                 </Col>
             </Form.Row>
