@@ -11,7 +11,7 @@ const GrowSchema = new Schema({
         required: false
     },
     dateCompleted: {
-        type: String,
+        type: Date,
         required: false
     },
     strainName: {
