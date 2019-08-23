@@ -15,69 +15,47 @@ export default function DailyLogTable(props) {
         }
     }
 
-    const [logs, setLogs] = useState([])
+    const [grows, setGrows] = useState([])
     const [loading, setLoading] = useState(true)
     
 
     useEffect(() => {
-        async function fetchLogs() {
+        async function fetchGrows() {
             setLoading(true);
-            let response = await Axios.get('/api/daily');
+            let response = await Axios.get('/api/grow');
             let data = response.data
             return data;
         }
-        fetchLogs().then(data => {
-            setLogs(data)
+        fetchGrows().then(data => {
+            setGrows(data)
             setLoading(false)
         }).catch(err => setLoading(false))
     }, []);
 
-    async function getLogs() {
-        let response = await Axios.get('/api/daily')
-        setLogs(response.data)
+    async function getGrows() {
+        let response = await Axios.get('/api/grow')
+        setGrows(response.data)
     }
 
-    async function deleteLog(id) {
+    async function deleteGrow(id) {
         let response = await Axios({
             method: 'delete',
-            url: `/api/daily/${id}`
+            url: `/api/grow/${id}`
         })
         return response
-    }
-
-    async function getNotes(id) {
-        let response = await Axios.get(`/api/daily/${id}`)
-        // console.log(response)
-        return response.data.notes
-    }
-
-    async function updateLog(id) {
-
-        const log = {
-            date: "05/21/18",
-            didFeed: false,
-            didTransplant: false,
-            didWater: true,
-            notes: "put note",
-            plantAppearance: "mellow"
-        }
-
-        let response = await Axios({
-            method: 'put',
-            url: `/api/daily/${id}`,
-            data: log
-        })
-        console.log(response)
+        //needs logic to delete all associated logs
     }
 
     function TableHead() {
         return (
             <thead>
                 <tr>
-                    <th>Daily Log ID</th>
-                    <th>Date</th>
-                    <th>Grow</th>
-                    <th>Notes</th>
+                    <th>Season Name</th>
+                    <th>Data Started</th>
+                    <th>Date Completed</th>
+                    <th>Strain Name</th>
+                    <th>Medium</th>
+                    <th></th>
                 </tr>
             </thead>
         )
@@ -86,32 +64,13 @@ export default function DailyLogTable(props) {
     function TableBody() {
         return (
             <tbody>
-                {/* after implementing filters "logs.map....""  will be "filteredLogs.map..." */}
-                {logs.map(log => (
-                    <tr key={log._id}>
-                        <td>{log.logId}</td>
-                        <td>{log.date.slice(0, 10)}</td>
-                        <td>season name</td>
-                        <td>
-                            {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
-                                event.preventDefault()
-                                getNotes(log._id).then(notes => console.log(notes))
-
-                            }}                        
-                            ></i> 
-                            :
-                            <i style={styles.placeholder} className="p-1 far fa-edit"></i>}
-                            <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
-                                event.preventDefault()
-                                updateLog(log._id).then(getLogs)
-                            }}
-                            ></i>
-                            <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {
-                                event.preventDefault()
-                                deleteLog(log._id).then(getLogs)
-                            }}
-                            ></i>
-                        </td>
+                {grows.map(grow => (
+                    <tr key={grow._id}>
+                        <td>{grow.seasonName}</td>
+                        <td>{grow.dateStarted.slice(0, 10)}</td>
+                        <td>{grow.dateCompleted.slice(0, 10)}</td>
+                        <td>{grow.strainName}</td>
+                        <td>{grow.medium}</td>
                     </tr>
                 ))}
             </tbody>
