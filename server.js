@@ -26,7 +26,7 @@ app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.urlencoded({ extended: true }))
+// app.use(express.urlencoded({ extended: true }))
 
 // Passport middleware
 app.use(passport.initialize());
