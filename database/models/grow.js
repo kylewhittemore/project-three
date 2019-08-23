@@ -32,7 +32,7 @@ const GrowSchema = new Schema({
     },
     starterPlantType: {
         type: String,
-        required: false
+        required: true
     },
     numPlants: {
         type: Number,
