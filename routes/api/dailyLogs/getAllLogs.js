@@ -1,7 +1,16 @@
 const DailyLog = require('../../../database/models/dailyLog')
 
+// module.exports = (req, res) => {
+//     DailyLog.find()
+//         .then(dbDailyLogs => res.json(dbDailyLogs))
+//         .catch(err => res.json(err))
+// }
 module.exports = (req, res) => {
-    DailyLog.find()
-        .then(dbDailyLogs => res.json(dbDailyLogs))
-        .catch(err => res.json(err))
+    DailyLog.find({}).populate("grow").exec(function (err, grow) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.json(grow)
+        };
+    });
 }

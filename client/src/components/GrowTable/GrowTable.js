@@ -9,6 +9,9 @@ export default function DailyLogTable(props) {
     const styles = {
         icon: {
             cursor: "pointer"
+        },
+        placeholder: {
+            visibility: "hidden"
         }
     }
 
@@ -90,12 +93,14 @@ export default function DailyLogTable(props) {
                         <td>{log.date.slice(0, 10)}</td>
                         <td>season name</td>
                         <td>
-                            <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
+                            {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
                                 event.preventDefault()
                                 getNotes(log._id).then(notes => console.log(notes))
 
-                            }}
-                            ></i>
+                            }}                        
+                            ></i> 
+                            :
+                            <i style={styles.placeholder} className="p-1 far fa-edit"></i>}
                             <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
                                 event.preventDefault()
                                 updateLog(log._id).then(getLogs)
