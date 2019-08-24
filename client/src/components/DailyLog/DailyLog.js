@@ -41,7 +41,8 @@ export default function DailyLog(props) {
                     didFlush: data.didFlush,
                     didFlip: data.didFlip,
                     didDefoliate: data.didDefoliate,
-                    notes: data.notes
+                    notes: data.notes,
+                    grow: props.growId
                 }
                 setFormData(form)
             }).catch(err => console.log(err))
@@ -50,7 +51,6 @@ export default function DailyLog(props) {
 
     async function postDailyLog() {
         let data = formData
-        formData.grow = props.growId
         let response = await Axios.post(`/api/daily/${props.growId}`, data)
         return response
     }

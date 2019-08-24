@@ -25,12 +25,13 @@ class StaticForm extends Component {
         flowerLightWattage: "",
         lightNotes: "",
         canopyTechnique: "",
-        canopyTechniqueNotes: ""
+        canopyTechniqueNotes: "",
+        user: "5d60ad3ce54ff902983c41dd"
     };
 
     // function set to post input to the database.
     postNewSeasonStatic(formData) {
-        Axios.post('/api/grow', formData);
+        Axios.post(`/api/grow/5d60ad3ce54ff902983c41dd`, formData);
     }
 
     // setting each states value when the input is changed
@@ -75,7 +76,8 @@ class StaticForm extends Component {
             flowerLightWattage: "",
             lightNotes: "",
             canopyTechnique: "",
-            canopyTechniqueNotes: ""
+            canopyTechniqueNotes: "",
+            user: ""
         });
     };
 
