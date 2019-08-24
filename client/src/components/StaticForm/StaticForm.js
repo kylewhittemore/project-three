@@ -57,7 +57,11 @@ class StaticForm extends Component {
         let formData = this.state;
 
         // passing the values in each state to the postNewSeasonStatic function so the function can push the info to the database
-        this.postNewSeasonStatic(formData).then(this.setState({ redirect: true }));
+        this.postNewSeasonStatic(formData).then(response => {
+            response.data.message ? console.log(response.data.message)
+            :
+            this.setState({ redirect: true })
+        });
 
         // console.log to see that the state is taking in the forms value.
         console.log(this.state.floweringTime);

@@ -70,7 +70,7 @@ export default function DailyLogTable(props) {
                         <td>{grow.dateStarted.slice(0, 10)}</td>
                         <td>{grow.dateCompleted.slice(0, 10)}</td>
                         <td>{grow.strainName}</td>
-                        <td>{grow.dailyLogs[0].date}</td>
+                        <td>{grow.medium ? grow.medium : "No medium specified"}</td>
                     </tr>
                 ))}
             </tbody>
