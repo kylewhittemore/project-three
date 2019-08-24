@@ -12,7 +12,7 @@ module.exports = (req, res) => {
     User.findOne({username})
         .then(user => {
             if (user) {
-                console.log('username already exists');
+                return res.json({success: false, msg: 'username already used'});
             } else {
                 const newUser = ({
                     username,
@@ -27,8 +27,14 @@ module.exports = (req, res) => {
                         User.create( newUser )
                             .then(user => {
                                 console.log("new user: " + JSON.stringify(user));
-                                // res.redirect('/');
-                                // return user
+                                res.json({
+                                    success: true,
+                                    user: {
+                                      id: user._id,
+                                      username: user.username,
+                                      email: user.email
+                                    }
+                                  });
                             })
                             .catch(err => console.log(err));
                         });
