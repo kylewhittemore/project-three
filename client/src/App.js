@@ -8,6 +8,7 @@ import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/LogOut/LogOut";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import DailyLog from './pages/DailyLog/DailyLog'
 import Profile from "./pages/Profile/Profile";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/profile" component={Profile} />
+        <Route exact path="/dailylog" component={DailyLog} />
       </div>
     </Router>
   );

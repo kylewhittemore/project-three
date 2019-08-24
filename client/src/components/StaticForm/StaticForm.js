@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -27,11 +28,14 @@ class StaticForm extends Component {
         canopyTechnique: "",
         canopyTechniqueNotes: "",
         // user: "5d60ad3ce54ff902983c41dd"
+        redirect: false
     };
 
     // function set to post input to the database.
-    postNewSeasonStatic(formData) {
-        Axios.post(`/api/grow/5d60ad3ce54ff902983c41dd`, formData);
+    async postNewSeasonStatic(formData) {
+       let response = await Axios.post(`/api/grow/5d60ad3ce54ff902983c41dd`, formData);
+       console.log(response)
+       return response
     }
 
     // setting each states value when the input is changed
@@ -53,7 +57,7 @@ class StaticForm extends Component {
         let formData = this.state;
 
         // passing the values in each state to the postNewSeasonStatic function so the function can push the info to the database
-        this.postNewSeasonStatic(formData);
+        this.postNewSeasonStatic(formData).then(this.setState({ redirect: true }));
 
         // console.log to see that the state is taking in the forms value.
         console.log(this.state.floweringTime);
@@ -77,6 +81,7 @@ class StaticForm extends Component {
             lightNotes: "",
             canopyTechnique: "",
             canopyTechniqueNotes: "",
+         
             // user: ""
         });
     };
@@ -84,8 +89,11 @@ class StaticForm extends Component {
     render() {
 
         return (
-            <div>
 
+            this.state.redirect ? <Redirect to='/' />
+            :
+            <div>
+                
                 <Form className="mx-5 my-5">
                     <Form.Row>
                         <Form.Group as={Col} controlId="log.ControlInput1">

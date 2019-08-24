@@ -5,15 +5,15 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import StaticForm from '../../components/StaticForm/StaticForm'
+import DailyLogForm from '../../components/DailyLogForm/DailyLogForm'
 
 
-function NewSeasonPage() {
+function DailyLogPage() {
     return (
         <div className="align-me">
-            <StaticForm />
+            <DailyLogForm />
         </div>
     );
 };
 
-export default NewSeasonPage;
+export default DailyLogPage;

@@ -16,9 +16,7 @@ export default function DailyLogTable(props) {
     }
 
     const [logs, setLogs] = useState([])
-    const [loading, setLoading] = useState(true)
-    // const [seasonName, setSeasonName] = useState('')
-    
+    const [loading, setLoading] = useState(true)    
 
     useEffect(() => {
         async function fetchLogs() {
@@ -29,9 +27,7 @@ export default function DailyLogTable(props) {
         }
         fetchLogs().then(data => {
             setLogs(data)
-            // setSeasonName(data[0].grow.seasonName)
             setLoading(false)
-            console.log(data[0])
         }).catch(err => setLoading(false))
     }, []);
 
@@ -50,7 +46,6 @@ export default function DailyLogTable(props) {
 
     async function getNotes(id) {
         let response = await Axios.get(`/api/daily/${id}`)
-        // console.log(response)
         return response.data.notes
     }
 
@@ -93,13 +88,11 @@ export default function DailyLogTable(props) {
                 {logs.map(log => {
 
                     console.log(log.grow)
-                    // let seasonName = log.grow.seasonName
                     return (
                     <tr key={log._id}>
                         <td>{log.logId}</td>
                         <td>{log.date.slice(0, 10)}</td>
                         <td>{log.grow.seasonName}</td>
-                        {/* <td></td> */}
                         <td>
                             {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
                                 event.preventDefault()
