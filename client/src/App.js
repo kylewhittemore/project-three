@@ -7,6 +7,7 @@ import Seasons from "./pages/Seasons/Seasons";
 import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/LogOut/LogOut";
 import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/settings" component={Settings} />
         <Route exact path="/logout" component={LogOut} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
       </div>
     </Router>
   );
