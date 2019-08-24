@@ -8,6 +8,7 @@ import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/LogOut/LogOut";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/logout" component={LogOut} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/profile" component={Profile} />
       </div>
     </Router>
   );

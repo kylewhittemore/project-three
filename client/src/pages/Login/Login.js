@@ -32,7 +32,6 @@ class UserLogin extends Component {
             if (success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
                 localStorage.setItem('p3aajjkw-user', user)
-                
 
                 // Axios.defaults.headers.common['Authorization'] = token;
                 // redirect to home page

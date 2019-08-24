@@ -12,15 +12,10 @@ class Profile extends Component {
         username: "",
         email: "",
         _id: ""
-
     }
 
     getToken() {
-        // , token)
-        // if (token) {
-
         Axios.defaults.headers.common['Authorization'] = localStorage.getItem('p3aajjkw-jwt')
-        // }
     }
 
     componentDidMount() {
@@ -43,7 +38,6 @@ class Profile extends Component {
                     <h1> mongoDB _id: {this.state._id} </h1>
                 </Container>
                 <Container style={{ opacity: this.state.isAuth ? 0 : 1 }} >
-                    
                     <h1> NO USER IS LOGGED IN </h1>
                 </Container>
             </div>
