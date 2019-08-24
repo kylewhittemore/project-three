@@ -10,6 +10,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import DailyLog from './pages/DailyLog/DailyLog'
 import Profile from "./pages/Profile/Profile";
+import DailyLogs from './pages/DailyLogs/DailyLogs'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/dailylog" component={DailyLog} />
+        <Route exact path="/dailylogs" component={DailyLogs} />
       </div>
     </Router>
   );

@@ -43,6 +43,11 @@ function HomePage() {
                 </Row>
                 <Row className="justify-content-center">
                     <Button variant="outline-success" size="lg">
+                        <Link to="/dailylogs">All Logs</Link>
+                    </Button>
+                </Row>
+                <Row className="justify-content-center">
+                    <Button variant="outline-success" size="lg">
                         <Link to="/logout">Log Out</Link>
                     </Button>
                 </Row>
