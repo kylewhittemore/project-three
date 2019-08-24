@@ -28,10 +28,42 @@ class StaticForm extends Component {
         canopyTechniqueNotes: ""
     };
 
+    fetchGrow = id => {
+        let response = Axios.get(`/api/grow/${id}`);
+        let data = response.data;
+        return data;
+    }
+
+    componentDidMount() {
+        if (this.props.logId) {
+            this.fetchGrow(props.logId).then(data => {
+                this.setState({
+                    seasonName: data.seasonName,
+                    dateStarted: data.dateStarted.slice(0, 10),
+                    dateCompleted: data.dateCompleted.slice(0, 10),
+                    strainName: data.strainName,
+                    lineage: data.lineage,
+                    floweringTime: data.floweringTime,
+                    breeder: data.breeder,
+                    starterPlantType: data.starterPlantType,
+                    numPlants: data.numPlants,
+                    medium: data.medium,
+                    vegLightType: data.vegLightType,
+                    vegLightWattage: data.vegLightWattage,
+                    flowerLightType: data.flowerLightType,
+                    flowerLightWattage: data.flowerLightWattage,
+                    lightNotes: data.lightNotes,
+                    canopyTechnique: data.canopyTechnique,
+                    canopyTechniqueNotes: data.canopyTechniqueNotes
+                });
+            }).catch(err => console.log(err));
+        };
+    };
+
     // function set to post input to the database.
     postNewSeasonStatic(formData) {
         Axios.post('/api/grow', formData);
-    }
+    };
 
     // setting each states value when the input is changed
     handleInputChange = event => {
