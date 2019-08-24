@@ -10,6 +10,7 @@ export default function Test() {
     return (
         <>
             <DailyLogTable />
+            {/* <GrowTable /> */}
             {/* <DailyLog logId={"5d6191176b8de771726664fc"} /> */}
             {/* <Populate /> */}
         </>

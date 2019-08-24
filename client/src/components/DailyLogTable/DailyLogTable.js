@@ -90,12 +90,16 @@ export default function DailyLogTable(props) {
         return (
             <tbody>
                 {/* after implementing filters "logs.map....""  will be "filteredLogs.map..." */}
-                {logs.map(log => (
+                {logs.map(log => {
+
+                    console.log(log.grow)
+                    // let seasonName = log.grow.seasonName
+                    return (
                     <tr key={log._id}>
                         <td>{log.logId}</td>
                         <td>{log.date.slice(0, 10)}</td>
-                        <td></td>
-                        {/* <td>{seasonName}</td> */}
+                        <td>{log.grow.seasonName}</td>
+                        {/* <td></td> */}
                         <td>
                             {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
                                 event.preventDefault()
@@ -118,7 +122,7 @@ export default function DailyLogTable(props) {
                             ></i>
                         </td>
                     </tr>
-                ))}
+                  )})}
             </tbody>
         )
     }
