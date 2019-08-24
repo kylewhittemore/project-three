@@ -28,7 +28,7 @@ class StaticForm extends Component {
         canopyTechnique: "",
         canopyTechniqueNotes: "",
         // user: "5d60ad3ce54ff902983c41dd"
-        redirect: false
+        // redirect: false
     };
 
     // function set to post input to the database.
@@ -60,7 +60,8 @@ class StaticForm extends Component {
         this.postNewSeasonStatic(formData).then(response => {
             response.data.message ? console.log(response.data.message)
             :
-            this.setState({ redirect: true })
+            // this.setState({ redirect: true })
+            this.props.history.push('/')
         });
 
         // console.log to see that the state is taking in the forms value.
@@ -94,8 +95,6 @@ class StaticForm extends Component {
 
         return (
 
-            this.state.redirect ? <Redirect to='/' />
-            :
             <div>
                 
                 <Form className="mx-5 my-5">

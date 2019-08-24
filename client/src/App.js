@@ -11,21 +11,54 @@ import Login from "./pages/Login/Login";
 import DailyLog from './pages/DailyLog/DailyLog'
 import Profile from "./pages/Profile/Profile";
 import DailyLogs from './pages/DailyLogs/DailyLogs'
+import StaticForm from './components/StaticForm/StaticForm'
 
 function App() {
+
   return (
     <Router>
       <div>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/newseason" component={NewSeason} />
-        <Route exact path="/seasons" component={Seasons} />
-        <Route exact path="/settings" component={Settings} />
-        <Route exact path="/logout" component={LogOut} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/dailylog" component={DailyLog} />
-        <Route exact path="/dailylogs" component={DailyLogs} />
+        <Route
+          exact path="/"
+          render={props => <HomePage {...props} />}
+        />
+        <Route
+          exact path="/newseason"
+          render={props => <NewSeason {...props} />}
+        />
+        <Route
+          exact path="/seasons"
+          render={props => <Seasons {...props} />}
+        />
+        <Route
+          exact path="/settings"
+          render={props => <Settings {...props} />}
+        />
+        <Route
+          exact path="/logout"
+          render={props => <LogOut {...props} />}
+        />
+        <Route
+          exact path="/register"
+          render={props => <Register {...props} />}
+        />
+        <Route
+          exact path="/login"
+          render={props => <Login {...props} />}
+        />
+        <Route
+          exact path="/profile"
+          render={props => <Profile {...props} />}
+        />
+        <Route
+          path="/dailylog" 
+          render={props => <DailyLog {...props}
+          />}
+        />
+        <Route
+          exact path="/dailylogs"
+          render={props => <DailyLogs {...props} />}
+        />
       </div>
     </Router>
   );

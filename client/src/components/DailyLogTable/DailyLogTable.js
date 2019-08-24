@@ -49,24 +49,24 @@ export default function DailyLogTable(props) {
         return response.data.notes
     }
 
-    async function updateLog(id) {
+    // async function updateLog(id) {
 
-        const log = {
-            date: "05/21/18",
-            didFeed: false,
-            didTransplant: false,
-            didWater: true,
-            notes: "put note",
-            plantAppearance: "mellow"
-        }
+    //     const log = {
+    //         date: "05/21/18",
+    //         didFeed: false,
+    //         didTransplant: false,
+    //         didWater: true,
+    //         notes: "put note",
+    //         plantAppearance: "mellow"
+    //     }
 
-        let response = await Axios({
-            method: 'put',
-            url: `/api/daily/${id}`,
-            data: log
-        })
-        console.log(response)
-    }
+    //     let response = await Axios({
+    //         method: 'put',
+    //         url: `/api/daily/${id}`,
+    //         data: log
+    //     })
+    //     console.log(response)
+    // }
 
     function TableHead() {
         return (
@@ -105,7 +105,8 @@ export default function DailyLogTable(props) {
                             }
                             <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
                                 event.preventDefault()
-                                updateLog(log._id).then(getLogs)
+                                // updateLog(log._id).then(getLogs)
+                                this.history.push(`/dailylog/${log._id}`)
                             }}
                             ></i>
                             <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {

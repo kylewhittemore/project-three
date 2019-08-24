@@ -8,10 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import StaticForm from '../../components/StaticForm/StaticForm'
 
 
-function NewSeasonPage() {
+function NewSeasonPage(props) {
+    console.log(props)
     return (
         <div className="align-me">
-            <StaticForm />
+            <StaticForm {...props}/>
+            <p></p>
         </div>
     );
 };
