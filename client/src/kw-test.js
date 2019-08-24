@@ -9,7 +9,9 @@ export default function Test() {
 
     return (
         <>
-            <Populate />
+            <DailyLogTable />
+            {/* <DailyLog logId={"5d6191176b8de771726664fc"} /> */}
+            {/* <Populate /> */}
         </>
     )
 }

@@ -26,7 +26,7 @@ class StaticForm extends Component {
         lightNotes: "",
         canopyTechnique: "",
         canopyTechniqueNotes: "",
-        user: "5d60ad3ce54ff902983c41dd"
+        // user: "5d60ad3ce54ff902983c41dd"
     };
 
     // function set to post input to the database.
@@ -77,7 +77,7 @@ class StaticForm extends Component {
             lightNotes: "",
             canopyTechnique: "",
             canopyTechniqueNotes: "",
-            user: ""
+            // user: ""
         });
     };
 

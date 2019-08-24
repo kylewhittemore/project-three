@@ -42,7 +42,7 @@ export default function DailyLog(props) {
                     didFlip: data.didFlip,
                     didDefoliate: data.didDefoliate,
                     notes: data.notes,
-                    grow: props.growId
+                    // grow: props.growId
                 }
                 setFormData(form)
             }).catch(err => console.log(err))
