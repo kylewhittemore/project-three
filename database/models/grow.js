@@ -75,6 +75,12 @@ const GrowSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "DailyLog"
         }
+    ],
+    user: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
     ]
 
 })

@@ -28,6 +28,16 @@ function HomePage() {
                 </Row>
                 <Row className="justify-content-center">
                     <Button variant="outline-success" size="lg">
+                        <Link to="/register">Register</Link>
+                    </Button>
+                </Row>
+                <Row className="justify-content-center">
+                    <Button variant="outline-success" size="lg">
+                        <Link to="/login">Log In</Link>
+                    </Button>
+                </Row>
+                <Row className="justify-content-center">
+                    <Button variant="outline-success" size="lg">
                         <Link to="/logout">Log Out</Link>
                     </Button>
                 </Row>
