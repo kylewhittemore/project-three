@@ -106,7 +106,7 @@ export default function DailyLogTable(props) {
                             <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
                                 event.preventDefault()
                                 // updateLog(log._id).then(getLogs)
-                                props.history.push(`/dailylog/${log._id}`)
+                                props.history.push(`/dailylog/?log_id=${log._id}`)
                             }}
                             ></i>
                             <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {
