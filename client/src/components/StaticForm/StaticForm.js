@@ -8,6 +8,12 @@ import "./style.css";
 
 class StaticForm extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { isOn: true };
+        this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    };
+
     // State below set to blank for all neccessary database inputs.
     state = {
         seasonName: "",
@@ -31,12 +37,49 @@ class StaticForm extends Component {
         // redirect: false
     };
 
-    // function set to post input to the database.
-    async postNewSeasonStatic(formData) {
-       let response = await Axios.post(`/api/grow/5d60ad3ce54ff902983c41dd`, formData);
-       console.log(response)
-       return response
+    //after form has shown, if a growId is passed, then populate the static information from the database to allow the user to add/edit information.
+    async componentDidMount() {
+        if (this.props.growId) {
+            console.log(this.props.growId);
+            let response = await Axios.get(`/api/grow/${this.props.growId}`);
+            console.log(response);
+            let data = response.data;
+            this.setState({
+                seasonName: data.seasonName,
+                dateStarted: data.dateStarted.slice(0, 10),
+                dateCompleted: data.dateCompleted.slice(0, 10),
+                strainName: data.strainName,
+                lineage: data.lineage,
+                floweringTime: data.floweringTime,
+                breeder: data.breeder,
+                starterPlantType: data.starterPlantType,
+                numPlants: data.numPlants,
+                medium: data.medium,
+                vegLightType: data.vegLightType,
+                vegLightWattage: data.vegLightWattage,
+                flowerLightType: data.flowerLightType,
+                flowerLightWattage: data.flowerLightWattage,
+                lightNotes: data.lightNotes,
+                canopyTechnique: data.canopyTechnique,
+                canopyTechniqueNotes: data.canopyTechniqueNotes
+            });
+        };
+    };
+
+    async putSeasonStatic() {
+        let response = await Axios({
+            method: "PUT",
+            url: `/api/grow/${this.props.growId}`,
+            data: this.state
+        })
+
+        return response
     }
+
+    // function set to post input to the database.
+    postNewSeasonStatic() {
+        Axios.post('/api/grow', this.state);
+    };
 
     // setting each states value when the input is changed
     handleInputChange = event => {
@@ -50,7 +93,7 @@ class StaticForm extends Component {
     };
 
     // submitting the information in the form to the database
-    handleFormSubmit = event => {
+    async handleFormSubmit(event) {
         event.preventDefault();
 
         // variable used to reference this.state
@@ -66,6 +109,8 @@ class StaticForm extends Component {
 
         // console.log to see that the state is taking in the forms value.
         console.log(this.state.floweringTime);
+        let response = this.props.growId ? await this.putSeasonStatic() : await this.postNewSeasonStatic()
+        console.log("form submit response: ", response)
 
         // reset the state back to it's original "state"
         this.setState({
@@ -149,6 +194,7 @@ class StaticForm extends Component {
                         <Form.Group as={Col} controlId="log.ControlSelect3">
                             <Form.Label>Starting Plant Type:</Form.Label>
                             <Form.Control name="starterPlantType" value={this.state.starterPlantType} onChange={this.handleInputChange} as="select">
+                                <option>(Select)</option>
                                 <option>Seeds</option>
                                 <option>Clones</option>
                                 <option>Teens</option>
@@ -162,6 +208,7 @@ class StaticForm extends Component {
                         <Form.Group as={Col} controlId="log.ControlSelect1">
                             <Form.Label>Medium:</Form.Label>
                             <Form.Control name="medium" value={this.state.medium} onChange={this.handleInputChange} as="select">
+                                <option>(Select)</option>
                                 <option>Soil</option>
                                 <option>Coco</option>
                                 <option>Rockwool</option>
@@ -174,6 +221,7 @@ class StaticForm extends Component {
                         <Form.Group as={Col} controlId="log.ControlSelect2">
                             <Form.Label>Veg Lighting Type:</Form.Label>
                             <Form.Control name="vegLightType" value={this.state.vegLightType} onChange={this.handleInputChange} as="select">
+                                <option>(Select)</option>
                                 <option>CFL</option>
                                 <option>T5 Flourescent</option>
                                 <option>Ceramic Metal Halide (CMH)</option>
@@ -192,6 +240,7 @@ class StaticForm extends Component {
                         <Form.Group as={Col} controlId="log.ControlSelect3">
                             <Form.Label>Flower Lighting Type:</Form.Label>
                             <Form.Control name="flowerLightType" value={this.state.flowerLightType} onChange={this.handleInputChange} as="select">
+                                <option>(Select)</option>
                                 <option>CFL</option>
                                 <option>T5 Flourescent</option>
                                 <option>Ceramic Metal Halide (CMH)</option>
@@ -217,6 +266,7 @@ class StaticForm extends Component {
                         <Form.Group controlId="log.ControlSelect4">
                             <Form.Label>Canopy Technique:</Form.Label>
                             <Form.Control name="canopyTechnique" value={this.state.canopyTechnique} onChange={this.handleInputChange} as="select">
+                                <option>(Select)</option>
                                 <option>Horizontal</option>
                                 <option>Vertical</option>
                             </Form.Control>
