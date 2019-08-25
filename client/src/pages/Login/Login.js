@@ -13,7 +13,8 @@ class UserLogin extends Component {
         userid: "",
         password: "",
         errors: "",
-        success: null
+        success: false,
+        redirect: false
         }; 
     
     handleInputChange = e => {
@@ -27,20 +28,19 @@ class UserLogin extends Component {
             password: this.state.password
         }).then(res => {
             console.log(JSON.stringify(res.data))
-            const {success, token, user, msg} = res.data
+            const {success, token, msg} = res.data
             this.setState({ success })
-            if (success) {
+            if (this.state.success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
-                localStorage.setItem('p3aajjkw-user', user)
-                this.props.history.push('/')
-                // Axios.defaults.headers.common['Authorization'] = token;
-                // redirect to home page
+                // localStorage.setItem('p3aajjkw-user', user)
+                // redirect to home page, clear inputs
+                this.setState({ redirect: true })
+                this.setState({ username: "", password: "" }) 
             } else {
-                this.setState({ errors : msg });
-                // reload current page with messages
+                // stay on login page with messages (clear password)
+                this.setState({ errors : msg, password: "" });
             }
         });
-        // console.log(formData);
     };
 
     render () {

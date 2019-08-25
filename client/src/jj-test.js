@@ -15,10 +15,10 @@ function App() {
     <Router>
       <div>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/newseason" component={NewSeason} />
+        {/* <Route exact path="/newseason" component={NewSeason} />
         <Route exact path="/seasons" component={Seasons} />
         <Route exact path="/settings" component={Settings} />
-        <Route exact path="/logout" component={LogOut} />
+        <Route exact path="/logout" component={LogOut} /> */}
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/profile" component={Profile} />
