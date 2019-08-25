@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Axios from 'axios'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import { userInfo } from 'os';
 
 
-export default function DailyLogTable(props) {
+export default function GrowTable(props) {
 
     const styles = {
         icon: {
@@ -22,8 +23,9 @@ export default function DailyLogTable(props) {
     useEffect(() => {
         async function fetchGrows() {
             setLoading(true);
-            let response = await Axios.get('/api/grow');
+            let response = await Axios.get(`/api/grow/user/${props.userId}`);
             let data = response.data
+            console.log(data)
             return data;
         }
         fetchGrows().then(data => {
@@ -70,7 +72,7 @@ export default function DailyLogTable(props) {
                         <td>{grow.dateStarted.slice(0, 10)}</td>
                         <td>{grow.dateCompleted.slice(0, 10)}</td>
                         <td>{grow.strainName}</td>
-                        <td>{grow.medium}</td>
+                        <td>{grow.medium ? grow.medium : "No medium specified"}</td>
                     </tr>
                 ))}
             </tbody>

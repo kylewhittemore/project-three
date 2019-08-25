@@ -3,7 +3,7 @@ const routes = require('express').Router()
 // This route posts a new grow
 // Tested working
 const growPost = require('./growPost')
-routes.post('/', growPost)
+routes.post('/:id', growPost)
 
 // This route updates a grow by ID
 // Tested working
@@ -27,5 +27,8 @@ routes.delete('/:id', deleteById)
 // NOT TESTED
 const getById = require('./getGrowById')
 routes.get('/:id', getById)
+
+const getbyUser = require('./getGrowsByUser')
+routes.get('/user/:id', getbyUser)
 
 module.exports = routes

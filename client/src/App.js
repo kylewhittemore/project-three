@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from "./pages/Home/Home";
@@ -8,20 +8,59 @@ import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/LogOut/LogOut";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import DailyLog from './pages/DailyLog/DailyLog'
 import Profile from "./pages/Profile/Profile";
+import DailyLogs from './pages/DailyLogs/DailyLogs'
+import StaticForm from './components/StaticForm/StaticForm'
 
 function App() {
+
+  const [userId, setUserId] = useState("5d60ad3ce54ff902983c41dd")
+
   return (
     <Router>
       <div>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/newseason" component={NewSeason} />
-        <Route exact path="/seasons" component={Seasons} />
-        <Route exact path="/settings" component={Settings} />
-        <Route exact path="/logout" component={LogOut} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/profile" component={Profile} />
+        <Route
+          exact path="/"
+          render={props => <HomePage {...props} />}
+        />
+        <Route
+          exact path="/newseason"
+          render={props => <NewSeason {...props} />}
+        />
+        <Route
+          exact path="/seasons"
+          render={props => <Seasons {...props} userId={userId} />}
+        />
+        <Route
+          exact path="/settings"
+          render={props => <Settings {...props} />}
+        />
+        <Route
+          exact path="/logout"
+          render={props => <LogOut {...props} />}
+        />
+        <Route
+          exact path="/register"
+          render={props => <Register {...props} />}
+        />
+        <Route
+          exact path="/login"
+          render={props => <Login {...props} />}
+        />
+        <Route
+          exact path="/profile"
+          render={props => <Profile {...props} />}
+        />
+        <Route
+          path="/dailylog"
+          render={props => <DailyLog {...props}
+        />}
+        />
+        <Route
+          exact path="/dailylogs"
+          render={props => <DailyLogs {...props} />}
+        />
       </div>
     </Router>
   );

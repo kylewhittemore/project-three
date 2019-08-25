@@ -16,8 +16,7 @@ export default function DailyLogTable(props) {
     }
 
     const [logs, setLogs] = useState([])
-    const [loading, setLoading] = useState(true)
-    
+    const [loading, setLoading] = useState(true)    
 
     useEffect(() => {
         async function fetchLogs() {
@@ -47,28 +46,27 @@ export default function DailyLogTable(props) {
 
     async function getNotes(id) {
         let response = await Axios.get(`/api/daily/${id}`)
-        // console.log(response)
         return response.data.notes
     }
 
-    async function updateLog(id) {
+    // async function updateLog(id) {
 
-        const log = {
-            date: "05/21/18",
-            didFeed: false,
-            didTransplant: false,
-            didWater: true,
-            notes: "put note",
-            plantAppearance: "mellow"
-        }
+    //     const log = {
+    //         date: "05/21/18",
+    //         didFeed: false,
+    //         didTransplant: false,
+    //         didWater: true,
+    //         notes: "put note",
+    //         plantAppearance: "mellow"
+    //     }
 
-        let response = await Axios({
-            method: 'put',
-            url: `/api/daily/${id}`,
-            data: log
-        })
-        console.log(response)
-    }
+    //     let response = await Axios({
+    //         method: 'put',
+    //         url: `/api/daily/${id}`,
+    //         data: log
+    //     })
+    //     console.log(response)
+    // }
 
     function TableHead() {
         return (
@@ -87,11 +85,15 @@ export default function DailyLogTable(props) {
         return (
             <tbody>
                 {/* after implementing filters "logs.map....""  will be "filteredLogs.map..." */}
-                {logs.map(log => (
+                {logs.map(log => {
+
+                    console.log(log.grow)
+                    return (
                     <tr key={log._id}>
                         <td>{log.logId}</td>
                         <td>{log.date.slice(0, 10)}</td>
-                        <td>{log.grow.seasonName}</td>
+                        <td></td>
+                        {/* <td>{log.grow.seasonName}</td> */}
                         <td>
                             {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
                                 event.preventDefault()
@@ -104,7 +106,8 @@ export default function DailyLogTable(props) {
                             }
                             <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
                                 event.preventDefault()
-                                updateLog(log._id).then(getLogs)
+                                // updateLog(log._id).then(getLogs)
+                                props.history.push(`/dailylog/?log_id=${log._id}`)
                             }}
                             ></i>
                             <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {
@@ -114,7 +117,7 @@ export default function DailyLogTable(props) {
                             ></i>
                         </td>
                     </tr>
-                ))}
+                  )})}
             </tbody>
         )
     }
