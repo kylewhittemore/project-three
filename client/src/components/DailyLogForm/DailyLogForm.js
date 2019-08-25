@@ -53,6 +53,7 @@ export default function DailyLog(props) {
     }, [props]);
 
     async function postDailyLog() {
+        console.log("***********", props.growId)
         let data = formData
         let response = await Axios.post(`/api/daily/${props.growId}`, data)
         return response

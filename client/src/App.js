@@ -14,7 +14,7 @@ import DailyLogs from './pages/DailyLogs/DailyLogs'
 import StaticForm from './components/StaticForm/StaticForm'
 
 function App() {
-  
+
   const [userId, setUserId] = useState("5d60ad3ce54ff902983c41dd")
 
   return (
@@ -53,9 +53,9 @@ function App() {
           render={props => <Profile {...props} />}
         />
         <Route
-          path="/dailylog" 
+          path="/dailylog"
           render={props => <DailyLog {...props}
-          />}
+        />}
         />
         <Route
           exact path="/dailylogs"

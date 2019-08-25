@@ -5,7 +5,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import { userInfo } from 'os';
 
 
-export default function DailyLogTable(props) {
+export default function GrowTable(props) {
 
     const styles = {
         icon: {

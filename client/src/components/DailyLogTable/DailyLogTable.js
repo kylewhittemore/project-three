@@ -92,7 +92,8 @@ export default function DailyLogTable(props) {
                     <tr key={log._id}>
                         <td>{log.logId}</td>
                         <td>{log.date.slice(0, 10)}</td>
-                        <td>{log.grow.seasonName}</td>
+                        <td></td>
+                        {/* <td>{log.grow.seasonName}</td> */}
                         <td>
                             {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
                                 event.preventDefault()
