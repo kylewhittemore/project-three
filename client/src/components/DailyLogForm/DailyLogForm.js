@@ -91,10 +91,10 @@ export default function DailyLog(props) {
 
     const handleUploadChange = event => {
         const target = event.target
-        console.log(target.files[0])
+        console.log(target.files[0].name)
         const thisFormData = new FormData();
         thisFormData.append('image', target.files[0])
-        Axios.post('/api/image/', thisFormData)
+        Axios.post('/api/image/', thisFormData).then(response => console.log(response))
     }
 
     return (

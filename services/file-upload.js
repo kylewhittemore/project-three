@@ -9,8 +9,6 @@ const uploader = (fileName, inputFileName) => {
         secretAccessKey: "st7RWUTjyaZ4gy3o97z6C8phSNh3gx/ThxxJGJE5"
     });
 
-    // const fileName = inputFileName;
-
     const uploadFile = () => {
         fs.readFile(inputFileName, (err, data) => {
             if (err) throw err;
