@@ -1,21 +1,23 @@
 const uploader = require('../../../services/file-upload')
 
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
     const value = Object.values(req.files)
     console.log(req._startTime)
     let regex = /:/gi
-    let newStr = 
-        req._startTime
-        .toString()
-        .toLowerCase()
-        .replace(regex, "")
-        .replace(/ /gi, '')
-        .replace(/z/, '')
-        .replace(/-/, '')
-        .slice(3,25)
+    let image = {
+        s3Id: req._startTime
+            .toString()
+            .toLowerCase()
+            .replace(regex, "")
+            .replace(/ /gi, '')
+            .replace(/z/, '')
+            .replace(/-/, '')
+            .slice(3, 25),
+        name: value[0].name
 
+    }
 
-    console.log(newStr)
-    uploader(value[0].name, value[0].path)
-    res.json(req._startTime)
+    console.log(image.s3Id)
+    uploader(image.s3Id, value[0].path)
+    res.json({image})
 }

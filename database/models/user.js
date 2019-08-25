@@ -22,8 +22,13 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Grow"
         }
+    ],
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Image"
+      }
     ]
-
 })
 
 // userSchema.methods = {

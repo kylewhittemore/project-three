@@ -11,6 +11,7 @@ function DailyLogPage(props) {
     
     let logId
     let growId
+    let userId
 
     let url = window.location.href
 
@@ -25,7 +26,10 @@ function DailyLogPage(props) {
 
     return (
         <div className="align-me">
-            <DailyLogForm {...props} growId={growId} logId={logId} />
+            <DailyLogForm {...props} 
+            userId={'5d62f4ef67b1c19c4a06f420'} 
+            growId={'5d62f6bb42d0239cbc08a6be'} 
+            logId={'5d62f70fb039099cdbd55790'} />
         </div>
     );
 };

@@ -46,7 +46,13 @@ const DailyLogSchema = new Schema({
     grow: {
         type: Schema.Types.ObjectId,
         ref: "Grow"
-    }
+    },
+    images: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Image"
+        }
+    ]
 
 })
 
