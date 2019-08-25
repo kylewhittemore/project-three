@@ -92,7 +92,8 @@ export default function DailyLogTable(props) {
                     <tr key={log._id}>
                         <td>{log.logId}</td>
                         <td>{log.date.slice(0, 10)}</td>
-                        <td>{log.grow.seasonName}</td>
+                        <td></td>
+                        {/* <td>{log.grow.seasonName}</td> */}
                         <td>
                             {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
                                 event.preventDefault()
@@ -106,7 +107,7 @@ export default function DailyLogTable(props) {
                             <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
                                 event.preventDefault()
                                 // updateLog(log._id).then(getLogs)
-                                props.history.push(`/dailylog/${log._id}`)
+                                props.history.push(`/dailylog/?log_id=${log._id}`)
                             }}
                             ></i>
                             <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {

@@ -8,10 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import GrowTable from '../../components/GrowTable/GrowTable'
 
 
-function SeasonsPage() {
+function SeasonsPage(props) {
     return (
         <div className="align-me">
-            <GrowTable />
+            <GrowTable {...props}/>
         </div>
     );
 };

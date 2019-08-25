@@ -13,8 +13,7 @@ class UserLogin extends Component {
         userid: "",
         password: "",
         errors: "",
-        success: null,
-        redirect: false
+        success: null
         }; 
     
     handleInputChange = e => {
@@ -33,7 +32,7 @@ class UserLogin extends Component {
             if (success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
                 localStorage.setItem('p3aajjkw-user', user)
-                this.setState({ redirect: true })
+                this.props.history.push('/')
                 // Axios.defaults.headers.common['Authorization'] = token;
                 // redirect to home page
             } else {

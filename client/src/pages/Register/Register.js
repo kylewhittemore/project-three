@@ -47,7 +47,7 @@ class UserSignup extends Component {
                     .then(user => {
                         console.log(`${user.username} is registered`) 
                         alert(`Thank You for registering ${user.userame}`)
-                        window.location.href = '/'
+                        this.props.history.push('/login')
                     })
                 }
             };

@@ -8,10 +8,24 @@ import DailyLogForm from '../../components/DailyLogForm/DailyLogForm'
 
 
 function DailyLogPage(props) {
-    console.log(window.location.href)
+    
+    let logId
+    let growId
+
+    let url = window.location.href
+
+    if (url.indexOf("?log_id=") !== -1) {
+        logId = url.split("=")[1]
+        console.log(logId)
+    }
+    else if (url.indexOf("?grow_id=") !== -1) {
+        growId = url.split("=")[1]
+        console.log(growId)
+    }
+
     return (
         <div className="align-me">
-            <DailyLogForm {...props} />
+            <DailyLogForm {...props} growId={growId} logId={logId} />
         </div>
     );
 };
