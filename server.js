@@ -12,6 +12,7 @@
 //****************************************************************** */
 
 const express = require('express');
+const formData = require('express-form-data')
 const path = require('path')
 const logger = require('morgan')
 const routes = require('./routes')
@@ -24,7 +25,7 @@ const app = express()
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(formData.parse())
 // app.use(express.urlencoded({ extended: true }))
 
 // Passport middleware

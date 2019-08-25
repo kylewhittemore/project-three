@@ -6,6 +6,7 @@ import Axios from 'axios'
 import { Link, Redirect } from "react-router-dom";
 
 
+
 export default function DailyLog(props) {
 
     // empty form object to set formData state to after submission
@@ -88,6 +89,14 @@ export default function DailyLog(props) {
         setFormData({ ...formData, [name]: value })
     }
 
+    const handleUploadChange = event => {
+        const target = event.target
+        console.log(target.files[0])
+        const thisFormData = new FormData();
+        thisFormData.append('image', target.files[0])
+        Axios.post('/api/image/', thisFormData)
+    }
+
     return (
         <Form onSubmit={handleFormSubmit}>
             <Form.Row className="m-1">
@@ -146,6 +155,12 @@ export default function DailyLog(props) {
                 <Form.Group className="m-1" controlId="log.ControlTextarea1">
                     <Form.Label>Notes:</Form.Label>
                     <Form.Control value={formData.notes} name="notes" onChange={handleInputChange} as="textarea" rows="3" />
+                </Form.Group>
+            </Col>
+            <Col>
+                <Form.Group className="m-1" controlId="log.ControlTextarea1">
+                    <Form.Label>upload:</Form.Label>
+                    <input type="file" id="single" onChange={handleUploadChange} />
                 </Form.Group>
             </Col>
             <Button className="m-2" variant="primary" type="submit">

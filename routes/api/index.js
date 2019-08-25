@@ -9,4 +9,7 @@ routes.use('/grow', grows)
 const users = require('./user')
 routes.use('/user', users)
 
+const image = require('./image')
+routes.use('/image', image)
+
 module.exports = routes
