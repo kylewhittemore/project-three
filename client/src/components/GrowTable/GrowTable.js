@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Axios from 'axios'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import { userInfo } from 'os';
 
 
 export default function DailyLogTable(props) {
@@ -22,8 +23,9 @@ export default function DailyLogTable(props) {
     useEffect(() => {
         async function fetchGrows() {
             setLoading(true);
-            let response = await Axios.get('/api/grow');
+            let response = await Axios.get(`/api/grow/user/${props.userId}`);
             let data = response.data
+            console.log(data)
             return data;
         }
         fetchGrows().then(data => {

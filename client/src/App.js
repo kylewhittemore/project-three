@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from "./pages/Home/Home";
@@ -14,6 +14,8 @@ import DailyLogs from './pages/DailyLogs/DailyLogs'
 import StaticForm from './components/StaticForm/StaticForm'
 
 function App() {
+  
+  const [userId, setUserId] = useState("5d60ad3ce54ff902983c41dd")
 
   return (
     <Router>
@@ -28,7 +30,7 @@ function App() {
         />
         <Route
           exact path="/seasons"
-          render={props => <Seasons {...props} />}
+          render={props => <Seasons {...props} userId={userId} />}
         />
         <Route
           exact path="/settings"
