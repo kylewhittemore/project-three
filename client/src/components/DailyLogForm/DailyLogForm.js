@@ -81,7 +81,7 @@ export default function DailyLog(props) {
     }
 
     const handleInputChange = event => {
-        event.preventDefault()
+        // event.preventDefault()
         const target = event.target
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
@@ -89,10 +89,7 @@ export default function DailyLog(props) {
     }
 
     return (
-        // redirect ? <Redirect to='/' />
-        // :
         <Form onSubmit={handleFormSubmit}>
-        {/* <Form> */}
             <Form.Row className="m-1">
                 <Col>
                     <Form.Group className="m-1" controlId="log.ControlInput1">
@@ -113,34 +110,34 @@ export default function DailyLog(props) {
             </Form.Row>
             <Form.Row className="ml-2 m-1">
                 <Col>
-                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                    <Form.Group className="m-1" controlId="formBasicCheckbox1">
                         <Form.Check name="didWater" checked={formData.didWater} onChange={handleInputChange} type="checkbox" label="Water" />
                     </Form.Group>
                 </Col>
                 <Col>
-                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                    <Form.Group className="m-1" controlId="formBasicCheckbox2">
                         <Form.Check name="didFeed" checked={formData.didFeed} onChange={handleInputChange} type="checkbox" label="Feed" />
                     </Form.Group>
                 </Col>
                 <Col>
-                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                    <Form.Group className="m-1" controlId="formBasicCheckbox3">
                         <Form.Check name="didTransplant" checked={formData.didTransplant} onChange={handleInputChange} type="checkbox" label="Transplant" />
                     </Form.Group>
                 </Col>
             </Form.Row>
             <Form.Row>
                 <Col>
-                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                    <Form.Group className="m-1" controlId="formBasicCheckbox4">
                         <Form.Check name="didFlush" checked={formData.didFlush} onChange={handleInputChange} type="checkbox" label="Flush" />
                     </Form.Group>
                 </Col>
                 <Col>
-                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                    <Form.Group className="m-1" controlId="formBasicCheckbox5">
                         <Form.Check name="didFlip" checked={formData.didFlip} onChange={handleInputChange} type="checkbox" label="Flip to Flower" />
                     </Form.Group>
                 </Col>
                 <Col>
-                    <Form.Group className="m-1" controlId="formBasicCheckbox">
+                    <Form.Group className="m-1" controlId="formBasicCheckbox6">
                         <Form.Check name="didDefoliate" checked={formData.didDefoliate} onChange={handleInputChange} type="checkbox" label="Defoliate" />
                     </Form.Group>
                 </Col>
