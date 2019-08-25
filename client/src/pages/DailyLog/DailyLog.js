@@ -8,6 +8,7 @@ import DailyLogForm from '../../components/DailyLogForm/DailyLogForm'
 
 
 function DailyLogPage(props) {
+    console.log(window.location.href)
     return (
         <div className="align-me">
             <DailyLogForm {...props} />
