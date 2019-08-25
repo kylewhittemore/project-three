@@ -28,4 +28,7 @@ routes.delete('/:id', deleteById)
 const getById = require('./getGrowById')
 routes.get('/:id', getById)
 
+const getbyUser = require('./getGrowsByUser')
+routes.get('/user/:id', getbyUser)
+
 module.exports = routes
