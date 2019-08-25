@@ -1,5 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import Axios from 'axios';
+import Moment from 'moment';
+
 
 class StaticHeader extends Component {
 
@@ -37,8 +40,8 @@ class StaticHeader extends Component {
         let data = response.data;
         this.setState({
             seasonName: data.seasonName,
-            dateStarted: data.dateStarted.slice(0, 10),
-            dateCompleted: data.dateCompleted.slice(0, 10),
+            dateStarted: Moment(data.dateStarted.slice(0, 10)).format("MM-DD-YYYY"),
+            dateCompleted: Moment(data.dateCompleted.slice(0, 10)).format("MM-DD-YYYY"),
             strainName: data.strainName,
             lineage: data.lineage,
             floweringTime: data.floweringTime,

@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
