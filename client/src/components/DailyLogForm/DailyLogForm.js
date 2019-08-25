@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col';
 import Axios from 'axios'
+import { Link, Redirect } from "react-router-dom";
+
 
 export default function DailyLog(props) {
 
@@ -21,6 +23,7 @@ export default function DailyLog(props) {
     // This is where the component's formData state and its updater 
     // are defined with the'useState' hook
     const [formData, setFormData] = useState(initialFormState)
+    // const [redirect, setRedirect] = useState(false)
 
     useEffect(() => {
 
@@ -41,7 +44,8 @@ export default function DailyLog(props) {
                     didFlush: data.didFlush,
                     didFlip: data.didFlip,
                     didDefoliate: data.didDefoliate,
-                    notes: data.notes
+                    notes: data.notes,
+                    // grow: props.growId
                 }
                 setFormData(form)
             }).catch(err => console.log(err))
@@ -50,7 +54,6 @@ export default function DailyLog(props) {
 
     async function postDailyLog() {
         let data = formData
-        formData.grow = props.growId
         let response = await Axios.post(`/api/daily/${props.growId}`, data)
         return response
     }
@@ -70,6 +73,10 @@ export default function DailyLog(props) {
         let response = props.logId ? await putDailyLog() : await postDailyLog()
         console.log(response)
         setFormData(initialFormState)
+        // setRedirect(true)
+        response.data.message ? console.log(response.data.message)
+        :
+        props.history.push('/')
     }
 
     const handleInputChange = event => {
@@ -81,8 +88,10 @@ export default function DailyLog(props) {
     }
 
     return (
-
+        // redirect ? <Redirect to='/' />
+        // :
         <Form onSubmit={handleFormSubmit}>
+        {/* <Form> */}
             <Form.Row className="m-1">
                 <Col>
                     <Form.Group className="m-1" controlId="log.ControlInput1">

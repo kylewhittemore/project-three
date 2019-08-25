@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -31,7 +32,9 @@ class StaticForm extends Component {
         flowerLightWattage: "",
         lightNotes: "",
         canopyTechnique: "",
-        canopyTechniqueNotes: ""
+        canopyTechniqueNotes: "",
+        // user: "5d60ad3ce54ff902983c41dd"
+        // redirect: false
     };
 
     //after form has shown, if a growId is passed, then populate the static information from the database to allow the user to add/edit information.
@@ -93,6 +96,19 @@ class StaticForm extends Component {
     async handleFormSubmit(event) {
         event.preventDefault();
 
+        // variable used to reference this.state
+        let formData = this.state;
+
+        // passing the values in each state to the postNewSeasonStatic function so the function can push the info to the database
+        this.postNewSeasonStatic(formData).then(response => {
+            response.data.message ? console.log(response.data.message)
+            :
+            // this.setState({ redirect: true })
+            this.props.history.push('/')
+        });
+
+        // console.log to see that the state is taking in the forms value.
+        console.log(this.state.floweringTime);
         let response = this.props.growId ? await this.putSeasonStatic() : await this.postNewSeasonStatic()
         console.log("form submit response: ", response)
 
@@ -114,15 +130,18 @@ class StaticForm extends Component {
             flowerLightWattage: "",
             lightNotes: "",
             canopyTechnique: "",
-            canopyTechniqueNotes: ""
+            canopyTechniqueNotes: "",
+         
+            // user: ""
         });
     };
 
     render() {
 
         return (
-            <div>
 
+            <div>
+                
                 <Form className="mx-5 my-5">
                     <Form.Row>
                         <Form.Group as={Col} controlId="log.ControlInput1">

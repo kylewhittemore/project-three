@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -13,7 +13,8 @@ class UserLogin extends Component {
         userid: "",
         password: "",
         errors: "",
-        success: null
+        success: null,
+        redirect: false
         }; 
     
     handleInputChange = e => {
@@ -32,7 +33,7 @@ class UserLogin extends Component {
             if (success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
                 localStorage.setItem('p3aajjkw-user', user)
-
+                this.setState({ redirect: true })
                 // Axios.defaults.headers.common['Authorization'] = token;
                 // redirect to home page
             } else {
@@ -46,7 +47,8 @@ class UserLogin extends Component {
     render () {
 
         return ( 
-
+            this.state.redirect ? <Redirect to={'/'} />
+            :
             <Container >
                 
                 <h1>LOGIN PAGE</h1>
