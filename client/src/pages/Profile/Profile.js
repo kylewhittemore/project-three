@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import Axios from 'axios'
-import isAuth from '../../utils/isAuth'
+// import isAuth from '../../utils/isAuth'
 import './style.css'
 
 
@@ -20,7 +20,7 @@ class Profile extends Component {
     // }
 
     componentDidMount() {
-        isAuth();
+        // isAuth();
         Axios.get('api/user/profile')
             .then (res => {
                 this.setState ({ isAuth: true })
