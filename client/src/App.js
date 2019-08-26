@@ -13,6 +13,11 @@ import Profile from "./pages/Profile/Profile";
 import DailyLogs from './pages/DailyLogs/DailyLogs'
 import StaticForm from './components/StaticForm/StaticForm'
 
+// import './utils/interceptors.js'
+// import './utils/isAuth.js'
+import isAuth from './utils/isAuth.js'
+isAuth();
+
 function App() {
 
   const [userId, setUserId] = useState("5d60ad3ce54ff902983c41dd")
