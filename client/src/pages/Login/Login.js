@@ -32,9 +32,10 @@ class UserLogin extends Component {
             if (success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
                 localStorage.setItem('p3aajjkw-user', user)
-                this.props.history.push('/')
-                // Axios.defaults.headers.common['Authorization'] = token;
                 // redirect to home page
+                this.setState({ redirect: true }) 
+                // this.props.history.push('/')                
+                // Axios.defaults.headers.common['Authorization'] = token;
             } else {
                 this.setState({ errors : msg });
                 // reload current page with messages

@@ -12,7 +12,7 @@ export default function Test() {
     return (
 
         <>
-            <StaticHeader growId={"5d630cabb255c29f4f1e2178"} />
+            <StaticHeader growId="5d630cabb255c29f4f1e2178" />
         </>
     )
 };

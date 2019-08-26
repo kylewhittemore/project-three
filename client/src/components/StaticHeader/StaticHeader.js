@@ -1,7 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import Axios from 'axios';
 import Moment from 'moment';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 
 class StaticHeader extends Component {
@@ -63,25 +65,85 @@ class StaticHeader extends Component {
 
         return (
             <div>
+                <Container>
+                    <Row>
+                        <Col className="text-right">
+                            <Button variant="outline-dark" size="sm">Edit</Button>
+                        </Col>
+                    </Row>
+                    <Row className="justify-content-md-center">
+                        <Col lg="auto">
+                            <h2>{this.state.seasonName}</h2>
+                        </Col>
+                    </Row>
 
-            <h1>{this.state.seasonName}</h1>
-            <h3>{this.state.dateStarted}</h3>
-            <h3>{this.state.dateCompleted}</h3>
+                    <Row>
+                        <Col lg={6} className="text-center">
+                            <p><strong>Date Started: </strong>{this.state.dateStarted}</p>
+                        </Col>
+                        <Col lg={6} className="text-center">
+                            <p><strong>Date Completed: </strong>{this.state.dateCompleted}</p>
+                        </Col>
+                    </Row>
 
-            <h4>{this.state.strainName}</h4>
-            <h4>{this.state.lineage}</h4>
-            <h4>{this.state.floweringTime}</h4>
-            <h4>{this.state.breeder}</h4>
-            <h4>{this.state.starterPlantType}</h4>
-            <h4>{this.state.numPlants}</h4>
-            <h4>{this.state.medium}</h4>
-            <h4>{this.state.vegLightType}</h4>
-            <h4>{this.state.vegLightWattage}</h4>
-            <h4>{this.state.flowerLightType}</h4>
-            <h4>{this.state.flowerLightWattage}</h4>
-            <h4>{this.state.lightNotes}</h4>
-            <h4>{this.state.canopyTechnique}</h4>
-            <h4>{this.state.canopyTechniqueNotes}</h4>
+                    <Row>
+                        <Col lg={3} className="text-center">
+                            <p><strong>Breeder: </strong>{this.state.breeder}</p>
+                        </Col>
+                        <Col lg={3} className="text-center">
+                            <p><strong>Strain: </strong>{this.state.strainName}</p>
+                        </Col>
+                        <Col lg={3} className="text-center">
+                            <p><strong>Lineage: </strong>{this.state.lineage}</p>
+                        </Col>
+                        <Col lg={3} className="text-center">
+                            <p><strong>Flowering Time: </strong>{this.state.floweringTime} Days</p>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col lg={4} className="text-center">
+                            <p><strong>Starter Plant Type: </strong>{this.state.starterPlantType}</p>
+                        </Col>
+                        <Col lg={4} className="text-center">
+                            <p><strong>Number of Plants: </strong>{this.state.numPlants}</p>
+                        </Col>
+                        <Col lg={4} className="text-center">
+                            <p><strong>Medium: </strong>{this.state.medium}</p>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col lg={3} className="text-center">
+                            <p><strong>Veg Light Type: </strong>{this.state.vegLightType}</p>
+                        </Col>
+                        <Col lg={3} className="text-center">
+                            <p><strong>Veg Light Wattage: </strong>{this.state.vegLightWattage} Watts</p>
+                        </Col>
+                        <Col lg={3} className="text-center">
+                            <p><strong>Flower Light Type: </strong>{this.state.flowerLightType}</p>
+                        </Col>
+                        <Col lg={3} className="text-center">
+                            <p><strong>Flower Light Wattage: </strong>{this.state.flowerLightWattage} Watts</p>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className="text-center">
+                            <p><strong>Lighting Notes: </strong>{this.state.lightNotes}</p>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col lg={6} className="text-center">
+                            <p><strong>Canopy Technique: </strong>{this.state.canopyTechnique}</p>
+                        </Col>
+                        <Col lg={6} className="text-center">
+                            <p><strong>Canopy Technique Notes: </strong>{this.state.canopyTechniqueNotes}</p>
+                        </Col>
+                    </Row>
+
+                </Container>
 
             </div>
         )

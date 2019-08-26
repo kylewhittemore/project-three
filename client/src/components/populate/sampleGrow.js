@@ -1,6 +1,6 @@
 const data = [
     {
-        "seasonName" : "Menthol Diaries",
+        "seasonName" : "Menthol Flavors",
         "dateStarted" : "2019-04-05",
         "dateCompleted" : "2019-08-05",
         "strainName" : "Peppermint Agave",
