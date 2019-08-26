@@ -26,6 +26,7 @@ export default function DailyLog(props) {
     // are defined with the'useState' hook
     const [formData, setFormData] = useState(initialFormState)
     const [imageS3Id, setImageS3Id] = useState('')
+    const [loadingImage, setLoadingImage] = useState(false)
 
     useEffect(() => {
 
@@ -97,6 +98,7 @@ export default function DailyLog(props) {
         thisFormData.append('image', target.files[0])
         let apiResponse = await Axios.post('/api/image/s3', thisFormData)
         // event.target.value = ''
+        console.log("API res: ", apiResponse)
         let img = {
             name: apiResponse.data.image.name,
             s3Id: apiResponse.data.image.s3Id,
@@ -106,7 +108,9 @@ export default function DailyLog(props) {
         }
 
         let dbResponse = await Axios.post('/api/image/db', img)
-        console.log(dbResponse)
+        console.log("db res: ", dbResponse)
+        // setImageS3Id(apiResponse.data.s3Id)
+        
     }
 
     return (
@@ -180,8 +184,12 @@ export default function DailyLog(props) {
                     Submit
             </Button>
             </Form>
-                      
-            <img src={`https://grow-image-storage.s3.amazonaws.com/${imageS3Id}`} />
+                {/* {
+                    loadingImage ? <div></div>
+                    :
+                    <img src={`https://grow-image-storage.s3.amazonaws.com/${imageS3Id}`} />
+                }
+             */}
         </>
     )
 }

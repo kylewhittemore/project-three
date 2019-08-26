@@ -27,9 +27,9 @@ function DailyLogPage(props) {
     return (
         <div className="align-me">
             <DailyLogForm {...props} 
-            userId={'5d62f4ef67b1c19c4a06f420'} 
-            growId={'5d62f6bb42d0239cbc08a6be'} 
-            logId={'5d62f70fb039099cdbd55790'} />
+            userId={'5d630c1ab4e4e29f0dfb5830'} 
+            growId={'5d630cabb255c29f4f1e2178'} 
+            logId={'5d630ceace36969f5fc95039'} />
         </div>
     );
 };

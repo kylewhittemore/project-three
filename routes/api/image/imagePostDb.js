@@ -13,38 +13,39 @@ module.exports = (req, res) => {
         user: req.body.userId
 
     }).then(dbImage => {
-        console.log('##############', dbImage)
-        User
-            .findByIdAndUpdate(req.body.userId,
+        console.log('0##############', dbImage.user)
+       return User
+            .findByIdAndUpdate(dbImage.user,
                 {
                     $push: { images: dbImage._id }
                 },
                 {
                     new: true
                 })
-        return dbImage
-    }).then(dbImage => {
-        console.log('##############', dbImage)
-        Grow
-            .findByIdAndUpdate(req.body.growId,
-                {
-                    $push: { images: dbImage._id }
-                },
-                {
-                    mew: true
-                })
-        return dbImage
-    }).then(dbImage => {
-        console.log('##############', dbImage)
-        DailyLog
-            .findByIdAndUpdate(req.body.dailyLogId,
-                {
-                    $push: { images: dbImage._id }
-                },
-                {
-                    new: true
-                })
-        return dbImage
-    }).then(dbImage => res.json(dbImage))
+    })
+    // .then(dbImage => {
+    //     console.log('1##############', dbImage.grow)
+    //     Grow
+    //         .findByIdAndUpdate(dbImage.grow,
+    //             {
+    //                 $push: { images: dbImage._id }
+    //             },
+    //             {
+    //                 mew: true
+    //             })
+    //     return dbImage
+    // }).then(dbImage => {
+    //     console.log('2##############', dbImage.dailyLog)
+    //     DailyLog
+    //         .findByIdAndUpdate(dbImage.dailyLog,
+    //             {
+    //                 $push: { images: dbImage._id }
+    //             },
+    //             {
+    //                 new: true
+    //             })
+    //     return dbImage
+    // })
+    .then(dbUser => res.json(dbUser))
         .catch(err => res.json(err))
 }
