@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -12,8 +13,9 @@ class UserLogin extends Component {
     state = {
         userid: "",
         password: "",
-        errors: "",
-        success: null
+        errorMsg: "",
+        success: true,
+        redirect: false
         }; 
     
     handleInputChange = e => {
@@ -26,10 +28,10 @@ class UserLogin extends Component {
             username: this.state.username,
             password: this.state.password
         }).then(res => {
-            console.log(JSON.stringify(res.data))
-            const {success, token, user, msg} = res.data
+            // console.log(JSON.stringify(res.data))
+            const {success, token, msg} = res.data
             this.setState({ success })
-            if (success) {
+            if (this.state.success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
                 localStorage.setItem('p3aajjkw-user', user)
                 // redirect to home page
@@ -41,7 +43,6 @@ class UserLogin extends Component {
                 // reload current page with messages
             }
         });
-        // console.log(formData);
     };
 
     render () {
@@ -52,6 +53,12 @@ class UserLogin extends Component {
             <Container >
                 
                 <h1>LOGIN PAGE</h1>
+                { this.state.success ? null : 
+                    <Alert variant="danger">
+                        <Alert.Heading>You got an error!</Alert.Heading>
+                        <h4>{ this.state.errorMsg }</h4>
+                    </Alert>
+                }
                 <Form onSubmit = {this.handleFormSubmit} >
                     <Form.Row >
                         <Form.Group controlId="formUsername" >

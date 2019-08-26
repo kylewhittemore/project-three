@@ -1,12 +1,13 @@
 import axios from "axios";
 
-const setAuthToken = token => {
+export const isAuth = () => {
+  let token = localStorage.getItem('p3aajjkw-jwt')
   if (token) {
-    // Apply authorization token to every request if logged in
+    // Add authorization token to http header
     axios.defaults.headers.common["Authorization"] = token;
-  } else {
+  } else { 
     // Delete auth header
     delete axios.defaults.headers.common["Authorization"];
   }
 };
-export default setAuthToken;
+export default isAuth;

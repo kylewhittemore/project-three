@@ -12,7 +12,7 @@ module.exports = (req, res) => {
     User.findOne({username})
         .then(user => {
             if (user) {
-                return res.json({success: false, msg: 'username already used'});
+                return res.json({success: false, errorMsg: 'username already used'});
             } else {
                 const newUser = ({
                     username,
