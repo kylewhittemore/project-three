@@ -24,7 +24,8 @@ function DailyLogPage(props) {
             // logId={'logId'} />
             userId={'5d630c1ab4e4e29f0dfb5830'} 
             growId={'5d647ec8380712b1997d4caa'} 
-            logId={'5d647ef7916f32b1b280514a'} />
+            // logId={'5d647ef7916f32b1b280514a'} 
+            />
         </div>
     );
 };
