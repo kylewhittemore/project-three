@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -10,7 +11,7 @@ class StaticForm extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { isOn: true };
+        // this.state = { isOn: true };
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
     };
 
@@ -64,6 +65,7 @@ class StaticForm extends Component {
                 canopyTechniqueNotes: data.canopyTechniqueNotes
             });
         };
+        console.log(this.props.userId)
     };
 
     async putSeasonStatic() {
@@ -77,8 +79,11 @@ class StaticForm extends Component {
     }
 
     // function set to post input to the database.
-    postNewSeasonStatic() {
-        Axios.post('/api/grow', this.state);
+    async postNewSeasonStatic(formData) {
+        let response = await Axios.post(`/api/grow/${this.props.userId}`, formData)
+        console.log(response)
+        return response
+
     };
 
     // setting each states value when the input is changed
@@ -100,17 +105,19 @@ class StaticForm extends Component {
         let formData = this.state;
 
         // passing the values in each state to the postNewSeasonStatic function so the function can push the info to the database
-        this.postNewSeasonStatic(formData).then(response => {
-            response.data.message ? console.log(response.data.message)
-            :
-            // this.setState({ redirect: true })
-            this.props.history.push('/')
-        });
+        // let response = await this.postNewSeasonStatic(formData)
+        let response = this.props.growId ? await this.putSeasonStatic() : await this.postNewSeasonStatic(formData)
+
+        response.data.message ? console.log(".then response", response.data.message)
+        :
+        // this.setState({ redirect: true })
+        this.props.history.push('/')
+
 
         // console.log to see that the state is taking in the forms value.
         console.log(this.state.floweringTime);
-        let response = this.props.growId ? await this.putSeasonStatic() : await this.postNewSeasonStatic()
-        console.log("form submit response: ", response)
+        // let response = this.props.growId ? await this.putSeasonStatic() : await this.postNewSeasonStatic()
+        // console.log("form submit response: ", response)
 
         // reset the state back to it's original "state"
         this.setState({
@@ -131,7 +138,7 @@ class StaticForm extends Component {
             lightNotes: "",
             canopyTechnique: "",
             canopyTechniqueNotes: "",
-         
+
             // user: ""
         });
     };
@@ -141,7 +148,7 @@ class StaticForm extends Component {
         return (
 
             <div>
-                
+
                 <Form className="mx-5 my-5">
                     <Form.Row>
                         <Form.Group as={Col} controlId="log.ControlInput1">
