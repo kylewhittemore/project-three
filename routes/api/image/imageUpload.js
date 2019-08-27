@@ -14,5 +14,5 @@ module.exports = (req, res) => {
             .slice(3, 25),
         name: value[0].name
     }
-    uploader(image.s3Id, value[0].path, res)
+    uploader(image, value[0].path, res)
 }

@@ -2,7 +2,7 @@ const fs = require('fs');
 const AWS = require('aws-sdk');
 
 
-const uploader = (fileName, inputFileName, res) => {
+const uploader = (image, inputFileName, res) => {
 
     const s3 = new AWS.S3({
         accessKeyId: "AKIAI5ZBWI63YUOSTKLQ",
@@ -13,7 +13,7 @@ const uploader = (fileName, inputFileName, res) => {
         if (err) throw err;
         const params = {
             Bucket: 'grow-image-storage',
-            Key: fileName,
+            Key: image.s3Id,
             ContentType: 'image/jpg',
             acl: "",
             Body: fs.createReadStream(inputFileName)
@@ -23,7 +23,7 @@ const uploader = (fileName, inputFileName, res) => {
         let promise = upload.promise();
         promise.then(data => {
             let response = {
-                name: fileName,
+                name: image.name,
                 s3Id: data.key 
             }
             res.json(response)

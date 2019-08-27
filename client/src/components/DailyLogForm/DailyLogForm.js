@@ -12,8 +12,7 @@ export default function DailyLog(props) {
     const styles = {
         image: {
             height: 171 + "px",
-            // width: 80 + "px"
-            padding: 5 + "px"
+            // padding: 5 + "px"
         }
     }
 
@@ -117,9 +116,10 @@ export default function DailyLog(props) {
     }
 
     const handleUploadChange = async event => {
-        const target = event.target
-        inputImageData.append('image', target.files[0])
-        setImageName(target.files[0].name)
+        const file = event.target.files[0]
+        inputImageData.append('image', file)
+        setImageUrl(URL.createObjectURL(file))
+        setImageName(file.name)
     }
 
     return (
@@ -208,7 +208,7 @@ export default function DailyLog(props) {
                                 loadingImage ?
                                     <Spinner />
                                     :
-                                    <Image style={styles.image} src={imageUrl} />
+                                    <Image style={styles.image} src={imageUrl} rounded/>
                             }
                         </Col>
                     </Form.Row>
