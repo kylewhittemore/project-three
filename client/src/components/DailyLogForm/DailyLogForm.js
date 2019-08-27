@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col';
+import Spinner from '../LoadingSpinner/LoadingSpinner'
 import Axios from 'axios'
 
 export default function DailyLog(props) {
@@ -22,6 +23,7 @@ export default function DailyLog(props) {
     const [inputImageData, setInputImageData] = useState(new FormData())
     const [loadingImage, setLoadingImage] = useState(false)
     const [imageUrl, setImageUrl] = useState('')
+    const [imageName, setImageName] = useState('')
 
     useEffect(() => {
 
@@ -86,7 +88,7 @@ export default function DailyLog(props) {
         event.preventDefault();
         setLoadingImage(true)
         let apiResponse = await Axios.post('/api/image/s3', inputImageData)
-        
+
         console.log("API res: ", apiResponse)
         let img = {
             name: apiResponse.data.name,
@@ -107,11 +109,12 @@ export default function DailyLog(props) {
     const handleUploadChange = async event => {
         const target = event.target
         inputImageData.append('image', target.files[0])
+        setImageName(target.files[0].name)
     }
 
     return (
         <>
-            <Form onSubmit={handleFormSubmit}>
+            <Form onSubmit={handleFormSubmit} className="col-md-6">
                 <Form.Row className="m-1">
                     <Col>
                         <Form.Group className="m-1" controlId="log.ControlInput1">
@@ -172,23 +175,28 @@ export default function DailyLog(props) {
                 </Col>
                 <Col>
                     <Form.Group className="m-1" controlId="log.ControlTextarea1">
-                        <Form.Label>upload:</Form.Label>
-                        <input className="" type="file" id="single" onChange={handleUploadChange} />
+                        {/* <Form.Label>upload:</Form.Label> */}
+                        <div className="input-group my-4">
+                            <div className="custom-file">
+                                <input type="file" onChange={handleUploadChange} className="custom-file-input" id="inputGroupFile02" />
+                                <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{imageName ? imageName : "Choose file"}</label>
+                            </div>
+                            <div className="input-group-append">
+                                 <span className="input-group-text" onClick={handleImageAttach} id="inputGroupFileAddon02">Upload</span>
+                            </div>
+                        </div>
                     </Form.Group>
                 </Col>
-                <Button className="m-2" variant="primary" type="button" onClick={handleImageAttach}>
-                    attach
-                </Button>
-                <Button className="m-2" variant="primary" type="submit">
+                <Button className="ml-3" variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
             {
-                    loadingImage ? <div>LOADING</div>
+                loadingImage ? <Spinner />
                     :
                     <img src={imageUrl} />
-                }
-            
+            }
+
         </>
     )
 }
