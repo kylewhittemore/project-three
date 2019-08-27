@@ -10,9 +10,19 @@ import StaticForm from '../../components/StaticForm/StaticForm'
 
 function NewSeasonPage(props) {
     console.log(props)
+
+    let growId;
+    let url = window.location.href;
+
+    if (url.indexOf("?grow_id=") !== -1) {
+        growId = url.split("=")[1]
+        console.log("GROW ID %%%%%%", growId)
+    };
+
+
     return (
         <div className="align-me">
-            <StaticForm {...props}/>
+            <StaticForm {...props} growId={growId}/>
             <p></p>
         </div>
     );

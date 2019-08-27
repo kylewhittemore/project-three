@@ -33,7 +33,7 @@ class UserLogin extends Component {
             this.setState({ success })
             if (this.state.success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
-                localStorage.setItem('p3aajjkw-user', user)
+                // localStorage.setItem('p3aajjkw-user', user)
                 // redirect to home page
                 this.setState({ redirect: true }) 
                 // this.props.history.push('/')                
