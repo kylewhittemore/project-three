@@ -3,13 +3,9 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col';
 import Axios from 'axios'
-import { Link, Redirect } from "react-router-dom";
-
-
 
 export default function DailyLog(props) {
 
-    // empty form object to set formData state to after submission
     const initialFormState = {
         date: "",
         plantAppearance: "happy",
@@ -22,8 +18,6 @@ export default function DailyLog(props) {
         notes: ""
     }
 
-    // This is where the component's formData state and its updater 
-    // are defined with the'useState' hook
     const [formData, setFormData] = useState(initialFormState)
     const [inputImageData, setInputImageData] = useState(new FormData())
     const [loadingImage, setLoadingImage] = useState(false)
@@ -49,7 +43,6 @@ export default function DailyLog(props) {
                     didFlip: data.didFlip,
                     didDefoliate: data.didDefoliate,
                     notes: data.notes,
-                    // grow: props.growId
                 }
                 setFormData(form)
             }).catch(err => console.log(err))
@@ -57,7 +50,6 @@ export default function DailyLog(props) {
     }, [props]);
 
     async function postDailyLog() {
-        console.log("***********", props.growId)
         let data = formData
         let response = await Axios.post(`/api/daily/${props.growId}`, data)
         return response
@@ -76,7 +68,6 @@ export default function DailyLog(props) {
     async function handleFormSubmit(event) {
         event.preventDefault()
         let response = props.logId ? await putDailyLog() : await postDailyLog()
-        console.log(response)
         setFormData(initialFormState)
         response.data.message ?
             console.log(response.data.message)
@@ -85,7 +76,6 @@ export default function DailyLog(props) {
     }
 
     const handleInputChange = event => {
-        // event.preventDefault()
         const target = event.target
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
@@ -116,8 +106,6 @@ export default function DailyLog(props) {
 
     const handleUploadChange = async event => {
         const target = event.target
-        console.log(target.files[0].name)
-        // const imageInputData = new FormData();
         inputImageData.append('image', target.files[0])
     }
 

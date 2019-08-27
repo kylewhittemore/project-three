@@ -22,7 +22,6 @@ const uploader = (fileName, inputFileName, res) => {
         let upload = s3.upload(params)
         let promise = upload.promise();
         promise.then(data => {
-            console.log(data)
             let response = {
                 name: fileName,
                 s3Id: data.key 

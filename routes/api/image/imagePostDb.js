@@ -4,7 +4,6 @@ const DailyLog = require('../../../database/models/dailyLog')
 const Grow = require('../../../database/models/grow')
 
 module.exports = (req, res) => {
-    console.log("req.body: ", req.body)
     let image;
 
     Image.create({
@@ -25,8 +24,6 @@ module.exports = (req, res) => {
                     new: true
                 })
             .then(user => {
-                console.log('##############', image)
-
                 return DailyLog
                     .findByIdAndUpdate(image.dailyLog,
                         {
@@ -49,7 +46,4 @@ module.exports = (req, res) => {
             .then(grow => res.json(image))
             .catch(err => res.json(err))
     })
-
-    // .then(dbUser => res.json(dbUser))
-    // .catch(err => res.json(err))
 }

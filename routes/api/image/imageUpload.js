@@ -13,11 +13,6 @@ module.exports = (req, res) => {
             .replace(/-/, '')
             .slice(3, 25),
         name: value[0].name
-
     }
-
-    console.log(image.s3Id)
     uploader(image.s3Id, value[0].path, res)
-    // .then(data => res.json(data))
-    // res.json({image})
 }
