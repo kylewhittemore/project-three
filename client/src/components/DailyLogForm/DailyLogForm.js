@@ -57,6 +57,7 @@ export default function DailyLog(props) {
                     notes: data.notes,
                 }
                 setFormData(form)
+                setImageUrl(`https://grow-image-storage.s3.amazonaws.com/${data.images[0].s3Id}`)
             }).catch(err => console.log(err))
         }
     }, [props]);
@@ -84,7 +85,6 @@ export default function DailyLog(props) {
         response.data.message ?
             console.log(response.data.message)
             :
-            // props.history.push('/')
             handleImageDbPost().then(respose => {
                 console.log("response from handle form: ", response)
                 props.history.push('/')
@@ -113,12 +113,6 @@ export default function DailyLog(props) {
             dailyLogId: props.logId
         }
         setDbPostImage(img)
-        // let dbResponse = await Axios.post('/api/image/db', img)
-        // console.log("DB res: ", dbResponse)
-        // setImageUrl(`https://grow-image-storage.s3.amazonaws.com/${dbResponse.data.s3Id}`)
-        // setInputImageData(new FormData())
-        // setLoadingImage(false)
-        // return dbResponse
     }
 
     const handleImageDbPost = async () => {
