@@ -12,6 +12,7 @@ import DailyLog from './pages/DailyLog/DailyLog'
 import Profile from "./pages/Profile/Profile";
 import DailyLogs from './pages/DailyLogs/DailyLogs'
 import StaticForm from './components/StaticForm/StaticForm'
+import StaticHeaderPage from './pages/StaticHeaderPage'
 
 // import './utils/interceptors.js'
 // import './utils/isAuth.js'
@@ -21,6 +22,7 @@ isAuth();
 function App() {
 
   const [userId, setUserId] = useState("5d60ad3ce54ff902983c41dd")
+  const growId = "5d647ec8380712b1997d4caa"
 
   return (
     <Router>
@@ -66,6 +68,10 @@ function App() {
           exact path="/dailylogs"
           render={props => <DailyLogs {...props} />}
         />
+        {/* <Route
+          path="/grow"
+          render={props => <StaticHeaderPage {...props} />}
+        /> */}
       </div>
     </Router>
   );

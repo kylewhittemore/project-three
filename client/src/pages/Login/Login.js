@@ -34,12 +34,13 @@ class UserLogin extends Component {
             if (this.state.success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
                 // localStorage.setItem('p3aajjkw-user', user)
-                // save token, redirect to home page, clear inputs
-                this.setState({ username: "", password: "" }) 
-                this.setState({ redirect: true })
-            } else { 
-                // stay on login page with messages (clear password)
-                this.setState({ errorMsg : msg, password: "" });
+                // redirect to home page
+                this.setState({ redirect: true }) 
+                // this.props.history.push('/')                
+                // Axios.defaults.headers.common['Authorization'] = token;
+            } else {
+                this.setState({ errors : msg });
+                // reload current page with messages
             }
         });
     };
