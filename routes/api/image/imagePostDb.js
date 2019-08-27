@@ -5,6 +5,8 @@ const Grow = require('../../../database/models/grow')
 
 module.exports = (req, res) => {
     console.log("req.body: ", req.body)
+    let image;
+
     Image.create({
         name: req.body.name,
         s3Id: req.body.s3Id,
@@ -13,39 +15,41 @@ module.exports = (req, res) => {
         user: req.body.userId
 
     }).then(dbImage => {
-        console.log('0##############', dbImage.user)
-       return User
-            .findByIdAndUpdate(dbImage.user,
+        image = dbImage
+        return User
+            .findByIdAndUpdate(image.user,
                 {
-                    $push: { images: dbImage._id }
+                    $push: { images: image._id }
                 },
                 {
                     new: true
                 })
+            .then(user => {
+                console.log('0##############', image)
+
+                return DailyLog
+                    .findByIdAndUpdate(image.dailyLog,
+                        {
+                            $push: { images: image._id }
+                        },
+                        {
+                            new: true
+                        })
+            })
+            .then(log => {
+                return Grow
+                    .findByIdAndUpdate(image.grow,
+                        {
+                            $push: { images: image._id }
+                        },
+                        {
+                            new: true
+                        })
+            })
+            .then(grow => res.json(image))
+            .catch(err => res.json(err))
     })
-    // .then(dbImage => {
-    //     console.log('1##############', dbImage.grow)
-    //     Grow
-    //         .findByIdAndUpdate(dbImage.grow,
-    //             {
-    //                 $push: { images: dbImage._id }
-    //             },
-    //             {
-    //                 mew: true
-    //             })
-    //     return dbImage
-    // }).then(dbImage => {
-    //     console.log('2##############', dbImage.dailyLog)
-    //     DailyLog
-    //         .findByIdAndUpdate(dbImage.dailyLog,
-    //             {
-    //                 $push: { images: dbImage._id }
-    //             },
-    //             {
-    //                 new: true
-    //             })
-    //     return dbImage
-    // })
-    .then(dbUser => res.json(dbUser))
-        .catch(err => res.json(err))
+
+    // .then(dbUser => res.json(dbUser))
+    // .catch(err => res.json(err))
 }

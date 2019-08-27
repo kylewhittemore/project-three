@@ -28,8 +28,8 @@ function DailyLogPage(props) {
         <div className="align-me">
             <DailyLogForm {...props} 
             userId={'5d630c1ab4e4e29f0dfb5830'} 
-            growId={'5d630cabb255c29f4f1e2178'} 
-            logId={'5d630ceace36969f5fc95039'} />
+            growId={'5d647ec8380712b1997d4caa'} 
+            logId={'5d647ef7916f32b1b280514a'} />
         </div>
     );
 };

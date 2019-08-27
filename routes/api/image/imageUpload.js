@@ -2,7 +2,6 @@ const uploader = require('../../../services/file-upload')
 
 module.exports = (req, res) => {
     const value = Object.values(req.files)
-    console.log(req._startTime)
     let regex = /:/gi
     let image = {
         s3Id: req._startTime
@@ -19,5 +18,6 @@ module.exports = (req, res) => {
 
     console.log(image.s3Id)
     uploader(image.s3Id, value[0].path)
+    // .then(res => res.json())
     res.json({image})
 }
