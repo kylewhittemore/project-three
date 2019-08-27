@@ -26,6 +26,7 @@ const uploader = (image, inputFileName, res) => {
                 name: image.name,
                 s3Id: data.key 
             }
+            console.log("DATA:###########", data)
             res.json(response)
         }, err => console.log(err))
         

@@ -33,6 +33,7 @@ export default function DailyLog(props) {
     const [loadingImage, setLoadingImage] = useState(false)
     const [imageUrl, setImageUrl] = useState('')
     const [imageName, setImageName] = useState('')
+    const [dbPostImage, setDbPostImage] = useState({})
 
     useEffect(() => {
 
@@ -83,7 +84,12 @@ export default function DailyLog(props) {
         response.data.message ?
             console.log(response.data.message)
             :
-            props.history.push('/')
+            // props.history.push('/')
+            handleImageDbPost().then(respose => {
+                console.log("response from handle form: ", response)
+                props.history.push('/')
+
+            })
     }
 
     const handleInputChange = event => {
@@ -97,7 +103,7 @@ export default function DailyLog(props) {
         event.preventDefault();
         setLoadingImage(true)
         let apiResponse = await Axios.post('/api/image/s3', inputImageData)
-
+        setLoadingImage(false)
         console.log("API res: ", apiResponse)
         let img = {
             name: apiResponse.data.name,
@@ -106,8 +112,18 @@ export default function DailyLog(props) {
             growId: props.growId,
             dailyLogId: props.logId
         }
+        setDbPostImage(img)
+        // let dbResponse = await Axios.post('/api/image/db', img)
+        // console.log("DB res: ", dbResponse)
+        // setImageUrl(`https://grow-image-storage.s3.amazonaws.com/${dbResponse.data.s3Id}`)
+        // setInputImageData(new FormData())
+        // setLoadingImage(false)
+        // return dbResponse
+    }
 
-        let dbResponse = await Axios.post('/api/image/db', img)
+    const handleImageDbPost = async () => {
+        setLoadingImage(true)
+        let dbResponse = await Axios.post('/api/image/db', dbPostImage)
         console.log("DB res: ", dbResponse)
         setImageUrl(`https://grow-image-storage.s3.amazonaws.com/${dbResponse.data.s3Id}`)
         setInputImageData(new FormData())
@@ -208,7 +224,7 @@ export default function DailyLog(props) {
                                 loadingImage ?
                                     <Spinner />
                                     :
-                                    <Image style={styles.image} src={imageUrl} rounded/>
+                                    <Image style={styles.image} src={imageUrl} rounded />
                             }
                         </Col>
                     </Form.Row>
@@ -219,7 +235,7 @@ export default function DailyLog(props) {
                     </Form.Row>
                 </Form>
             </Row>
-{/* 
+            {/* 
             <Row className="m-2">
                 <Col>
                     {
