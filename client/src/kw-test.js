@@ -6,7 +6,7 @@ export default function Test() {
 
     return (
         <>
-            <Populate />
+            <NewSeason userId={"5d630c1ab4e4e29f0dfb5830"} />
         </>
     )
 }

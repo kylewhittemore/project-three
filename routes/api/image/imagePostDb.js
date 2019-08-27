@@ -25,7 +25,7 @@ module.exports = (req, res) => {
                     new: true
                 })
             .then(user => {
-                console.log('0##############', image)
+                console.log('##############', image)
 
                 return DailyLog
                     .findByIdAndUpdate(image.dailyLog,

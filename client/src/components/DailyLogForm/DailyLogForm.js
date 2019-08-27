@@ -25,7 +25,7 @@ export default function DailyLog(props) {
     // This is where the component's formData state and its updater 
     // are defined with the'useState' hook
     const [formData, setFormData] = useState(initialFormState)
-    const [inputImageData] = useState(new FormData())
+    const [inputImageData, setInputImageData] = useState(new FormData())
     const [loadingImage, setLoadingImage] = useState(false)
     const [imageUrl, setImageUrl] = useState('')
 
@@ -96,6 +96,7 @@ export default function DailyLog(props) {
         event.preventDefault();
         setLoadingImage(true)
         let apiResponse = await Axios.post('/api/image/s3', inputImageData)
+        // setInputImageData(new FormData())
         console.log("API res: ", apiResponse)
         let img = {
             name: apiResponse.data.image.name,
@@ -109,6 +110,7 @@ export default function DailyLog(props) {
         console.log("DB res: ", dbResponse)
         setImageUrl(`https://grow-image-storage.s3.amazonaws.com/${dbResponse.data.s3Id}`)
         setLoadingImage(false)
+        return dbResponse
     }
 
     const handleUploadChange = async event => {
@@ -208,7 +210,7 @@ export default function DailyLog(props) {
                 </Button>
             </Form>
             {
-                    loadingImage ? <div></div>
+                    loadingImage ? <div>LOADING</div>
                     :
                     <img src={imageUrl} />
                 }
