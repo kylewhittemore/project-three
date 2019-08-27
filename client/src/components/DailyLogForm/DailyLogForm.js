@@ -96,11 +96,11 @@ export default function DailyLog(props) {
         event.preventDefault();
         setLoadingImage(true)
         let apiResponse = await Axios.post('/api/image/s3', inputImageData)
-        // setInputImageData(new FormData())
+        
         console.log("API res: ", apiResponse)
         let img = {
-            name: apiResponse.data.image.name,
-            s3Id: apiResponse.data.image.s3Id,
+            name: apiResponse.data.name,
+            s3Id: apiResponse.data.s3Id,
             userId: props.userId,
             growId: props.growId,
             dailyLogId: props.logId
@@ -109,6 +109,7 @@ export default function DailyLog(props) {
         let dbResponse = await Axios.post('/api/image/db', img)
         console.log("DB res: ", dbResponse)
         setImageUrl(`https://grow-image-storage.s3.amazonaws.com/${dbResponse.data.s3Id}`)
+        setInputImageData(new FormData())
         setLoadingImage(false)
         return dbResponse
     }
@@ -118,21 +119,6 @@ export default function DailyLog(props) {
         console.log(target.files[0].name)
         // const imageInputData = new FormData();
         inputImageData.append('image', target.files[0])
-        // let apiResponse = await Axios.post('/api/image/s3', imageInputData)
-        // event.target.value = ''
-        // console.log("API res: ", apiResponse)
-        // let img = {
-        //     name: apiResponse.data.image.name,
-        //     s3Id: apiResponse.data.image.s3Id,
-        //     userId: props.userId,
-        //     growId: props.growId,
-        //     dailyLogId: props.logId
-        // }
-
-        // let dbResponse = await Axios.post('/api/image/db', img)
-        // console.log("DB res: ", dbResponse)
-        // // setImageS3Id(apiResponse.data.s3Id)
-
     }
 
     return (

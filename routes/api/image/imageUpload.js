@@ -17,7 +17,7 @@ module.exports = (req, res) => {
     }
 
     console.log(image.s3Id)
-    uploader(image.s3Id, value[0].path)
-    // .then(res => res.json())
-    res.json({image})
+    uploader(image.s3Id, value[0].path, res)
+    // .then(data => res.json(data))
+    // res.json({image})
 }
