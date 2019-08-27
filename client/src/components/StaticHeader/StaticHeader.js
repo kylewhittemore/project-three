@@ -11,6 +11,7 @@ class StaticHeader extends Component {
     constructor(props) {
         super(props);
         this.state = { isOn: true };
+        this.editForm = this.editForm.bind(this);
     };
 
     // State below set to blank for all neccessary database inputs.
@@ -34,6 +35,37 @@ class StaticHeader extends Component {
         canopyTechniqueNotes: "",
         // user: "5d60ad3ce54ff902983c41dd"
         // redirect: false
+    };
+
+    async editForm(event) {
+        event.preventDefault();
+        console.log("hi!")
+        if (this.props.growId) {
+            console.log(this.props.growId);
+            let response = await Axios.get(`/api/grow/${this.props.growId}`);
+            console.log(response);
+            let data = response.data;
+            this.setState({
+                seasonName: data.seasonName,
+                dateStarted: data.dateStarted.slice(0, 10),
+                dateCompleted: data.dateCompleted.slice(0, 10),
+                strainName: data.strainName,
+                lineage: data.lineage,
+                floweringTime: data.floweringTime,
+                breeder: data.breeder,
+                starterPlantType: data.starterPlantType,
+                numPlants: data.numPlants,
+                medium: data.medium,
+                vegLightType: data.vegLightType,
+                vegLightWattage: data.vegLightWattage,
+                flowerLightType: data.flowerLightType,
+                flowerLightWattage: data.flowerLightWattage,
+                lightNotes: data.lightNotes,
+                canopyTechnique: data.canopyTechnique,
+                canopyTechniqueNotes: data.canopyTechniqueNotes
+            });
+        };
+        await this.props.history.push(`grow/${this.props.growId}`)
     };
 
     async componentDidMount() {
@@ -68,7 +100,7 @@ class StaticHeader extends Component {
                 <Container>
                     <Row>
                         <Col className="text-right">
-                            <Button variant="outline-dark" size="sm">Edit</Button>
+                            <Button onClick={this.editForm} variant="outline-dark" size="sm">Edit</Button>
                         </Col>
                     </Row>
                     <Row className="justify-content-md-center">
