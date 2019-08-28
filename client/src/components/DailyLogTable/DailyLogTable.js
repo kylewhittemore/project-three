@@ -28,7 +28,9 @@ export default function DailyLogTable(props) {
         fetchLogs().then(data => {
             setLogs(data)
             setLoading(false)
-        }).catch(err => setLoading(false))
+            console.log("DATATATATATA^^^^", data)
+        })
+        .catch(err => setLoading(false))
     }, []);
 
     async function getLogs() {
@@ -87,7 +89,7 @@ export default function DailyLogTable(props) {
                 {/* after implementing filters "logs.map....""  will be "filteredLogs.map..." */}
                 {logs.map(log => {
 
-                    console.log(log.grow)
+                    // console.log(log.grow.seasonName)
                     return (
                     <tr key={log._id}>
                         <td>{log.logId}</td>

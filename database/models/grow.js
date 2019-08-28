@@ -79,7 +79,13 @@ const GrowSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    images: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Image"
+        }
+    ]
 })
 
 module.exports = mongoose.model('Grow', GrowSchema)

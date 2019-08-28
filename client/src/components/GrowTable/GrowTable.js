@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Axios from 'axios'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import { userInfo } from 'os';
-
 
 export default function GrowTable(props) {
 
@@ -18,7 +16,6 @@ export default function GrowTable(props) {
 
     const [grows, setGrows] = useState([])
     const [loading, setLoading] = useState(true)
-    
 
     useEffect(() => {
         async function fetchGrows() {

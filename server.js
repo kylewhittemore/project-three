@@ -1,17 +1,5 @@
-//****************************************************************** */
-//  
-// This is the entry point for the app.  It instantiates an
-// express server, loads the necessary middleware, and listens
-// on either a dynamic port or 8080.  It also is configured to
-// serve the build folder of the react client as the static 
-// directory.  
-// 
-// Note that the dbConnection is imported from
-// './database/index.js'
-//
-//****************************************************************** */
-
 const express = require('express');
+const formData = require('express-form-data')
 const path = require('path')
 const logger = require('morgan')
 const routes = require('./routes')
@@ -25,7 +13,7 @@ const app = express()
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(formData.parse())
 // app.use(express.urlencoded({ extended: true }))
 
 // Passport middleware
