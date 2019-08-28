@@ -1,6 +1,6 @@
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
-const secrets = require('../../../config/secrets')
+// const secrets = require('../../../config/secrets')
 const User= require('../../../database/models/user')
 // import { jwtSecret } from '../../../config/secrets'
 
@@ -30,7 +30,7 @@ module.exports = (req, res, next) => {
             // console.log(`config.secret: ${config.secret} || process.env.JWT_SECRET: ${process.env.JWT_SECRET}`)
             // const testSecret
 
-            const token = jwt.sign(user.toJSON(), secrets.jwtSecret, {
+            const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
               expiresIn: 86400 // 24 hours
             });
     
