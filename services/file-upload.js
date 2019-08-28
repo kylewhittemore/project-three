@@ -5,14 +5,14 @@ const AWS = require('aws-sdk');
 const uploader = (image, inputFileName, res) => {
 
     const s3 = new AWS.S3({
-        accessKeyId: "AKIAI5ZBWI63YUOSTKLQ",
-        secretAccessKey: "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"
+        accessKeyId: "AKIAIUEXIQZLZH6A4LYQ",
+        secretAccessKey: "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"
     });
 
     fs.readFile(inputFileName, (err, data) => {
         if (err) throw err;
         const params = {
-            Bucket: 'grow-image-storage',
+            Bucket: 'project-three-logger-photos',
             Key: image.s3Id,
             ContentType: 'image/jpg',
             acl: "",

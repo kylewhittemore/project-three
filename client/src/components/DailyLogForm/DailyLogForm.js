@@ -57,7 +57,7 @@ export default function DailyLog(props) {
                     notes: data.notes,
                 }
                 setFormData(form)
-                setImageUrl(`https://grow-image-storage.s3.amazonaws.com/${data.images[0].s3Id}`)
+                setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.images[0].s3Id}`)
             }).catch(err => console.log(err))
         }
     }, [props]);
@@ -119,7 +119,7 @@ export default function DailyLog(props) {
         setLoadingImage(true)
         let dbResponse = await Axios.post('/api/image/db', dbPostImage)
         console.log("DB res: ", dbResponse)
-        setImageUrl(`https://grow-image-storage.s3.amazonaws.com/${dbResponse.data.s3Id}`)
+        setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${dbResponse.data.s3Id}`)
         setInputImageData(new FormData())
         setLoadingImage(false)
         return dbResponse
