@@ -16,7 +16,7 @@ const uploader = (image, inputFileName, res) => {
     fs.readFile(inputFileName, (err, data) => {
         if (err) throw err;
         const params = {
-            Bucket: 'grow-image-storage',
+            Bucket: 'project-three-logger-photos',
             Key: image.s3Id,
             ContentType: 'image/jpg',
             acl: "",
