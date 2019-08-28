@@ -1,8 +1,8 @@
-// const dotenv = require('dotenv')
+const dotenv = require('dotenv')
 
 // const dbConnection =  'mongodb://localhost:27017/project3'
 
-// module.exports = {
+module.exports = {
 //   database: dbConnection,
-//   secret: 'yoursecret'
-// }
+  secret: process.env.JWT_SECRET
+}
