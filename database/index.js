@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-require('dotenv').config()
+// require('dotenv').config()
 
 // the database that is used is the heroku deployed mongo DB in mLab
 // this line can be commented out and re-configured to a local DB for development when appropriate
