@@ -12,6 +12,7 @@ function NewSeasonPage(props) {
     console.log(props)
 
     let growId;
+    let userId = '5d630c1ab4e4e29f0dfb5830'
     let url = window.location.href;
 
     if (url.indexOf("?grow_id=") !== -1) {
@@ -22,7 +23,7 @@ function NewSeasonPage(props) {
 
     return (
         <div className="align-me">
-            <StaticForm {...props} growId={growId}/>
+            <StaticForm {...props} growId={growId} userId={userId}/>
             <p></p>
         </div>
     );

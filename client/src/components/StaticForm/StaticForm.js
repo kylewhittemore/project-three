@@ -45,6 +45,12 @@ class StaticForm extends Component {
             let response = await Axios.get(`/api/grow/${this.props.growId}`);
             console.log(response);
             let data = response.data;
+
+            // The two lines below aviod an error if there is no date saved on the log
+            data.dateStarted ? data.dateStarted = data.dateStarted.slice(0,10) : data.dateStarted = ''
+            data.dateStarted ? data.dateStarted = data.dateStarted.slice(0,10) : data.dateStarted = ''
+
+            // this.setState(data)
             this.setState({
                 seasonName: data.seasonName,
                 dateStarted: data.dateStarted.slice(0, 10),

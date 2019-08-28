@@ -22,7 +22,7 @@ isAuth();
 function App() {
 
   const [userId, setUserId] = useState("5d60ad3ce54ff902983c41dd")
-  const growId = "5d647ec8380712b1997d4caa"
+  // const growId = "5d647ec8380712b1997d4caa"
 
   return (
     <Router>
@@ -32,7 +32,7 @@ function App() {
           render={props => <HomePage {...props} />}
         />
         <Route
-          exact path="/newseason"
+          path="/newseason"
           render={props => <NewSeason {...props} />}
         />
         <Route
