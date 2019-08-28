@@ -1,7 +1,9 @@
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
-const config = require('../../../config/database')
+const secrets = require('../../../config/secrets')
 const User= require('../../../database/models/user')
+// import { jwtSecret } from '../../../config/secrets'
+
 
 
 module.exports = (req, res, next) => {
@@ -25,7 +27,10 @@ module.exports = (req, res, next) => {
         User.comparePassword(password, user.password, (err, isMatch) => {
           if(err) throw err;
           if(isMatch){
-            const token = jwt.sign(user.toJSON(), config.secret, {
+            // console.log(`config.secret: ${config.secret} || process.env.JWT_SECRET: ${process.env.JWT_SECRET}`)
+            // const testSecret
+
+            const token = jwt.sign(user.toJSON(), secrets.jwtSecret, {
               expiresIn: 86400 // 24 hours
             });
     
