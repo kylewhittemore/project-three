@@ -2,6 +2,7 @@ import React from "react";
 // import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
+import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
 
 function ImagesPage(props) {
 
@@ -16,11 +17,14 @@ function ImagesPage(props) {
     }
 
     return (
-        <div className="align-me">
-            <PhotoCarousel {...props}
-                growId={growId}
-            />
-        </div>
+        <>
+            <LeftSliderBar {...props} />
+            <div className="align-me">
+                <PhotoCarousel {...props}
+                    growId={growId}
+                />
+            </div>
+        </>
     );
 };
 

@@ -6,13 +6,17 @@ import React from "react";
 import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GrowTable from '../../components/GrowTable/GrowTable'
+import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
 
 
 function SeasonsPage(props) {
     return (
-        <div className="align-me">
-            <GrowTable {...props}/>
-        </div>
+        <>
+            <LeftSliderBar {...props}/>
+            <div className="align-me">
+                <GrowTable {...props} />
+            </div>
+        </>
     );
 };
 
