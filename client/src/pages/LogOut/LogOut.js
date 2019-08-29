@@ -7,6 +7,11 @@ import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function LogOutPage() {
+
+    // componentDidMount() {
+    //    delete the token from localStorage 
+    // }
+
     return (
         <Container>
             <Row>

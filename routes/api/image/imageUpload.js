@@ -11,7 +11,7 @@ module.exports = (req, res) => {
             .replace(/ /gi, '')
             .replace(/z/, '')
             .replace(/-/, '')
-            .slice(3, 25),
+            .slice(3, 18),
         name: value[0].name
     }
     uploader(image, value[0].path, res)
