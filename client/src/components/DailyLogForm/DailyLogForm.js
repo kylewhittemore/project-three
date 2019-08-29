@@ -74,10 +74,9 @@ export default function DailyLog(props) {
             url: `/api/daily/${props.logId}`,
             data: formData
         })
-
         return response
     }
-
+    
     async function handleFormSubmit(event) {
         event.preventDefault()
         let response = props.logId ? await putDailyLog() : await postDailyLog()

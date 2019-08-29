@@ -26,6 +26,10 @@ function App() {
       <div>
         <Route
           exact path="/"
+          render={props => <Login {...props} />}
+        />
+        <Route
+          exact path="/home"
           render={props => <HomePage {...props} />}
         />
         <Route
@@ -49,17 +53,13 @@ function App() {
           render={props => <Register {...props} />}
         />
         <Route
-          exact path="/login"
-          render={props => <Login {...props} />}
-        />
-        <Route
           exact path="/profile"
           render={props => <Profile {...props} />}
         />
         <Route
           path="/dailylog"
           render={props => <DailyLog {...props}
-        />}
+          />}
         />
         <Route
           exact path="/dailylogs"
