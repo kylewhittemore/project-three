@@ -4,15 +4,15 @@ import Axios from 'axios'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 export default function GrowTable(props) {
-
-    const styles = {
-        icon: {
-            cursor: "pointer"
-        },
-        placeholder: {
-            visibility: "hidden"
-        }
-    }
+    const userId = localStorage.getItem('p3aajjkw-id')
+    // const styles = {
+    //     icon: {
+    //         cursor: "pointer"
+    //     },
+    //     placeholder: {
+    //         visibility: "hidden"
+    //     }
+    // }
 
     const [grows, setGrows] = useState([])
     const [loading, setLoading] = useState(true)
@@ -20,7 +20,7 @@ export default function GrowTable(props) {
     useEffect(() => {
         async function fetchGrows() {
             setLoading(true);
-            let response = await Axios.get(`/api/grow/user/${props.userId}`);
+            let response = await Axios.get(`/api/grow/user/${userId}`);
             let data = response.data
             console.log(data)
             return data;
@@ -28,33 +28,34 @@ export default function GrowTable(props) {
         fetchGrows().then(data => {
             setGrows(data)
             setLoading(false)
-        }).catch(err => setLoading(false))
-    }, []);
-
-    async function getGrows() {
-        let response = await Axios.get('/api/grow')
-        setGrows(response.data)
-    }
-
-    async function deleteGrow(id) {
-        let response = await Axios({
-            method: 'delete',
-            url: `/api/grow/${id}`
+        }).catch(err => {
+            console.log(err)
+            setLoading(false)
         })
-        return response
-        //needs logic to delete all associated logs
-    }
+    }, [userId]);
+
+    // async function getGrows() {
+    //     let response = await Axios.get('/api/grow')
+    //     setGrows(response.data)
+    // }
+
+    // async function deleteGrow(id) {
+    //     let response = await Axios({
+    //         method: 'delete',
+    //         url: `/api/grow/${id}`
+    //     })
+    //     return response
+    //     //needs logic to delete all associated logs
+    // }
 
     function TableHead() {
         return (
             <thead>
                 <tr>
                     <th>Season Name</th>
+                    <th>Strain Name</th>
                     <th>Data Started</th>
                     <th>Date Completed</th>
-                    <th>Strain Name</th>
-                    <th>Medium</th>
-                    <th></th>
                 </tr>
             </thead>
         )
@@ -66,10 +67,9 @@ export default function GrowTable(props) {
                 {grows.map(grow => (
                     <tr key={grow._id}>
                         <td>{grow.seasonName}</td>
-                        <td>{grow.dateStarted.slice(0, 10)}</td>
-                        <td>{grow.dateCompleted.slice(0, 10)}</td>
                         <td>{grow.strainName}</td>
-                        <td>{grow.medium ? grow.medium : "No medium specified"}</td>
+                        <td>{grow.dateStarted ? grow.dateStarted.slice(0, 10) : "Not Started"}</td>
+                        <td>{!grow.dateCompleted && !grow.dateStarted ? '' : grow.dateCompleted ? grow.dateCompleted.slice(0, 10) : "In Progress"}</td>
                     </tr>
                 ))}
             </tbody>

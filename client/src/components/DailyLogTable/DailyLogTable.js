@@ -21,7 +21,7 @@ export default function DailyLogTable(props) {
     useEffect(() => {
         async function fetchLogs() {
             setLoading(true);
-            let response = await Axios.get('/api/daily');
+            let response = await Axios.get('/api/daily'); // userId
             let data = response.data
             return data;
         }
@@ -50,25 +50,6 @@ export default function DailyLogTable(props) {
         let response = await Axios.get(`/api/daily/${id}`)
         return response.data.notes
     }
-
-    // async function updateLog(id) {
-
-    //     const log = {
-    //         date: "05/21/18",
-    //         didFeed: false,
-    //         didTransplant: false,
-    //         didWater: true,
-    //         notes: "put note",
-    //         plantAppearance: "mellow"
-    //     }
-
-    //     let response = await Axios({
-    //         method: 'put',
-    //         url: `/api/daily/${id}`,
-    //         data: log
-    //     })
-    //     console.log(response)
-    // }
 
     function TableHead() {
         return (

@@ -1,57 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
+// import { Link } from "react-router-dom";
+// import Button from "react-bootstrap/Button";
+// import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col'
 import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
+// import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
 
 function HomePage() {
+    // const userId = localStorage.getItem('p3aajjkw-id')
+    
     return (
-        <div className="align-me">
-            <Container className="page-center">
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/newseason">New Season</Link>
-                    </Button>
-                </Row>
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/seasons">Seasons</Link>
-                    </Button>
-                </Row>
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/settings">Settings</Link>
-                    </Button>
-                </Row>
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/register">Register</Link>
-                    </Button>
-                </Row>
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/login">Log In</Link>
-                    </Button>
-                </Row>
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/dailylog">Daily Log</Link>
-                    </Button>
-                </Row>
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/dailylogs">All Logs</Link>
-                    </Button>
-                </Row>
-                <Row className="justify-content-center">
-                    <Button variant="outline-success" size="lg">
-                        <Link to="/logout">Log Out</Link>
-                    </Button>
-                </Row>
-            </Container>
+        <div>
+            <LeftSliderBar />
+            <Row >
+                <Col className='col-md-6 mx-auto'>
+                    <h1>Content Goes here</h1>
+                </Col>
+            </Row>
         </div>
     );
 };

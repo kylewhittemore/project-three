@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from "./pages/Home/Home";
@@ -11,18 +11,15 @@ import Login from "./pages/Login/Login";
 import DailyLog from './pages/DailyLog/DailyLog'
 import Profile from "./pages/Profile/Profile";
 import DailyLogs from './pages/DailyLogs/DailyLogs'
-import StaticForm from './components/StaticForm/StaticForm'
-import StaticHeaderPage from './pages/StaticHeaderPage'
-
+// import StaticForm from './components/StaticForm/StaticForm'
+// import StaticHeaderPage from './pages/StaticHeaderPage'
+import Images from './pages/Images/Images'
 // import './utils/interceptors.js'
 // import './utils/isAuth.js'
 import isAuth from './utils/isAuth.js'
 isAuth();
 
 function App() {
-
-  const [userId, setUserId] = useState("5d60ad3ce54ff902983c41dd")
-  // const growId = "5d647ec8380712b1997d4caa"
 
   return (
     <Router>
@@ -37,7 +34,7 @@ function App() {
         />
         <Route
           exact path="/seasons"
-          render={props => <Seasons {...props} userId={userId} />}
+          render={props => <Seasons {...props} />}
         />
         <Route
           exact path="/settings"
@@ -68,10 +65,10 @@ function App() {
           exact path="/dailylogs"
           render={props => <DailyLogs {...props} />}
         />
-        {/* <Route
-          path="/grow"
-          render={props => <StaticHeaderPage {...props} />}
-        /> */}
+        <Route
+          exact path="/images"
+          render={props => <Images {...props} />}
+        />
       </div>
     </Router>
   );
