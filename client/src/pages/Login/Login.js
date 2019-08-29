@@ -29,12 +29,15 @@ class UserLogin extends Component {
             password: this.state.password
         }).then(res => {
             // console.log(JSON.stringify(res.data))
-            const {success, token, msg} = res.data
+            const {success, token, msg, user} = res.data
             this.setState({ success })
             if (this.state.success) {
                 localStorage.setItem('p3aajjkw-jwt', token)
-                // localStorage.setItem('p3aajjkw-user', user)
+                // console.log(`user: ${JSON.stringify(user)}`)
+                const userId = user.id
+                localStorage.setItem('p3aajjkw-id', userId)
                 // redirect to home page
+
                 this.setState({ redirect: true }) 
                 // this.props.history.push('/')                
                 // Axios.defaults.headers.common['Authorization'] = token;
