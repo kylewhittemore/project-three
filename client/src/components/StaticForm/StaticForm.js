@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -41,14 +41,20 @@ class StaticForm extends Component {
     //after form has shown, if a growId is passed, then populate the static information from the database to allow the user to add/edit information.
     async componentDidMount() {
         if (this.props.growId) {
-            console.log(this.props.growId);
+            // console.log(this.props.growId);
             let response = await Axios.get(`/api/grow/${this.props.growId}`);
             console.log(response);
             let data = response.data;
+
+            // The two lines below aviod an error if there is no date saved on the log
+            data.dateStarted ? data.dateStarted = data.dateStarted.slice(0,10) : data.dateStarted = ''
+            data.dateStarted ? data.dateStarted = data.dateStarted.slice(0,10) : data.dateStarted = ''
+
+            // this.setState(data)
             this.setState({
                 seasonName: data.seasonName,
-                dateStarted: data.dateStarted.slice(0, 10),
-                dateCompleted: data.dateCompleted.slice(0, 10),
+                dateStarted: data.dateStarted,
+                dateCompleted: data.dateCompleted,
                 strainName: data.strainName,
                 lineage: data.lineage,
                 floweringTime: data.floweringTime,
@@ -65,8 +71,9 @@ class StaticForm extends Component {
                 canopyTechniqueNotes: data.canopyTechniqueNotes
             });
         };
-        console.log(this.props.userId)
+        // console.log(this.props.userId)
     };
+
 
     async putSeasonStatic() {
         let response = await Axios({
@@ -115,7 +122,7 @@ class StaticForm extends Component {
 
 
         // console.log to see that the state is taking in the forms value.
-        console.log(this.state.floweringTime);
+        // console.log(this.state.floweringTime);
         // let response = this.props.growId ? await this.putSeasonStatic() : await this.postNewSeasonStatic()
         // console.log("form submit response: ", response)
 

@@ -4,7 +4,8 @@ import Carousel from 'react-bootstrap/Carousel'
 import Spinner from '../LoadingSpinner/LoadingSpinner'
 
 export default function PhotoCarousel(props) {
-
+    const userId = localStorage.getItem('p3aajjkw-id')
+    
     const [photos, setPhotos] = useState([])
     const [loading, setLoading] = useState(false)
 

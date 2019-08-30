@@ -28,12 +28,12 @@ const uploader = (image, inputFileName, res) => {
         promise.then(data => {
             let response = {
                 name: image.name,
-                s3Id: data.key 
+                s3Id: data.key
             }
             console.log("DATA:###########", data)
             res.json(response)
         }, err => console.log(err))
-        
+
     });
 }
 

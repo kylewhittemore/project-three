@@ -14,9 +14,15 @@ module.exports = (req, res) => {
                 },
                 {
                     new: true
+                }).then(user => {
+                    console.log("thennnnnnnnn", dbGrow)
+                    res.json(dbGrow)
                 })
             })
-            .then(user => res.json(dbGrow))
+            // .then(user => {
+            //     console.log("thennnnnnnnn", dbGrow)
+            //     res.json(dbGrow)
+            // })
             .catch(err => res.json(err))
 
 };

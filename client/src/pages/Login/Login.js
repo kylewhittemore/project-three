@@ -51,7 +51,7 @@ class UserLogin extends Component {
     render () {
 
         return ( 
-            this.state.redirect ? <Redirect to={'/'} />
+            this.state.redirect ? <Redirect to={'/home'} />
             :
             <Container >
                 
