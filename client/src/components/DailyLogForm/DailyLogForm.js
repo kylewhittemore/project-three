@@ -57,7 +57,11 @@ export default function DailyLog(props) {
                     notes: data.notes,
                 }
                 setFormData(form)
+                console.log("data: ", data)
+                data.images ? 
                 setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.images[0].s3Id}`)
+                :
+                setImageUrl('')
             }).catch(err => console.log(err))
         }
     }, [props]);
@@ -84,11 +88,12 @@ export default function DailyLog(props) {
         response.data.message ?
             console.log(response.data.message)
             :
-            handleImageDbPost().then(respose => {
+            imageUrl ? handleImageDbPost().then(response => {
                 console.log("response from handle form: ", response)
                 props.history.push('/')
-
             })
+            :
+            console.log('no image')
     }
 
     const handleInputChange = event => {

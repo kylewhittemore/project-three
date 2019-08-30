@@ -30,7 +30,6 @@ function ImagesPage(props) {
                 <PhotoCarousel {...props}
                     growId={growId}
                     userId={userId}
-                    // get all photos by user instead, hold them in state for filtering
                 />
             </div>
         </>
