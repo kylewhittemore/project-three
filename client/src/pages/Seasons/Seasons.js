@@ -7,9 +7,19 @@ import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GrowTable from '../../components/GrowTable/GrowTable'
 import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
+import { Redirect } from 'react-router-dom'
 
 
 function SeasonsPage(props) {
+
+    const userId = localStorage.getItem('p3aajjkw-id')
+
+    if (!userId) {
+        return (
+            <Redirect to={'/'} />
+        )
+    }
+
     return (
         <>
             <LeftSliderBar {...props}/>

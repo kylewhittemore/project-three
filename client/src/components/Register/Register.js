@@ -10,7 +10,11 @@ import './style.css';
 
 
 class UserSignup extends Component {
-
+    constructor(props) {
+        super(props);
+        // this.state = { isOn: true };
+        this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    };
    state = {
         userid: "",
         email: "",
@@ -58,7 +62,9 @@ class UserSignup extends Component {
                             console.log(`${username} is registered`) 
                             // alert(`Thank You for registering ${user.userame}`)
                             this.setState({ username: "", email: "", password: "", password2: ""})
-                            this.props.history.push('/login')
+                            // this.props.history.push('/login')
+                            this.props.registerUser(false)
+                            console.log(this.props)
                         } else {
                             this.setState({ errorMsg })
                         }

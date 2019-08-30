@@ -7,12 +7,20 @@ import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StaticForm from '../../components/StaticForm/StaticForm'
 import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
+import { Redirect } from "react-router-dom";
 
 
 function NewSeasonPage(props) {
     // console.log(props)
 
     const userId = localStorage.getItem('p3aajjkw-id')
+
+    if (!userId) {
+        return (
+            <Redirect to={'/'} />
+        )
+    }
+
     let growId;
 
     let url = window.location.href;

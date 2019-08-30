@@ -10,12 +10,20 @@ import './style.css';
 
 class UserLogin extends Component {
 
+    constructor(props) {
+        super(props);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this)
+        this.handleRegisterRequest = this.handleRegisterRequest.bind(this)
+    };
+    
+    
+
     state = {
         userid: "",
         password: "",
         errorMsg: "",
         success: true,
-        redirect: false
+        redirect: false,
         }; 
     
     handleInputChange = e => {
@@ -48,6 +56,12 @@ class UserLogin extends Component {
         });
     };
 
+    handleRegisterRequest = event => {
+        event.preventDefault()
+        this.props.registerUser(true)
+        console.log(this.props)
+    }
+
     render () {
 
         return ( 
@@ -79,6 +93,9 @@ class UserLogin extends Component {
                     </Form.Row>            
                     <Button className="m-2" variant="success" type="submit">
                         Submit
+                    </Button>
+                    <Button className="m-2" variant="success" onClick={event => this.handleRegisterRequest(event)} type="submit">
+                        Register
                     </Button>
                 </Form >
             </Container>
