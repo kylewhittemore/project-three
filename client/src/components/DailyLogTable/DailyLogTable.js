@@ -28,7 +28,6 @@ export default function DailyLogTable(props) {
         fetchLogs().then(data => {
             setLogs(data)
             setLoading(false)
-            console.log("DATATATATATA^^^^", data)
         })
         .catch(err => setLoading(false))
     }, []);

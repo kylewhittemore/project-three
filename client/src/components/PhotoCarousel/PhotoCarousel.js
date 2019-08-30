@@ -4,8 +4,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import Spinner from '../LoadingSpinner/LoadingSpinner'
 
 export default function PhotoCarousel(props) {
-    const userId = localStorage.getItem('p3aajjkw-id')
-    
+
     const [photos, setPhotos] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -15,12 +14,24 @@ export default function PhotoCarousel(props) {
             let response = await Axios.get(`/api/grow/${id}`);
             return response.data
         }
-
-        fetchGrow(props.growId).then(data => {
-            console.log(data.images)
-            setPhotos(data.images)
-            setLoading(false)
-        }).catch(err => console.log(err))
+        async function fetchUser(id) {
+            setLoading(true)
+            let response = await Axios.get(`/api/image/user/${id}`);
+            return response.data
+        }
+        if (props.growId) {
+            fetchGrow(props.growId).then(data => {
+                console.log(data.images)
+                setPhotos(data.images)
+                setLoading(false)
+            }).catch(err => console.log(err))
+        } else {
+            fetchUser(props.userId).then(data => {
+                console.log(data.images)
+                setPhotos(data.images)
+                setLoading(false)
+            }).catch(err => console.log(err))
+        }
     }, [props]);
 
     return (

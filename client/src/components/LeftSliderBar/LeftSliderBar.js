@@ -8,11 +8,12 @@ export default props => {
     console.log(userId)
     return (
         <Menu>
-            <Link to={`/`}>Dashboard</Link>
+            <Link to={`/home`}>Dashboard</Link>
             <Link to={`/newseason`}>New Season</Link>
             <Link to={`/seasons`}>Seasons</Link>
-            <Link to={`/dailylog`}>Daily Logs</Link>
+            <Link to={`/dailylogs`}>Daily Logs</Link>
             <Link to={`/images`}>Images</Link>
+            <Link to={`/dailylog`}>New Log</Link>
         </Menu>
     );
 };

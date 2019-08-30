@@ -4,13 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from "./pages/Home/Home";
 import NewSeason from "./pages/NewSeason/NewSeason";
 import Seasons from "./pages/Seasons/Seasons";
-import Settings from "./pages/Settings/Settings";
+// import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/LogOut/LogOut";
-import Register from "./pages/Register/Register";
-import Login from "./pages/Login/Login";
+// import Register from "./pages/Register/Register";
+// import Login from "./pages/Login/Login";
 import DailyLog from './pages/DailyLog/DailyLog'
 import Profile from "./pages/Profile/Profile";
 import DailyLogs from './pages/DailyLogs/DailyLogs'
+import Landing from './pages/Landing/Landing'
 // import StaticForm from './components/StaticForm/StaticForm'
 // import StaticHeaderPage from './pages/StaticHeaderPage'
 import Images from './pages/Images/Images'
@@ -26,14 +27,14 @@ function App() {
       <div>
         <Route
           exact path="/"
-          render={props => <Login {...props} />}
+          render={props => <Landing {...props} />}
         />
         <Route
           exact path="/home"
           render={props => <HomePage {...props} />}
         />
         <Route
-          path="/newseason"
+          exact path="/newseason"
           render={props => <NewSeason {...props} />}
         />
         <Route
@@ -41,16 +42,8 @@ function App() {
           render={props => <Seasons {...props} />}
         />
         <Route
-          exact path="/settings"
-          render={props => <Settings {...props} />}
-        />
-        <Route
           exact path="/logout"
           render={props => <LogOut {...props} />}
-        />
-        <Route
-          exact path="/register"
-          render={props => <Register {...props} />}
         />
         <Route
           exact path="/profile"

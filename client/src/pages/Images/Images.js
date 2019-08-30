@@ -3,10 +3,17 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
 import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
+import { Redirect } from 'react-router-dom'
 
 function ImagesPage(props) {
 
-    // const userId = localStorage.getItem('p3aajjkw-id')
+    const userId = localStorage.getItem('p3aajjkw-id')
+
+    if (!userId) {
+        return (
+            <Redirect to={'/'} />
+        )
+    }
 
     let growId
 
@@ -22,6 +29,7 @@ function ImagesPage(props) {
             <div className="align-me">
                 <PhotoCarousel {...props}
                     growId={growId}
+                    userId={userId}
                 />
             </div>
         </>

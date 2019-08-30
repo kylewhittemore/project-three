@@ -3,11 +3,17 @@ import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DailyLogForm from '../../components/DailyLogForm/DailyLogForm'
 import LeftSliderBar from "../../components/LeftSliderBar/LeftSliderBar";
-import DailyLogTable from '../../components/DailyLogTable/DailyLogTable'
+import { Redirect } from 'react-router-dom'
 
 function DailyLogPage(props) {
 
-    // const userId = localStorage.getItem('p3aajjkw-id')
+    const userId = localStorage.getItem('p3aajjkw-id')
+
+    if (!userId) {
+        return (
+            <Redirect to={'/'} />
+        )
+    }
 
     let logId, growId
 
@@ -28,7 +34,6 @@ function DailyLogPage(props) {
                     growId={growId}
                     logId={logId}
                 />
-                <DailyLogTable {...props} />
             </div>
         </>
     );
