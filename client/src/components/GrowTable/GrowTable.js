@@ -35,11 +35,10 @@ export default function GrowTable(props) {
         })
     }, [userId]);
 
-    // function goToDetails(growId) {
-    //     return (
-    //         <StaticHeader {...props} growId={growId} />
-    //     )
-    // }
+    const goToDetails = e => {
+        e.preventDefault();
+        console.log(`clicked, growId: ${this.value}`)
+    }
 
 
     // If the logs are loading display a spinner, otherwise render the table from state
@@ -57,8 +56,8 @@ export default function GrowTable(props) {
                             </Col>
                             <Col md="auto">
                                 <div >
-                                    <Button onClick >Details</Button>
-                                    <Button >Make Default</Button>
+                                    <Button onClick={goToDetails()} value={grow._id}>Details</Button>
+                                    <Button value={grow._id}>Make Default</Button>
                                 </div>
                             </Col>
                         </Row>
