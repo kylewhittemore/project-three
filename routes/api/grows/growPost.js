@@ -7,16 +7,17 @@ module.exports = (req, res) => {
     return Grow.create(req.body)
         .then(dbGrow => {
 
-            console.log("db grow: ", dbGrow[dbGrow.length - 1].user._id)
-            return User.findByIdAndUpdate(dbGrow[dbGrow.length - 1].user._id,
+            console.log("db grow: ", dbGrow)
+            return User.findByIdAndUpdate(dbGrow.user._id,
                 {
-                    $push: { grows: dbGrow[dbGrow.length - 1]._id }
+                    $push: { grows: dbGrow._id }
                 },
                 {
                     new: true
                 }).then(user => {
                     console.log("USER: ", user)
-                    res.json(dbGrow[dbGrow.length - 1])
+                    res.json(dbGrow)
+                    // res.json(dbGrow[dbGrow.length - 1])
                 })
             })
             // .then(user => {
