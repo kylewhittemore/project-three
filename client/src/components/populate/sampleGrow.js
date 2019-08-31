@@ -17,7 +17,7 @@ const data = [
         "lightNotes" : "RapidLED COB DIY; Dimmers off; 24 inches above canopy",
         "canopyTechnique" : "",
         "canopyTechniqueNotes" : "Using a SCROG net 18 inches above potters, weaving/bending plants to grow like a vine across the net. Topping when needed",
-        "user": "5d630c1ab4e4e29f0dfb5830"
+        "user": "5d6a7fb469c4201e907aed83"
     }
 ]
 

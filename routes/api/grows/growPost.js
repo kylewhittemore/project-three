@@ -3,20 +3,20 @@ const User = require('../../../database/models/user')
 
 module.exports = (req, res) => {
     console.log("user id: ", req.params.id)
-    console.log(req.body)
+    console.log("req.body", req.body)
     return Grow.create(req.body)
         .then(dbGrow => {
 
-            console.log("db grow: ", dbGrow)
-            return User.findByIdAndUpdate(req.params.id,
+            console.log("db grow: ", dbGrow[dbGrow.length - 1].user._id)
+            return User.findByIdAndUpdate(dbGrow[dbGrow.length - 1].user._id,
                 {
-                    $push: { grows: dbGrow._id }
+                    $push: { grows: dbGrow[dbGrow.length - 1]._id }
                 },
                 {
                     new: true
                 }).then(user => {
-                    console.log("thennnnnnnnn", dbGrow)
-                    res.json(dbGrow)
+                    console.log("USER: ", user)
+                    res.json(dbGrow[dbGrow.length - 1])
                 })
             })
             // .then(user => {

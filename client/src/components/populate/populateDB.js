@@ -13,19 +13,19 @@ async function postToDB(element, id) {
 }
 
 async function postGrowToDB(element) {
-    let response = await  Axios.post('/api/grow/5d630c1ab4e4e29f0dfb5830', element)
+    let response = await  Axios.post('/api/grow/5d6a7fb469c4201e907aed83', element)
     return response.data
 }
 
-// postGrowToDB(grow).then(response => console.log(response))
+postGrowToDB(grow).then(response => console.log(response))
 
-data.forEach(element => {
-    let data = element
-    data.grow = id
-    postToDB(data, id)
-    .then(response => console.log(response))
-    .catch(err => console.log(err))
-})
+// data.forEach(element => {
+//     let data = element
+//     data.grow = id
+//     postToDB(data, id)
+//     .then(response => console.log(response))
+//     .catch(err => console.log(err))
+// })
 
 return (
     <p>db populated</p>
