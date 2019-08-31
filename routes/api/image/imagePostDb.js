@@ -24,6 +24,7 @@ module.exports = (req, res) => {
                     new: true
                 })
             .then(user => {
+                console.log("LINE 27$$$$$$$$user: ", user)
                 return DailyLog
                     .findByIdAndUpdate(image.dailyLog,
                         {

@@ -36,6 +36,7 @@ class StaticForm extends Component {
         canopyTechnique: "",
         canopyTechniqueNotes: "",
         // user: "5d60ad3ce54ff902983c41dd"
+        user: this.props.userId
         // redirect: false
     };
 

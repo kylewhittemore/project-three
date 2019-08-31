@@ -8,9 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function LogOutPage() {
 
-    // componentDidMount() {
-    //    delete the token from localStorage 
-    // }
+    localStorage.removeItem('p3aajjkw-jwt')
+    localStorage.removeItem('p3aajjkw-id')
 
     return (
         <Container>
