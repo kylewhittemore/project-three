@@ -10,7 +10,7 @@ export default function Test() {
     return (
 
         <>
-            <StaticHeader growId="5d647ec8380712b1997d4caa"  />
+            <StaticForm />
         </>
     )
 };

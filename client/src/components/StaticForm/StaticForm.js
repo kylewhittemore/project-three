@@ -1,10 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Component } from "react";
+import React, { Component, Row } from "react";
 // import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Axios from "axios";
+import AddPhotos from "../AddPhotos/AddPhotos";
 import "./style.css";
 
 class StaticForm extends Component {
@@ -293,10 +294,16 @@ class StaticForm extends Component {
                             <Form.Control name="canopyTechniqueNotes" value={this.state.canopyTechniqueNotes} onChange={this.handleInputChange} as="textarea" rows="3" placeholder="Example: Scrog net used for flat, even horizontal canopy./No net or low-stress training used" />
                         </Form.Group>
                     </Form.Row>
+                    
+                    <Form.Row>
+                        <AddPhotos>
+
+                        </AddPhotos>
+                    </Form.Row>
 
                     <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit">
                         Submit
-            </Button>
+                     </Button>
                 </Form>
             </div>
         );
