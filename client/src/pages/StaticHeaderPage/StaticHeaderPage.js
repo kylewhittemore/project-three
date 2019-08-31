@@ -1,5 +1,5 @@
 import React from 'react';
-import StaticHeader from '../components/StaticHeader/StaticHeader';
+import StaticHeader from '../../components/StaticHeader/StaticHeader';
 
 //----------------
 //Test page used to test out the edit function on the static header. 
