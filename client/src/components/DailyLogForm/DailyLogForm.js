@@ -25,7 +25,8 @@ export default function DailyLog(props) {
         didFlush: false,
         didFlip: false,
         didDefoliate: false,
-        notes: ""
+        notes: "",
+        // grow: props.grow
     }
 
     const [formData, setFormData] = useState(initialFormState)

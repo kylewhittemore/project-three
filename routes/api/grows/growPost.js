@@ -7,8 +7,8 @@ module.exports = (req, res) => {
     return Grow.create(req.body)
         .then(dbGrow => {
 
-            console.log("db grow: ", dbGrow)
-            return User.findByIdAndUpdate(dbGrow.user._id,
+            console.log("req user: ", dbGrow)
+            return User.findByIdAndUpdate(req.params.id,
                 {
                     $push: { grows: dbGrow._id }
                 },

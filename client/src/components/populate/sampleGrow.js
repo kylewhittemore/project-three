@@ -1,6 +1,6 @@
-const data = [
+const data = 
     {
-        "seasonName" : "Menthol Flavors",
+        "seasonName" : "Menthol Grow",
         "dateStarted" : "2019-04-05",
         "dateCompleted" : "2019-08-05",
         "strainName" : "Peppermint Agave",
@@ -17,8 +17,8 @@ const data = [
         "lightNotes" : "RapidLED COB DIY; Dimmers off; 24 inches above canopy",
         "canopyTechnique" : "",
         "canopyTechniqueNotes" : "Using a SCROG net 18 inches above potters, weaving/bending plants to grow like a vine across the net. Topping when needed",
-        "user": "5d6a7fb469c4201e907aed83"
+        "user": "5d6ab87d1f4041274b0fbb1f"
     }
-]
+
 
 module.exports = data
