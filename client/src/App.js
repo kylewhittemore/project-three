@@ -13,7 +13,7 @@ import Profile from "./pages/Profile/Profile";
 import DailyLogs from './pages/DailyLogs/DailyLogs'
 import Landing from './pages/Landing/Landing'
 // import StaticForm from './components/StaticForm/StaticForm'
-// import StaticHeaderPage from './pages/StaticHeaderPage'
+import StaticHeaderPage from './pages/StaticHeaderPage/StaticHeaderPage'
 import Images from './pages/Images/Images'
 // import './utils/interceptors.js'
 // import './utils/isAuth.js'
@@ -57,6 +57,10 @@ function App() {
         <Route
           exact path="/dailylogs"
           render={props => <DailyLogs {...props} />}
+        />
+        <Route
+          exact path="/staticheader"
+          render={props => <StaticHeaderPage {...props} />}
         />
         <Route
           exact path="/images"
