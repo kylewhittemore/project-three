@@ -31,8 +31,9 @@ function DailyLogPage(props) {
             <LeftSliderBar {...props} />
             <div className="align-me">
                 <DailyLogForm {...props}
-                    growId={growId}
+                    // growId={growId}
                     logId={logId}
+                    userId={userId}
                 />
             </div>
         </>
