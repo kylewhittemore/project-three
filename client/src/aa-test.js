@@ -3,15 +3,15 @@ import React from 'react'
 import StaticForm from "./components/StaticForm/StaticForm";
 import StaticHeader from "./components/StaticHeader/StaticHeader";
 // import HomePage from './pages/Home/Home';
-// import App from './App'
+import PhotoCarousel from "./components/PhotoCarousel/PhotoCarousel"
+import App from './App'
 
 export default function Test() {
 
     return (
 
         <>
-            <StaticHeader growId="5d647ec8380712b1997d4caa"  />
-        </>
+<App />        </>
     )
 };
 

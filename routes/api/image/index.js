@@ -9,4 +9,7 @@ routes.post('/db', imagePostDb)
 const getUserImages = require('./getImagesByUserId')
 routes.get('/user/:id', getUserImages)
 
+const imagePostHeader = require('./imagePostHeader')
+routes.get('/headerimage', imagePostHeader)
+
 module.exports = routes

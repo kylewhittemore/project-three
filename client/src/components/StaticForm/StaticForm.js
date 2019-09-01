@@ -1,10 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Component } from "react";
+import React, { Component, Row } from "react";
 // import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Axios from "axios";
+import AddPhotos from "../AddPhotos/AddPhotos";
 import "./style.css";
 
 class StaticForm extends Component {
@@ -35,7 +36,8 @@ class StaticForm extends Component {
         canopyTechnique: "",
         canopyTechniqueNotes: "",
         // user: "5d60ad3ce54ff902983c41dd"
-        user: this.props.userId
+        user: this.props.userId,
+        coverImage: ""
         // redirect: false
     };
 
@@ -48,9 +50,9 @@ class StaticForm extends Component {
             let data = response.data;
 
             // The two lines below aviod an error if there is no date saved on the log
-            data.dateStarted ? data.dateStarted = data.dateStarted.slice(0,10) : data.dateStarted = ''
-            data.dateStarted ? data.dateStarted = data.dateStarted.slice(0,10) : data.dateStarted = ''
-
+            data.dateStarted ? data.dateStarted = data.dateStarted.slice(0, 10) : data.dateStarted = ''
+            data.dateStarted ? data.dateStarted = data.dateStarted.slice(0, 10) : data.dateStarted = ''
+            console.log('COVER IMAGE', data.coverImage)
             // this.setState(data)
             this.setState({
                 seasonName: data.seasonName,
@@ -69,10 +71,11 @@ class StaticForm extends Component {
                 flowerLightWattage: data.flowerLightWattage,
                 lightNotes: data.lightNotes,
                 canopyTechnique: data.canopyTechnique,
-                canopyTechniqueNotes: data.canopyTechniqueNotes
+                canopyTechniqueNotes: data.canopyTechniqueNotes,
+                coverImage: data.coverImage
             });
         };
-        // console.log(this.props.userId)
+        console.log(this.state.coverImage)
     };
 
 
@@ -105,6 +108,11 @@ class StaticForm extends Component {
         });
     };
 
+    updateCoverImage = s3Id => {
+        this.setState({ coverImage: s3Id })
+        console.log("S3ID: ****", s3Id)
+    }
+
     // submitting the information in the form to the database
     async handleFormSubmit(event) {
         event.preventDefault();
@@ -117,9 +125,9 @@ class StaticForm extends Component {
         let response = this.props.growId ? await this.putSeasonStatic() : await this.postNewSeasonStatic(formData)
 
         response.data.message ? console.log(".then response", response.data.message)
-        :
-        // this.setState({ redirect: true })
-        this.props.history.push('/')
+            :
+            // this.setState({ redirect: true })
+            this.props.history.push('/')
 
 
         // console.log to see that the state is taking in the forms value.
@@ -146,7 +154,7 @@ class StaticForm extends Component {
             lightNotes: "",
             canopyTechnique: "",
             canopyTechniqueNotes: "",
-
+            coverImage: ''
             // user: ""
         });
     };
@@ -295,9 +303,15 @@ class StaticForm extends Component {
                         </Form.Group>
                     </Form.Row>
 
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <AddPhotos updateCoverImage={this.updateCoverImage} userId={this.props.userId} coverImage={this.state.coverImage} growId={this.props.growId} />
+                        </Form.Group>
+                    </Form.Row>
+
                     <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit">
                         Submit
-            </Button>
+                     </Button>
                 </Form>
             </div>
         );

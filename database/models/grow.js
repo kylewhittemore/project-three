@@ -85,7 +85,13 @@ const GrowSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Image"
         }
-    ]
+    ],
+    coverImage: {
+        type: String,
+        required: false
+        // type: Schema.Types.ObjectId,
+        // ref: "Image"
+    }
 })
 
 module.exports = mongoose.model('Grow', GrowSchema)
