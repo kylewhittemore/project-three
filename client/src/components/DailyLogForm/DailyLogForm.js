@@ -25,7 +25,8 @@ export default function DailyLog(props) {
         didFlush: false,
         didFlip: false,
         didDefoliate: false,
-        notes: ""
+        notes: "",
+        // grow: props.grow
     }
 
     const [formData, setFormData] = useState(initialFormState)
@@ -55,6 +56,7 @@ export default function DailyLog(props) {
                     didFlip: data.didFlip,
                     didDefoliate: data.didDefoliate,
                     notes: data.notes,
+                    grow: data.grow
                 }
                 setFormData(form)
                 console.log("data: ", data)
@@ -116,6 +118,7 @@ export default function DailyLog(props) {
             growId: props.growId,
             dailyLogId: props.logId
         }
+        console.log(img)
         setDbPostImage(img)
     }
 

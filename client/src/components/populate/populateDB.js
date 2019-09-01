@@ -5,7 +5,7 @@ import grow from './sampleGrow'
 
 const Populate = () => {
 
-const id = '5d647ec8380712b1997d4caa'
+const id = '5d6abbd6b5f3052823de8332'
 
 async function postToDB(element, id) {
     let response = await Axios.post(`/api/daily/${id}`, element)
@@ -13,7 +13,7 @@ async function postToDB(element, id) {
 }
 
 async function postGrowToDB(element) {
-    let response = await  Axios.post('/api/grow/5d630c1ab4e4e29f0dfb5830', element)
+    let response = await  Axios.post('/api/grow/5d6ab87d1f4041274b0fbb1f', element)
     return response.data
 }
 

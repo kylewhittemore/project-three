@@ -8,10 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function LogOutPage() {
 
-    componentDidMount() {
-        localStorage.removeItem("p3aajjkw-jwt")
-        localStorage.removeItem("p3aajjkw-id")
-    }
+    localStorage.removeItem('p3aajjkw-jwt')
+    localStorage.removeItem('p3aajjkw-id')
 
     return (
         <Container>
