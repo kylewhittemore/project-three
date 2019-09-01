@@ -14,5 +14,6 @@ module.exports = (req, res) => {
             .slice(3, 18),
         name: value[0].name
     }
+    console.log("IMAGE: ******", image)
     uploader(image, value[0].path, res)
 }

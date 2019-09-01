@@ -9,12 +9,12 @@ module.exports = (req, res) => {
     Image.create({
         name: req.body.name,
         s3Id: req.body.s3Id,
-        dailyLog: req.body.dailyLogId,
+        // dailyLog: req.body.dailyLogId,
         grow: req.body.growId,
         user: req.body.userId
 
-    }).then(dbImage => {
-        image = dbImage
+    }).then(headerImg => {
+        image = headerImg
         return User
             .findByIdAndUpdate(image.user,
                 {
@@ -24,26 +24,17 @@ module.exports = (req, res) => {
                     new: true
                 })
             .then(user => {
-                return DailyLog
-                    .findByIdAndUpdate(image.dailyLog,
-                        {
-                            $push: { images: image._id }
-                        },
-                        {
-                            new: true
-                        })
-            })
-            .then(log => {
+                console.log("$$$$$$$$user: ", user)
                 return Grow
                     .findByIdAndUpdate(image.grow,
                         {
-                            $push: { images: image._id }
+                            $set: { coverImage: image._id }
                         },
                         {
                             new: true
                         })
             })
-            .then(grow => res.json(image))
+            .then(dbGrow => res.json(dbGrow))
             .catch(err => res.json(err))
     })
 }

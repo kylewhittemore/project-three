@@ -28,9 +28,9 @@ const uploader = (image, inputFileName, res) => {
         promise.then(data => {
             let response = {
                 name: image.name,
-                s3Id: data.key
+                s3Id: data.Key
             }
-            console.log("DATA:###########", data)
+            console.log("DATA:###########", data.Key)
             res.json(response)
         }, err => console.log(err))
 
