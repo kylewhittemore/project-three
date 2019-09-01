@@ -15,6 +15,7 @@ export default function GrowTable(props) {
     const userId = localStorage.getItem('p3aajjkw-id')
 
     const [grows, setGrows] = useState([])
+    const [user, setUser] = useState({})
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -23,22 +24,34 @@ export default function GrowTable(props) {
             let response = await Axios.get(`/api/grow/user/${userId}`);
             let data = response.data
             console.log(JSON.stringify(data))
+            setLoading(false)
+            return data;
+        }
+        async function fetchUser() {
+            setLoading(true);
+            let response = await Axios.get(`/api/user/profile`);
+            let data = response.data
+            console.log("USER: " + JSON.stringify(data))
+            setLoading(false)
             return data;
         }
         fetchGrows().then(data => {
             setGrows(data)
-            // console.log(JSON.stringify)
-            setLoading(false)
         }).catch(err => {
             console.log(err)
-            setLoading(false)
+        })
+        fetchUser().then(user => {
+            setUser(user.user)
+        }).catch(err => {
+            console.log(err)
         })
     }, [userId]);
 
-    const goToDetails = e => {
-        e.preventDefault();
-        console.log(`clicked, growId: ${this.value}`)
-    }
+    // const function setDefaultGrow (growId)  {
+    //     const body = 
+    //     let user = await Axios.put(`/api/user/setDefaultGrow/${userId}`, { defaultGrow: grow._id })
+    //     setUser(user.data)
+    // }
 
 
     // If the logs are loading display a spinner, otherwise render the table from state
@@ -64,7 +77,24 @@ export default function GrowTable(props) {
                                         event.preventDefault()
                                         // updateLog(log._id).then(getLogs)
                                         props.history.push(`/newseason/?grow_id=${grow._id}`)}}>Edit</Button>
-                                    <Button value={grow._id}>Make Default</Button>
+                                    { (user.defaultGrow === grow._id) 
+                                        ? <Button className="btn-success">IS DEFAULT</Button>
+                                        : <Button className="btn-warning" onClick={event => {
+                                            event.preventDefault()
+                                            const data = { defaultGrow: grow._id.toString() }
+                                            console.log("set default" + JSON.stringify(data))
+                                            Axios.put(`/api/user/setDefaultGrow/${userId}`, data)
+                                                .then(res => {
+                                                    console.log("Successful") 
+///  Getting Error Here ------------------------------------------------------------------------
+                                                    // res.body is undefined for some reason
+                                                    console.log(JSON.stringify(res.body)) 
+                                                    // setUser(res.body) .... so setUser doesn't work, there fore page does not refresh
+                                                })
+                                                .catch(err => console.log(`setDefaultGrow failed! Error = ${err}`))
+                                        }}>Make Default</Button>
+                                    }
+                                    {/* <Button value={grow._id}>Make Default</Button> */}
                                 </div>
                             </Col>
                         </Row>
