@@ -36,13 +36,6 @@ export default function DailyLog(props) {
     const [imageName, setImageName] = useState('')
     const [dbPostImage, setDbPostImage] = useState({})
 
-    // if (props.growId) {
-    //     initialFormState.grow = props.growId
-    //     console.log("IF GROW", initialFormState.grow)
-    //     setFormData(initialFormState)
-    // }
-
-
     useEffect(() => {
 
         async function fetchLog(id) {
@@ -73,7 +66,6 @@ export default function DailyLog(props) {
                     setImageUrl('')
             }).catch(err => console.log(err))
         } else {
-            // console.log("form Data: ", formData)
             const form = {
                 date: "",
                 plantAppearance: "happy",
@@ -92,7 +84,6 @@ export default function DailyLog(props) {
 
     async function postDailyLog() {
         let data = formData
-        console.log("POST DATA: ", data)
         let response = await Axios.post(`/api/daily/${props.growId}`, data)
         return response
     }
@@ -113,10 +104,9 @@ export default function DailyLog(props) {
         response.data.message ?
             console.log(response.data.message)
             :
-            imageUrl ? handleImageDbPost().then(response => {
-                console.log("response from handle form: ", response)
-                props.history.push('/')
-            })
+            imageUrl ?
+                handleImageDbPost()
+                    .then(props.history.push('/'))
                 :
                 console.log('no image')
     }
@@ -141,7 +131,6 @@ export default function DailyLog(props) {
             growId: props.growId,
             dailyLogId: props.logId
         }
-        console.log(img)
         setDbPostImage(img)
     }
 
@@ -229,7 +218,6 @@ export default function DailyLog(props) {
                     <Form.Row className="m-2">
                         <Col>
                             <Form.Group className="m-1" controlId="log.ControlTextarea1">
-                                {/* <Form.Label>upload:</Form.Label> */}
                                 <div className="input-group my-4">
                                     <div className="custom-file">
                                         <input type="file" onChange={handleUploadChange} className="custom-file-input" id="inputGroupFile02" />
@@ -259,17 +247,6 @@ export default function DailyLog(props) {
                     </Form.Row>
                 </Form>
             </Row>
-            {/* 
-            <Row className="m-2">
-                <Col>
-                    {
-                        loadingImage ?
-                            <Spinner />
-                            :
-                            <Image style={styles.image} src={imageUrl} thumbnail />
-                    }
-                </Col>
-            </Row> */}
         </>
 
     )

@@ -12,15 +12,6 @@ function DailyLogPage(props) {
     const [logId, setLogId] = useState('')
     const [loading, setLoading] = useState(false)
 
-    // const userId = localStorage.getItem('p3aajjkw-id')
-
-    // if (!userId) {
-    //     return (
-    //         <Redirect to={'/'} />
-    //     )
-    // }
-
-
     useEffect(() => {
         async function fetchUser() {
             setLoading(true);
@@ -57,17 +48,6 @@ function DailyLogPage(props) {
                 console.log(err)
             })
     }, []);
-
-    // let url = window.location.href
-
-    // if (url.indexOf("?log_id=") !== -1) {
-    //     setLogId(url.split("=")[1])
-    // }
-    // else if (url.indexOf("?grow_id=") !== -1) {
-    //     setGrowId(url.split("=")[1])
-    // } else {
-    //     setGrowId(user.defaultGrow)
-    // }
 
     return (
         <>

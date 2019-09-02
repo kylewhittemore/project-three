@@ -11,7 +11,6 @@ import './style.css'
 
 export default function GrowTable(props) {
 
-    // const leafLink = '../../../public/leaf.png'
     const userId = localStorage.getItem('p3aajjkw-id')
 
     const [grows, setGrows] = useState([])
@@ -23,7 +22,6 @@ export default function GrowTable(props) {
             setLoading(true);
             let response = await Axios.get(`/api/grow/user/${userId}`);
             let data = response.data
-            console.log(JSON.stringify(data))
             setLoading(false)
             return data;
         }
@@ -31,32 +29,23 @@ export default function GrowTable(props) {
             setLoading(true);
             let response = await Axios.get(`/api/user/profile`);
             let data = response.data
-            console.log("USER: " + JSON.stringify(data))
             setLoading(false)
             return data;
         }
-        fetchGrows().then(data => {
-            setGrows(data)
-        }).catch(err => {
-            console.log(err)
-        })
-        fetchUser().then(user => {
-            setUser(user.user)
-        }).catch(err => {
-            console.log(err)
-        })
+        fetchGrows()
+            .then(data => setGrows(data))
+            .catch(err => console.log(err))
+        fetchUser()
+            .then(user => setUser(user.user))
+            .catch(err => console.log(err))
     }, [userId]);
 
     async function setDefaultGrow(growId) {
-        // const body = 
         let user = await Axios.put(`/api/user/setDefaultGrow/${userId}`, { defaultGrow: growId })
-        console.log("default grow", user)
         setUser(user.data)
         return user.data
     }
 
-
-    // If the logs are loading display a spinner, otherwise render the table from state
     return (
         loading ?
             <LoadingSpinner />
@@ -73,36 +62,22 @@ export default function GrowTable(props) {
                                 <div >
                                     <Button onClick={event => {
                                         event.preventDefault()
-                                        // updateLog(log._id).then(getLogs)
                                         props.history.push(`/staticheader/?grow_id=${grow._id}`)
                                     }}>Details</Button>
                                     <Button onClick={event => {
                                         event.preventDefault()
-                                        // updateLog(log._id).then(getLogs)
                                         props.history.push(`/newseason/?grow_id=${grow._id}`)
                                     }}>Edit</Button>
                                     {(user.defaultGrow === grow._id)
                                         ? <Button className="btn-success">IS DEFAULT</Button>
                                         : <Button className="btn-warning" onClick={event => {
                                             event.preventDefault()
-                                            //                                             const data = { defaultGrow: grow._id.toString() }
-                                            //                                             console.log("set default" + JSON.stringify(data))
-                                            //                                             Axios.put(`/api/user/setDefaultGrow/${userId}`, data)
-                                            //                                                 .then(res => {
-                                            //                                                     console.log("Successful") 
-                                            // ///  Getting Error Here ------------------------------------------------------------------------
-                                            //                                                     // res.body is undefined for some reason
-                                            //                                                     console.log(JSON.stringify(res.body)) 
-                                            //                                                     // setUser(res.body) .... so setUser doesn't work, there fore page does not refresh
-                                            //                                                 })
-                                            //                                                 .catch(err => console.log(`setDefaultGrow failed! Error = ${err}`))
                                             setDefaultGrow(grow._id)
                                                 .then(response => console.log(response))
                                                 .catch(err => console.lo(err))
 
                                         }}>Make Default</Button>
                                     }
-                                    {/* <Button value={grow._id}>Make Default</Button> */}
                                 </div>
                             </Col>
                         </Row>
