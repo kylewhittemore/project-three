@@ -26,15 +26,22 @@ export default function DailyLog(props) {
         didFlip: false,
         didDefoliate: false,
         notes: "",
-        // grow: props.grow
+        grow: ''
     }
 
-    const [formData, setFormData] = useState(initialFormState)
+    const [formData, setFormData] = useState('')
     const [inputImageData, setInputImageData] = useState(new FormData())
     const [loadingImage, setLoadingImage] = useState(false)
     const [imageUrl, setImageUrl] = useState('')
     const [imageName, setImageName] = useState('')
     const [dbPostImage, setDbPostImage] = useState({})
+
+    // if (props.growId) {
+    //     initialFormState.grow = props.growId
+    //     console.log("IF GROW", initialFormState.grow)
+    //     setFormData(initialFormState)
+    // }
+
 
     useEffect(() => {
 
@@ -60,16 +67,32 @@ export default function DailyLog(props) {
                 }
                 setFormData(form)
                 console.log("data: ", data)
-                data.images ? 
-                setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.images[0].s3Id}`)
-                :
-                setImageUrl('')
+                data.images ?
+                    setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.images[0].s3Id}`)
+                    :
+                    setImageUrl('')
             }).catch(err => console.log(err))
+        } else {
+            // console.log("form Data: ", formData)
+            const form = {
+                date: "",
+                plantAppearance: "happy",
+                didWater: false,
+                didFeed: false,
+                didTransplant: false,
+                didFlush: false,
+                didFlip: false,
+                didDefoliate: false,
+                notes: "",
+                grow: props.growId
+            }
+            setFormData(form)
         }
     }, [props]);
 
     async function postDailyLog() {
         let data = formData
+        console.log("POST DATA: ", data)
         let response = await Axios.post(`/api/daily/${props.growId}`, data)
         return response
     }
@@ -82,7 +105,7 @@ export default function DailyLog(props) {
         })
         return response
     }
-    
+
     async function handleFormSubmit(event) {
         event.preventDefault()
         let response = props.logId ? await putDailyLog() : await postDailyLog()
@@ -94,8 +117,8 @@ export default function DailyLog(props) {
                 console.log("response from handle form: ", response)
                 props.history.push('/')
             })
-            :
-            console.log('no image')
+                :
+                console.log('no image')
     }
 
     const handleInputChange = event => {
