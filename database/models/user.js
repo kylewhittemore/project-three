@@ -18,11 +18,15 @@ const userSchema = new Schema({
         required: true
     },
     grows: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Grow"
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Grow"
+      }
     ],
+    defaultGrow: {
+      type: Schema.Types.ObjectId,
+      ref: "Grow"
+    },
     images: [
       {
         type: Schema.Types.ObjectId,

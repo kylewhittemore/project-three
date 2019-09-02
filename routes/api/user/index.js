@@ -18,4 +18,9 @@ routes.post('/authenticate', authenticate)
 const profile = require('./profile')
 routes.get('/profile', isAuth, profile)
 
+// This is route to set the default grow to the one chosen by the user
+// NOT tested: is NOT working 
+const setDefaultGrow = require('./setDefaultGrow')
+routes.put('/setDefaultGrow/:id', isAuth, setDefaultGrow)
+
 module.exports = routes
