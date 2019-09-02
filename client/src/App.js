@@ -18,6 +18,8 @@ import Images from './pages/Images/Images'
 // import './utils/interceptors.js'
 // import './utils/isAuth.js'
 import isAuth from './utils/isAuth.js'
+import './styles/main.scss';
+
 isAuth();
 
 function App() {
