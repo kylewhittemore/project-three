@@ -47,11 +47,13 @@ export default function GrowTable(props) {
         })
     }, [userId]);
 
-    // const function setDefaultGrow (growId)  {
-    //     const body = 
-    //     let user = await Axios.put(`/api/user/setDefaultGrow/${userId}`, { defaultGrow: grow._id })
-    //     setUser(user.data)
-    // }
+    async function setDefaultGrow(growId){
+        // const body = 
+        let user = await Axios.put(`/api/user/setDefaultGrow/${userId}`, { defaultGrow: growId })
+        console.log("default grow", user)
+        setUser(user.data)
+        return
+    }
 
 
     // If the logs are loading display a spinner, otherwise render the table from state
@@ -81,17 +83,19 @@ export default function GrowTable(props) {
                                         ? <Button className="btn-success">IS DEFAULT</Button>
                                         : <Button className="btn-warning" onClick={event => {
                                             event.preventDefault()
-                                            const data = { defaultGrow: grow._id.toString() }
-                                            console.log("set default" + JSON.stringify(data))
-                                            Axios.put(`/api/user/setDefaultGrow/${userId}`, data)
-                                                .then(res => {
-                                                    console.log("Successful") 
-///  Getting Error Here ------------------------------------------------------------------------
-                                                    // res.body is undefined for some reason
-                                                    console.log(JSON.stringify(res.body)) 
-                                                    // setUser(res.body) .... so setUser doesn't work, there fore page does not refresh
-                                                })
-                                                .catch(err => console.log(`setDefaultGrow failed! Error = ${err}`))
+//                                             const data = { defaultGrow: grow._id.toString() }
+//                                             console.log("set default" + JSON.stringify(data))
+//                                             Axios.put(`/api/user/setDefaultGrow/${userId}`, data)
+//                                                 .then(res => {
+//                                                     console.log("Successful") 
+// ///  Getting Error Here ------------------------------------------------------------------------
+//                                                     // res.body is undefined for some reason
+//                                                     console.log(JSON.stringify(res.body)) 
+//                                                     // setUser(res.body) .... so setUser doesn't work, there fore page does not refresh
+//                                                 })
+//                                                 .catch(err => console.log(`setDefaultGrow failed! Error = ${err}`))
+                                            setDefaultGrow(grow._id)
+
                                         }}>Make Default</Button>
                                     }
                                     {/* <Button value={grow._id}>Make Default</Button> */}
