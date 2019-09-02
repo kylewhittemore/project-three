@@ -22,6 +22,5 @@ routes.get('/profile', isAuth, profile)
 // NOT tested: is NOT working 
 const setDefaultGrow = require('./setDefaultGrow')
 routes.put('/setDefaultGrow/:id', isAuth, setDefaultGrow)
-// routes.put('/setDefaultGrow/:id', isAuth, setDefaultGrow)
 
 module.exports = routes
