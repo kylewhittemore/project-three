@@ -12,8 +12,8 @@
 @import "utils/utils";
 
 // components
-// @import "components/header";
-@import "../components/LeftSliderBar/LeftSliderBar.js";
+@import "components/header";
+@import "components/LeftSliderBar";
 // @import "components/content";
 // @import "components/page";
 // @import "components/widget";
@@ -23,4 +23,4 @@
 @import "themes/colors";
 
 // demos (only for demo pages)
-@import "demos/demos";
+// @import "demos/demos";

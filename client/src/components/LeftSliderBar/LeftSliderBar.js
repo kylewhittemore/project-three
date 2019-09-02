@@ -1,4 +1,3 @@
-import sidebarBgImage from '../../assets/img/sidebar'
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import { NavLink } from "react-router-dom";
@@ -9,12 +8,13 @@ import {
     Navbar,
     NavItem,
     NavLink as BSNavLink,
-  } from 'reactstrap';
-  import bn from '../../utils/bemnames';
-  
+} from 'reactstrap';
+import bn from '../../utils/bemnames';
+
+import sidebarBgImage from '../../assets/img/sidebar/sidebar.jpg';
 
 const sidebarBackground = {
-    backgroundImage: `url("${sidebarBgImage}")`,
+    backgroundImage: `url(${sidebarBgImage})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
 };

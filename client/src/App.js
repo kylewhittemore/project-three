@@ -19,6 +19,7 @@ import Images from './pages/Images/Images'
 // import './utils/isAuth.js'
 import isAuth from './utils/isAuth.js'
 import './styles/main.scss';
+import { MainLayout } from './components/Layout';
 
 isAuth();
 
@@ -26,49 +27,53 @@ function App() {
 
   return (
     <Router>
-      <div>
-        <Route
-          exact path="/"
-          render={props => <Landing {...props} />}
-        />
-        <Route
-          exact path="/home"
-          render={props => <HomePage {...props} />}
-        />
-        <Route
-          exact path="/newseason"
-          render={props => <NewSeason {...props} />}
-        />
-        <Route
-          exact path="/seasons"
-          render={props => <Seasons {...props} />}
-        />
-        <Route
-          exact path="/logout"
-          render={props => <LogOut {...props} />}
-        />
-        <Route
-          exact path="/profile"
-          render={props => <Profile {...props} />}
-        />
-        <Route
-          path="/dailylog"
-          render={props => <DailyLog {...props}
-          />}
-        />
-        <Route
-          exact path="/dailylogs"
-          render={props => <DailyLogs {...props} />}
-        />
-        <Route
-          exact path="/staticheader"
-          render={props => <StaticHeaderPage {...props} />}
-        />
-        <Route
-          exact path="/images"
-          render={props => <Images {...props} />}
-        />
-      </div>
+      <MainLayout>
+
+        <div>
+          <Route
+            exact path="/"
+            render={props => <Landing {...props} />}
+          />
+          <Route
+            exact path="/home"
+            render={props => <HomePage {...props} />}
+          />
+          <Route
+            exact path="/newseason"
+            render={props => <NewSeason {...props} />}
+          />
+          <Route
+            exact path="/seasons"
+            render={props => <Seasons {...props} />}
+          />
+          <Route
+            exact path="/logout"
+            render={props => <LogOut {...props} />}
+          />
+          <Route
+            exact path="/profile"
+            render={props => <Profile {...props} />}
+          />
+          <Route
+            path="/dailylog"
+            render={props => <DailyLog {...props}
+            />}
+          />
+          <Route
+            exact path="/dailylogs"
+            render={props => <DailyLogs {...props} />}
+          />
+          <Route
+            exact path="/staticheader"
+            render={props => <StaticHeaderPage {...props} />}
+          />
+          <Route
+            exact path="/images"
+            render={props => <Images {...props} />}
+          />
+        </div>
+      </MainLayout>
+
     </Router>
   );
 };
