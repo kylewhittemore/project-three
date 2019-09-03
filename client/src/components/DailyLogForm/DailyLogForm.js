@@ -35,13 +35,7 @@ export default function DailyLog(props) {
     const [imageUrl, setImageUrl] = useState('')
     const [imageName, setImageName] = useState('')
     const [dbPostImage, setDbPostImage] = useState({})
-
-    // if (props.growId) {
-    //     initialFormState.grow = props.growId
-    //     console.log("IF GROW", initialFormState.grow)
-    //     setFormData(initialFormState)
-    // }
-
+    const [images, setImages] = useState([])
 
     useEffect(() => {
 
@@ -65,15 +59,16 @@ export default function DailyLog(props) {
                     notes: data.notes,
                     grow: data.grow
                 }
+
                 setFormData(form)
                 console.log("data: ", data)
+                setImages(data.images)
                 data.images ?
                     setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.images[0].s3Id}`)
                     :
                     setImageUrl('')
             }).catch(err => console.log(err))
         } else {
-            // console.log("form Data: ", formData)
             const form = {
                 date: "",
                 plantAppearance: "happy",
@@ -92,7 +87,6 @@ export default function DailyLog(props) {
 
     async function postDailyLog() {
         let data = formData
-        console.log("POST DATA: ", data)
         let response = await Axios.post(`/api/daily/${props.growId}`, data)
         return response
     }
@@ -113,10 +107,9 @@ export default function DailyLog(props) {
         response.data.message ?
             console.log(response.data.message)
             :
-            imageUrl ? handleImageDbPost().then(response => {
-                console.log("response from handle form: ", response)
-                props.history.push('/')
-            })
+            imageUrl ?
+                handleImageDbPost()
+                    .then(props.history.push('/'))
                 :
                 console.log('no image')
     }
@@ -141,7 +134,6 @@ export default function DailyLog(props) {
             growId: props.growId,
             dailyLogId: props.logId
         }
-        console.log(img)
         setDbPostImage(img)
     }
 
@@ -229,7 +221,6 @@ export default function DailyLog(props) {
                     <Form.Row className="m-2">
                         <Col>
                             <Form.Group className="m-1" controlId="log.ControlTextarea1">
-                                {/* <Form.Label>upload:</Form.Label> */}
                                 <div className="input-group my-4">
                                     <div className="custom-file">
                                         <input type="file" onChange={handleUploadChange} className="custom-file-input" id="inputGroupFile02" />
@@ -248,7 +239,9 @@ export default function DailyLog(props) {
                                 loadingImage ?
                                     <Spinner />
                                     :
-                                    <Image style={styles.image} src={imageUrl} rounded />
+                                    images.map(image => (
+                                        <Image key={image._id} style={styles.image} src={`https://project-three-logger-photos.s3.amazonaws.com/${image.s3Id}`} rounded />
+                                    ))
                             }
                         </Col>
                     </Form.Row>
@@ -259,17 +252,6 @@ export default function DailyLog(props) {
                     </Form.Row>
                 </Form>
             </Row>
-            {/* 
-            <Row className="m-2">
-                <Col>
-                    {
-                        loadingImage ?
-                            <Spinner />
-                            :
-                            <Image style={styles.image} src={imageUrl} thumbnail />
-                    }
-                </Col>
-            </Row> */}
         </>
 
     )

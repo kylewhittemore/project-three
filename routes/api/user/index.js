@@ -23,4 +23,7 @@ routes.get('/profile', isAuth, profile)
 const setDefaultGrow = require('./setDefaultGrow')
 routes.put('/setDefaultGrow/:id', isAuth, setDefaultGrow)
 
+const getUserImages = require('./getUserImages')
+routes.get('/getuserimages/:id', getUserImages)
+
 module.exports = routes

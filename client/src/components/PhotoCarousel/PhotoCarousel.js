@@ -43,7 +43,7 @@ export default function PhotoCarousel(props) {
                         <Carousel.Item key={photo._id}>
                             <img
                                 className="d-block w-100"
-                                src={`https://grow-image-storage.s3.amazonaws.com/${photo.s3Id}`}
+                                src={`https://project-three-logger-photos.s3.amazonaws.com/${photo.s3Id}`}
                                 alt={photo.name}
                             />
                             {/* <Carousel.Caption>
