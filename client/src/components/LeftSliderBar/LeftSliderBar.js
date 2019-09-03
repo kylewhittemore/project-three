@@ -1,9 +1,9 @@
 import React from 'react';
-import { slide as Menu } from 'react-burger-menu';
+// import { slide as Menu } from 'react-burger-menu';
 import { NavLink } from "react-router-dom";
 import {
     // UncontrolledTooltip,
-    Collapse,
+    // Collapse,
     Nav,
     Navbar,
     NavItem,
@@ -43,7 +43,7 @@ export default props => {
                             tag={NavLink}
                             to={`/home`}
                             activeclassname="active"
-                            // exact={exact}
+                        // exact={exact}
                         >
                             <span className="">Dashboard</span>
                         </BSNavLink>
@@ -54,7 +54,7 @@ export default props => {
                             tag={NavLink}
                             to={`/newseason`}
                             activeclassname="active"
-                            // exact={exact}
+                        // exact={exact}
                         >
                             <span className="">New Season</span>
                         </BSNavLink>
@@ -65,7 +65,7 @@ export default props => {
                             tag={NavLink}
                             to={`/seasons`}
                             activeclassname="active"
-                            // exact={exact}
+                        // exact={exact}
                         >
                             <span className="">Seasons</span>
                         </BSNavLink>
@@ -76,7 +76,7 @@ export default props => {
                             tag={NavLink}
                             to={`/dailylogs`}
                             activeclassname="active"
-                            // exact={exact}
+                        // exact={exact}
                         >
                             <span className="">Daily Logs</span>
                         </BSNavLink>
@@ -87,7 +87,7 @@ export default props => {
                             tag={NavLink}
                             to={`/images`}
                             activeclassname="active"
-                            // exact={exact}
+                        // exact={exact}
                         >
                             <span className="">Images</span>
                         </BSNavLink>
@@ -98,7 +98,7 @@ export default props => {
                             tag={NavLink}
                             to={`/dailylog`}
                             activeclassname="active"
-                            // exact={exact}
+                        // exact={exact}
                         >
                             <span className="">New Log</span>
                         </BSNavLink>
@@ -118,5 +118,5 @@ export default props => {
         //     <Link to={`/images`}>Images</Link>
         //     <Link to={`/dailylog`}>New Log</Link>
         // </Menu>
-                );
+    );
 };

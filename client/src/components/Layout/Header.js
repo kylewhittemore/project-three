@@ -5,6 +5,7 @@
 // import { notificationsData } from 'demos/header';
 // import withBadge from 'hocs/withBadge';
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import {
   MdClearAll,
   //   MdExitToApp,
@@ -24,7 +25,7 @@ import {
   Nav,
   Navbar,
   NavItem,
-  NavLink,
+  NavLink as BSNavLink,
   // Popover,
   // PopoverBody,
 } from 'reactstrap';
@@ -91,8 +92,13 @@ class Header extends React.Component {
 
         <Nav navbar className={bem.e('nav-right')}>
           <NavItem className="d-inline-flex">
-            <NavLink className="position-relative">Log Out
-            </NavLink>
+            <BSNavLink 
+                className="position-relative"
+                tag={NavLink}
+                to={`/logout`}
+                >
+                  <span className="font-weight-bold">Log Out</span>
+            </BSNavLink>
           </NavItem>
         </Nav>
 

@@ -98,7 +98,7 @@ class StaticHeader extends Component {
             canopyTechniqueNotes: data.canopyTechniqueNotes,
             coverImage: data.coverImage
         });
-        console.log("DATA", data.coverImage)
+        console.log("DATA", data.dateCompleted)
     };
 
     render() {

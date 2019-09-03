@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row'
+// import Row from 'react-bootstrap/Row'
 import Spinner from '../LoadingSpinner/LoadingSpinner'
 import Image from 'react-bootstrap/Image'
 import Axios from 'axios'
