@@ -7,14 +7,14 @@
 import React from 'react';
 import {
   MdClearAll,
-//   MdExitToApp,
-//   MdHelp,
-//   MdInsertChart,
-//   MdMessage,
-//   MdNotificationsActive,
-//   MdNotificationsNone,
-//   MdPersonPin,
-//   MdSettingsApplications,
+  //   MdExitToApp,
+  //   MdHelp,
+  //   MdInsertChart,
+  //   MdMessage,
+  //   MdNotificationsActive,
+  //   MdNotificationsNone,
+  //   MdPersonPin,
+  //   MdSettingsApplications,
 } from 'react-icons/md';
 import {
   Button,
@@ -23,8 +23,8 @@ import {
   // NavbarToggler,
   Nav,
   Navbar,
-  // NavItem,
-  // NavLink,
+  NavItem,
+  NavLink,
   // Popover,
   // PopoverBody,
 } from 'reactstrap';
@@ -46,27 +46,27 @@ const bem = bn.create('header');
 // })(MdNotificationsActive);
 
 class Header extends React.Component {
-//   state = {
-//     isOpenNotificationPopover: false,
-//     isNotificationConfirmed: false,
-//     isOpenUserCardPopover: false,
-//   };
+  //   state = {
+  //     isOpenNotificationPopover: false,
+  //     isNotificationConfirmed: false,
+  //     isOpenUserCardPopover: false,
+  //   };
 
-//   toggleNotificationPopover = () => {
-//     this.setState({
-//       isOpenNotificationPopover: !this.state.isOpenNotificationPopover,
-//     });
+  //   toggleNotificationPopover = () => {
+  //     this.setState({
+  //       isOpenNotificationPopover: !this.state.isOpenNotificationPopover,
+  //     });
 
-//     if (!this.state.isNotificationConfirmed) {
-//       this.setState({ isNotificationConfirmed: true });
-//     }
-//   };
+  //     if (!this.state.isNotificationConfirmed) {
+  //       this.setState({ isNotificationConfirmed: true });
+  //     }
+  //   };
 
-//   toggleUserCardPopover = () => {
-//     this.setState({
-//       isOpenUserCardPopover: !this.state.isOpenUserCardPopover,
-//     });
-//   };
+  //   toggleUserCardPopover = () => {
+  //     this.setState({
+  //       isOpenUserCardPopover: !this.state.isOpenUserCardPopover,
+  //     });
+  //   };
 
   handleSidebarControlButton = event => {
     event.preventDefault();
@@ -89,36 +89,14 @@ class Header extends React.Component {
           <SearchInput />
         </Nav> */}
 
-        {/* <Nav navbar className={bem.e('nav-right')}>
+        <Nav navbar className={bem.e('nav-right')}>
           <NavItem className="d-inline-flex">
-            <NavLink id="Popover1" className="position-relative">
-              {isNotificationConfirmed ? (
-                <MdNotificationsNone
-                  size={25}
-                  className="text-secondary can-click"
-                  onClick={this.toggleNotificationPopover}
-                />
-              ) : (
-                <MdNotificationsActiveWithBadge
-                  size={25}
-                  className="text-secondary can-click animated swing infinite"
-                  onClick={this.toggleNotificationPopover}
-                />
-              )}
+            <NavLink className="position-relative">Log Out
             </NavLink>
-            <Popover
-              placement="bottom"
-              isOpen={this.state.isOpenNotificationPopover}
-              toggle={this.toggleNotificationPopover}
-              target="Popover1"
-            >
-              <PopoverBody>
-                <Notifications notificationsData={notificationsData} />
-              </PopoverBody>
-            </Popover>
           </NavItem>
+        </Nav>
 
-          <NavItem>
+        {/* <NavItem>
             <NavLink id="Popover2">
               <Avatar
                 onClick={this.toggleUserCardPopover}
