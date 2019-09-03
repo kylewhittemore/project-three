@@ -30,9 +30,9 @@ export default props => {
             <div className={bem.e('background')} style={sidebarBackground} />
             <div className={bem.e('content')}>
                 <Navbar>
-                    <NavItem className="navbar-brand d-flex">
+                    <NavItem className="navbar-brand d-flex mx-auto mt-2">
                         <span className="text-white">
-                            Canna-Keeper <i className="fas fa-cannabis"></i>
+                            Canna-Keeper  <i className="fas fa-cannabis"></i>
                         </span>
                     </NavItem>
                 </Navbar>

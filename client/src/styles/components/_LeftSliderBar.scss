@@ -40,7 +40,7 @@
       z-index: 3;
       // sublime light
       background: #048500; /* fallback for old browsers */
-      background: linear-gradient(to bottom, #048500, #fffb00);
+      background: linear-gradient(to bottom, #00910c, #fffb00);
       opacity: 1;
     }
   
@@ -102,13 +102,13 @@
     }
   
     .nav {
-      margin-top: 20px;
+      margin-top: 15px;
   
       .nav-item {
         margin: 5px 10px;
         color: theme-color(light);
         border-radius: 4px;
-        opacity: 0.86;
+        opacity: 0.90;
       }
   
       .nav-link {
@@ -120,6 +120,7 @@
         &:hover {
           background: rgba(theme-color(light), 0.15);
         }
+
       }
     }
   }
