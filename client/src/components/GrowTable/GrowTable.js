@@ -74,7 +74,7 @@ export default function GrowTable(props) {
                                             event.preventDefault()
                                             setDefaultGrow(grow._id)
                                                 .then(response => console.log(response))
-                                                .catch(err => console.lo(err))
+                                                .catch(err => console.log(err))
 
                                         }}>Make Default</Button>
                                     }
