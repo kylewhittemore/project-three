@@ -70,6 +70,7 @@ function DailyLogPage(props) {
                     growId={growId}
                     logId={logId}
                     userId={user._id}
+                    defaultGrow={user.defaultGrow}
                 />
             </div>
         </>

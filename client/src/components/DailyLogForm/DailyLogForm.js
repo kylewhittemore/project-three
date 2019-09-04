@@ -9,6 +9,8 @@ import Axios from 'axios'
 
 export default function DailyLog(props) {
 
+    const userId = localStorage.getItem('p3aajjkw-id')
+
     const styles = {
         image: {
             height: 171 + "px",
@@ -26,7 +28,8 @@ export default function DailyLog(props) {
         didFlip: false,
         didDefoliate: false,
         notes: "",
-        grow: ''
+        grow: '',
+        season: props.defaultGrow
     }
 
     const [formData, setFormData] = useState('')
@@ -36,14 +39,40 @@ export default function DailyLog(props) {
     const [imageName, setImageName] = useState('')
     const [dbPostImage, setDbPostImage] = useState({})
     const [image, setImage] = useState([])
+    const [seasons, setSeasons] = useState([])
+    const [growId, setGrowId] = useState(props.growId)
 
     useEffect(() => {
+
+        async function fetchGrows() {
+            // setLoading(true);
+            let response = await Axios.get(`/api/grow/user/${userId}`);
+            let data = response.data
+            // setLoading(false)
+            return data;
+        }
 
         async function fetchLog(id) {
             let response = await Axios.get(`/api/daily/${id}`);
             let data = response.data
             return data;
         }
+        async function setSeasonState() {
+            let data = await fetchGrows()
+            // console.log("grows   ", data)
+            // let justNames = data.map(element => element.seasonName)
+            // console.log("just names:", justNames)
+            await setSeasons(data)
+            return data
+        }
+        // fetchGrows().then(data => {
+        //     console.log("grows   ", data)
+        //     let justNames = data.map(element => element.seasonName)
+        //     console.log("just names:", justNames)
+        //     setSeasons(justNames)
+        // })
+
+        setSeasonState()
 
         if (props.logId) {
             fetchLog(props.logId).then(data => {
@@ -58,8 +87,8 @@ export default function DailyLog(props) {
                     didDefoliate: data.didDefoliate,
                     notes: data.notes,
                     grow: data.grow,
-                    caption: data.caption
-
+                    caption: data.caption,
+                    season: data.grow.seasonName
                 }
 
                 setFormData(form)
@@ -81,8 +110,9 @@ export default function DailyLog(props) {
                 didFlip: false,
                 didDefoliate: false,
                 notes: "",
-                grow: props.growId,
-                caption: ''
+                grow: growId,
+                caption: '',
+                season: props.defaultGrow
             }
             setFormData(form)
         }
@@ -121,7 +151,14 @@ export default function DailyLog(props) {
         const target = event.target
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
-        setFormData({ ...formData, [name]: value })
+        if (name === 'season') {
+            let selectId = event.target[event.target.selectedIndex].getAttribute('data-id')
+            console.log(selectId)
+            setFormData({...formData, grow: selectId, season: target.value})
+            setGrowId(selectId)
+        } else {
+            setFormData({ ...formData, [name]: value })
+        }
     }
 
     const handleImageAttach = async event => {
@@ -134,10 +171,10 @@ export default function DailyLog(props) {
             name: apiResponse.data.name,
             s3Id: apiResponse.data.s3Id,
             userId: props.userId,
-            growId: props.growId,
+            growId: growId,
             dailyLogId: props.logId
         }
-        setDbPostImage(img)
+        await setDbPostImage(img)
     }
 
     const handleImageDbPost = async () => {
@@ -158,8 +195,8 @@ export default function DailyLog(props) {
     const handleUploadChange = async event => {
         const file = event.target.files[0]
         inputImageData.append('image', file)
-        setImageUrl(URL.createObjectURL(file))
-        setImageName(file.name)
+        await setImageUrl(URL.createObjectURL(file))
+        await setImageName(file.name)
     }
 
     return (
@@ -175,6 +212,27 @@ export default function DailyLog(props) {
                         </Col>
                         <Col>
                             <Form.Group className="m-1" controlId="log.ControlSelect1">
+                                <Form.Label>Plant appearance:</Form.Label>
+                                <Form.Control value={formData.plantAppearance} name="plantAppearance" onChange={handleInputChange} as="select">
+                                    <option>happy</option>
+                                    <option>neutral</option>
+                                    <option>sad</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                    </Form.Row>
+                    <Form.Row className="m-2">
+                        <Col>
+                            <Form.Group className="m-1" controlId="log.ControlSelect2">
+                                <Form.Label>Season:</Form.Label>
+                                <Form.Control value={formData.season} name="season" onChange={handleInputChange} as="select">
+                                    {/* <option>(default)</option> */}
+                                    {seasons.map(season => <option data-id={season._id} >{season.seasonName}</option>)}
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="m-1" controlId="log.ControlSelect3">
                                 <Form.Label>Plant appearance:</Form.Label>
                                 <Form.Control value={formData.plantAppearance} name="plantAppearance" onChange={handleInputChange} as="select">
                                     <option>happy</option>

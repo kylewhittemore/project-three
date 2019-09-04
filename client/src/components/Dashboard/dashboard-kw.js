@@ -13,6 +13,9 @@ export default function Dashboard(props) {
 
         async function fetchGrow(growId) {
             let response = await Axios.get(`/api/grow/${growId}`)
+            if (props.growId) { 
+                setGrow(response)
+            }
             return response
         }
 

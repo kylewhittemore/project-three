@@ -33,6 +33,7 @@ function HomePage() {
             <Row >
                 <Col className='col-md-6 mx-auto'>
                     <Dashboard />
+ 
                 </Col>
             </Row>
         </div>

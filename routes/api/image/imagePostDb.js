@@ -5,7 +5,7 @@ const Grow = require('../../../database/models/grow')
 
 module.exports = (req, res) => {
     let image;
-
+    console.log("REQQQQQQQ", req)
     Image.create({
         name: req.body.name,
         s3Id: req.body.s3Id,
