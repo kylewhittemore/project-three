@@ -31,7 +31,7 @@ module.exports = (req, res, next) => {
             // const testSecret
 
             const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
-              expiresIn: 86400 // 24 hours
+              expiresIn: 864000 // 24 hours
             });
     
             res.json({
