@@ -5,7 +5,7 @@ const Grow = require('../../../database/models/grow')
 
 module.exports = (req, res) => {
     let image;
-    // console.log("REQQQQQQQ", req)
+    
     Image.create({
         name: req.body.name,
         s3Id: req.body.s3Id,
@@ -13,9 +13,11 @@ module.exports = (req, res) => {
         grow: req.body.growId,
         user: req.body.userId,
         date: req.body.date,
-        caption: req.body.caption               // the image needs to be attached back to the daily log!!!!!!!
+        caption: req.body.caption,   
+        dailyLog: req.body.dailyLogId            // the image needs to be attached back to the daily log!!!!!!!
 
     }).then(dbImage => {
+        console.log("REQQQQQQQ", dbImage)
         image = dbImage
         return User
             .findByIdAndUpdate(image.user,
@@ -26,6 +28,7 @@ module.exports = (req, res) => {
                     new: true
                 })
             .then(user => {
+                console.log("dailylog image set   ", image.dailyLog)
                 return DailyLog
                     .findByIdAndUpdate(image.dailyLog,
                         {

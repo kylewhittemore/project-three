@@ -10,7 +10,7 @@ import Axios from 'axios'
 export default function DailyLog(props) {
 
     const userId = localStorage.getItem('p3aajjkw-id')
-console.log(props)
+
     const styles = {
         image: {
             height: 171 + "px",
@@ -100,7 +100,7 @@ console.log(props)
                     setImageUrl('')
             }).catch(err => console.log(err))
         } else {
-            console.log("pgId    ", props.growId)
+            // console.log("pgId    ", props.growId)
             setGrowId(props.defaultGrow)
             const form = {
                 date: "",
@@ -123,9 +123,10 @@ console.log(props)
     async function postDailyLog() {
         let data = formData
         console.log("grrrrrrrrow   ", growId)
-        data.grow = props.growId
+        data.grow = growId
         console.log("DATATATATATA:  ", data)
-        let response = await Axios.post(`/api/daily/${props.growId}`, data)
+        let response = await Axios.post(`/api/daily/${growId}`, data)
+
         return response
     }
 
@@ -135,19 +136,37 @@ console.log(props)
             url: `/api/daily/${props.logId}`,
             data: formData
         })
+
+        //ensure that the response is the log if there are errors!!!!!!
         return response
     }
 
     async function handleFormSubmit(event) {
         event.preventDefault()
         let response = props.logId ? await putDailyLog() : await postDailyLog()
+        console.log("response", response.data._id)
+        //***********************************************/
+
+
+        let img = dbPostImage
+        img.date = formData.date
+        img.caption = formData.caption
+        img.dailyLogId = response.data._id
+        console.log("modified img:   ", img)
+        await setDbPostImage(img)
+
+
+        //***********************************************/
+
+
+
         setFormData(initialFormState)
         response.data.message ?
             console.log(response.data.message)
             :
             imageUrl ?
                 handleImageDbPost()
-                    // .then(props.history.push('/'))
+                // .then(props.history.push('/'))
                 :
                 console.log('no image')
     }
@@ -159,7 +178,7 @@ console.log(props)
         if (name === 'season') {
             let selectId = event.target[event.target.selectedIndex].getAttribute('data-id')
             console.log("select", selectId)
-            setFormData({...formData, grow: selectId, season: target.value})
+            setFormData({ ...formData, grow: selectId, season: target.value })
             setGrowId(selectId)
         } else {
             setFormData({ ...formData, [name]: value })
@@ -186,13 +205,15 @@ console.log(props)
 
     const handleImageDbPost = async () => {
         setLoadingImage(true)
-        let img = dbPostImage
-        img.date = formData.date
-        img.caption = formData.caption
-        console.log("modified img:   ", img)
-        await setDbPostImage(img)
+        // let img = dbPostImage
+        // img.date = formData.date
+        // img.caption = formData.caption
+        // console.log("modified img:   ", img)
+        // await setDbPostImage(img)
         let dbResponse = await Axios.post('/api/image/db', dbPostImage)
         console.log("DB res: ", dbResponse)
+        //need to take the returned imgs id and push it to the previously returned daily log
+
         setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${dbResponse.data.s3Id}`)
         setInputImageData(new FormData())
         setLoadingImage(false)
