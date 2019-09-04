@@ -10,7 +10,7 @@ import Axios from 'axios'
 export default function DailyLog(props) {
 
     const userId = localStorage.getItem('p3aajjkw-id')
-
+console.log(props)
     const styles = {
         image: {
             height: 171 + "px",
@@ -100,6 +100,8 @@ export default function DailyLog(props) {
                     setImageUrl('')
             }).catch(err => console.log(err))
         } else {
+            console.log("pgId    ", props.growId)
+            setGrowId(props.defaultGrow)
             const form = {
                 date: "",
                 plantAppearance: "happy",
@@ -110,7 +112,7 @@ export default function DailyLog(props) {
                 didFlip: false,
                 didDefoliate: false,
                 notes: "",
-                grow: growId,
+                grow: props.growId,
                 caption: '',
                 season: props.defaultGrow
             }
@@ -120,6 +122,9 @@ export default function DailyLog(props) {
 
     async function postDailyLog() {
         let data = formData
+        console.log("grrrrrrrrow   ", growId)
+        data.grow = props.growId
+        console.log("DATATATATATA:  ", data)
         let response = await Axios.post(`/api/daily/${props.growId}`, data)
         return response
     }
@@ -142,7 +147,7 @@ export default function DailyLog(props) {
             :
             imageUrl ?
                 handleImageDbPost()
-                    .then(props.history.push('/'))
+                    // .then(props.history.push('/'))
                 :
                 console.log('no image')
     }
@@ -153,7 +158,7 @@ export default function DailyLog(props) {
         const name = target.name
         if (name === 'season') {
             let selectId = event.target[event.target.selectedIndex].getAttribute('data-id')
-            console.log(selectId)
+            console.log("select", selectId)
             setFormData({...formData, grow: selectId, season: target.value})
             setGrowId(selectId)
         } else {
@@ -172,10 +177,12 @@ export default function DailyLog(props) {
             s3Id: apiResponse.data.s3Id,
             userId: props.userId,
             growId: growId,
-            dailyLogId: props.logId
+            // dailyLogId: props.logId
         }
         await setDbPostImage(img)
     }
+
+    //still needs work on the put route - doesnt update the image
 
     const handleImageDbPost = async () => {
         setLoadingImage(true)
