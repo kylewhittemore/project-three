@@ -16,29 +16,25 @@ export default function Dashboard(props) {
             return response
         }
 
-        async function fetchUser() {
+        async function fetchUserData() {
             let data = await Axios.get(`/api/user/profile`)
             let user = data.data.user
-            return user
+            // return user
+            let response = await fetchGrow(user.defaultGrow)
+            setGrow(response.data)
+            console.log(response.data)
+            setWaterHistory(response.data.dailyLogs.filter(log => log.didWater))
+            setFeedHistory(response.data.dailyLogs.filter(log => log.didFeed))
+            return response
         }
 
         if (props.growId) {
             fetchGrow(props.growId)
                 .then(response => console.log(response))
         } else {
-        fetchUser()
-            .then(user => {
-                console.log("USER:  ", user)
-                return user.defaultGrow
-            })
-            .then(async growId => {
-                let response = await fetchGrow(growId)
-                setGrow(response.data)
-                console.log(response.data)
-                setWaterHistory(response.data.dailyLogs.filter(log => log.didWater))
-                setFeedHistory(response.data.dailyLogs.filter(log => log.didFeed))
-
-                return response
+        fetchUserData()
+            .then(response => {
+                console.log("fetch user data response:  ", response)
             })
         }
     }, [])
@@ -47,7 +43,6 @@ export default function Dashboard(props) {
         return (
                 <ListGroup>
                     <ListGroup.Item><strong>Strain: </strong>{grow.strainName}</ListGroup.Item>
-                    
                     <ListGroup.Item><strong>Last Date Watered: </strong>{waterHistory.map((element, index) => index === 0 ? element.date : "" )}</ListGroup.Item>
                     <ListGroup.Item><strong>Last Data Fed: </strong>{feedHistory.map((element, index) => index === 0 ? element.date : "" )}</ListGroup.Item>
                 </ListGroup>

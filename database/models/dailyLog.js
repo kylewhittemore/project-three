@@ -47,13 +47,11 @@ const DailyLogSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Grow"
     },
-    images: [
+    image:
         {
             type: Schema.Types.ObjectId,
             ref: "Image"
         }
-    ]
-
 })
 
 module.exports = mongoose.model('DailyLog', DailyLogSchema)
