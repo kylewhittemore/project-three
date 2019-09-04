@@ -38,10 +38,10 @@ export default function PhotoCarousel(props) {
                                 src={`https://project-three-logger-photos.s3.amazonaws.com/${photo.s3Id}`}
                                 alt={photo.name}
                             />
-                            {/* <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption> */}
+                            <Carousel.Caption>
+                                <h3>{photo.date}</h3>
+                                <p>{photo.caption}</p>
+                            </Carousel.Caption>
                         </Carousel.Item>
                     ))}
                 </Carousel>
