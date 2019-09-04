@@ -12,31 +12,28 @@ function DailyLogPage(props) {
     const [logId, setLogId] = useState('')
     const [loading, setLoading] = useState(false)
 
-    // const userId = localStorage.getItem('p3aajjkw-id')
-
-    // if (!userId) {
-    //     return (
-    //         <Redirect to={'/'} />
-    //     )
-    // }
-
-
     useEffect(() => {
         async function fetchUser() {
             setLoading(true);
             let response = await Axios.get(`/api/user/profile`);
             let data = response.data
-            console.log("USER: " + JSON.stringify(data))
+            // console.log("USER: " + JSON.stringify(data))
             setLoading(false)
             return data.user;
         }
+        async function fetchLog(id) {
+            let response = await Axios.get(`/api/daily/${id}`);
+            let data = response.data
+            return data;
+        }
+        
         fetchUser().then(user => {
             if (!user._id) {
                 return (
                     <Redirect to={'/'} />
                 )
             }
-            console.log("fetch user", user)
+            // console.log("fetch user", user)
             setUser(user)
             return user
         })
@@ -45,7 +42,14 @@ function DailyLogPage(props) {
                 let url = window.location.href
 
                 if (url.indexOf("?log_id=") !== -1) {
-                    setLogId(url.split("=")[1])
+                    let logId = url.split("=")[1]
+                    setLogId(logId)
+                    fetchLog(logId)
+                        .then(log => {
+                            console.log("LOG:   ", log)
+                            setGrowId(log.grow)
+                        })
+                        .catch(err => console.log(err))
                 }
                 else if (url.indexOf("?grow_id=") !== -1) {
                     setGrowId(url.split("=")[1])
@@ -57,17 +61,6 @@ function DailyLogPage(props) {
                 console.log(err)
             })
     }, []);
-
-    // let url = window.location.href
-
-    // if (url.indexOf("?log_id=") !== -1) {
-    //     setLogId(url.split("=")[1])
-    // }
-    // else if (url.indexOf("?grow_id=") !== -1) {
-    //     setGrowId(url.split("=")[1])
-    // } else {
-    //     setGrowId(user.defaultGrow)
-    // }
 
     return (
         <>
