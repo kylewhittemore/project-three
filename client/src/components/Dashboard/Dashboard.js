@@ -153,13 +153,13 @@ export default function  Dashboard(props)  {
                         </Col>
                     </Row>
 
-                    {/* <Row>
+                    <Row>
                         <ListGroup>
                             <ListGroup.Item><strong>Strain: </strong>{grow.strainName}</ListGroup.Item>
                             <ListGroup.Item><strong>Last Date Watered: </strong>{eventHistory.didWater[0].date}</ListGroup.Item>
                             <ListGroup.Item><strong>Last Data Fed: </strong>{eventHistory.didFeed[0].date}</ListGroup.Item>
                         </ListGroup>
-                    </Row> */}
+                    </Row>
 
 
                 </Container>
