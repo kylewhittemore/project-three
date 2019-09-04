@@ -27,7 +27,7 @@ module.exports = (req, res) => {
                 return DailyLog
                     .findByIdAndUpdate(image.dailyLog,
                         {
-                            $push: { images: image._id }
+                            $set: { image: image._id }
                         },
                         {
                             new: true

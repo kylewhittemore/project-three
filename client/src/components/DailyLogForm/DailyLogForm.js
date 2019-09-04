@@ -35,7 +35,7 @@ export default function DailyLog(props) {
     const [imageUrl, setImageUrl] = useState('')
     const [imageName, setImageName] = useState('')
     const [dbPostImage, setDbPostImage] = useState({})
-    const [images, setImages] = useState([])
+    const [image, setImage] = useState([])
 
     useEffect(() => {
 
@@ -62,9 +62,9 @@ export default function DailyLog(props) {
 
                 setFormData(form)
                 console.log("data: ", data)
-                setImages(data.images)
-                data.images ?
-                    setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.images[0].s3Id}`)
+                setImage(data.image)
+                data.image ?
+                    setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.image.s3Id}`)
                     :
                     setImageUrl('')
             }).catch(err => console.log(err))
@@ -239,9 +239,10 @@ export default function DailyLog(props) {
                                 loadingImage ?
                                     <Spinner />
                                     :
-                                    images.map(image => (
-                                        <Image key={image._id} style={styles.image} src={`https://project-three-logger-photos.s3.amazonaws.com/${image.s3Id}`} rounded />
-                                    ))
+                                    // images.map(image => (
+                                    //     <Image key={image._id} style={styles.image} src={`https://project-three-logger-photos.s3.amazonaws.com/${image.s3Id}`} rounded />
+                                    // ))
+                                    <Image style={styles.image} src={imageUrl} rounded />
                             }
                         </Col>
                     </Form.Row>
