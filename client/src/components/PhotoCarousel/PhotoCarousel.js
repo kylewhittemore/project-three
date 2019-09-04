@@ -9,29 +9,21 @@ export default function PhotoCarousel(props) {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        async function fetchGrow(id) {
-            setLoading(true)
-            let response = await Axios.get(`/api/grow/${id}`);
-            return response.data
-        }
+
         async function fetchUser(id) {
             setLoading(true)
-            let response = await Axios.get(`/api/image/user/${id}`);
+            let response = await Axios.get(`/api/user/getuserimages/${id}`);
             return response.data
         }
-        if (props.growId) {
-            fetchGrow(props.growId).then(data => {
-                console.log(data.images)
-                setPhotos(data.images)
-                setLoading(false)
-            }).catch(err => console.log(err))
-        } else {
-            fetchUser(props.userId).then(data => {
-                console.log(data.images)
-                setPhotos(data.images)
-                setLoading(false)
-            }).catch(err => console.log(err))
-        }
+
+        fetchUser(props.userId).then(data => {
+            console.log(props.growId)
+            let filteredImages = data.images.filter(image => image.grow === props.growId)
+            console.log(filteredImages)
+            setPhotos(filteredImages)
+            setLoading(false)
+        }).catch(err => console.log(err))
+
     }, [props]);
 
     return (
@@ -46,10 +38,10 @@ export default function PhotoCarousel(props) {
                                 src={`https://project-three-logger-photos.s3.amazonaws.com/${photo.s3Id}`}
                                 alt={photo.name}
                             />
-                            {/* <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption> */}
+                            <Carousel.Caption>
+                                <h3>{photo.date}</h3>
+                                <p>{photo.caption}</p>
+                            </Carousel.Caption>
                         </Carousel.Item>
                     ))}
                 </Carousel>

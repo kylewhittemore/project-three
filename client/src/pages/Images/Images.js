@@ -5,80 +5,53 @@ import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
 import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
 import { Redirect } from 'react-router-dom'
 import Axios from 'axios'
-import Image from 'react-bootstrap/Image'
 
 function ImagesPage(props) {
 
-    const styles = {
-        image: {
-            height: 171 + "px",
-            // padding: 5 + "px"
-        }
-    }
-
     const userId = localStorage.getItem('p3aajjkw-id')
 
-    const [user, setUser] = useState('')
     const [growId, setGrowId] = useState('')
-    const [growImages, setGrowImages] = useState([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-
         async function fetchUser() {
-            let response = await Axios.get(`/api/user/profile`)
-            console.log(response)
-            return response.data.user.defaultGrow
+            setLoading(true);
+            let response = await Axios.get(`/api/user/profile`);
+            let data = response.data
+            setLoading(false)
+            return data.user;
         }
 
-        fetchUser().then(defaultGrow => {
-
-            let url = window.location.href
-
-            if (url.indexOf("?grow_id=") !== -1) {
-                setGrowId(url.split("=")[1])
-            } else {
-                setGrowId(defaultGrow)
-                console.log("default    ", defaultGrow)
+        fetchUser().then(user => {
+            if (!user._id) {
+                return (
+                    <Redirect to={'/'} />
+                )
             }
-
+            return user
         })
+            .then(user => {
+                console.log("user: ", user)
+                let url = window.location.href
 
+                if (url.indexOf("?grow_id=") !== -1) {
+                    setGrowId(url.split("=")[1])
+                } else {
+                    setGrowId(user.defaultGrow)
+                    console.log(user.defaultGrow)
+                }
+                return user
+            })
     }, [])
-
-    // async function fetchUser() {
-    //     let response = await Axios.get(`/api/user/profile`)
-    //     console.log(response)
-    //     return response
-    // }
-
-    async function fetchUserImages() {
-        let response = await Axios.get(`/api/user/getuserimages/${userId}`)
-        let images = response.data.images
-
-        console.log("images:   ", images)
-        return images
-    }
-    
-    // fetchUserImages().then(images => {
-    //     console.log("gowId from fetch:   ", growId)
-    //     let filteredImages = images.filter(image => image.grow === growId)
-    //     console.log("filtered   ", filteredImages)
-    //     setGrowImages(filteredImages)
-    // })
 
     return (
         <>
             <LeftSliderBar {...props} />
             <div className="align-me">
-                {/* <PhotoCarousel {...props}
+                <PhotoCarousel {...props}
                     growId={growId}
                     userId={userId}
-                /> */}
-
-                {growImages.map(image => (
-                    <Image key={image._id} style={styles.image} src={`https://project-three-logger-photos.s3.amazonaws.com/${image.s3Id}`} rounded />
-                ))}
+                />
 
             </div>
         </>

@@ -14,6 +14,14 @@ const ImageSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    date: {
+        type: Date,
+        required: false
+    },
+    caption: {
+        type: String,
+        required: false
+    },
     dailyLog: {
         type: Schema.Types.ObjectId,
         ref: "DailyLog"

@@ -43,6 +43,10 @@ const DailyLogSchema = new Schema({
         type: String,
         required: false
     },
+    caption: {
+        type: String,
+        required: false
+    },
     grow: {
         type: Schema.Types.ObjectId,
         ref: "Grow"
