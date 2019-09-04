@@ -35,7 +35,7 @@ export default function DailyLog(props) {
     const [imageUrl, setImageUrl] = useState('')
     const [imageName, setImageName] = useState('')
     const [dbPostImage, setDbPostImage] = useState({})
-    const [images, setImages] = useState([])
+    const [image, setImage] = useState([])
 
     useEffect(() => {
 
@@ -57,14 +57,16 @@ export default function DailyLog(props) {
                     didFlip: data.didFlip,
                     didDefoliate: data.didDefoliate,
                     notes: data.notes,
-                    grow: data.grow
+                    grow: data.grow,
+                    caption: data.caption
+
                 }
 
                 setFormData(form)
                 console.log("data: ", data)
-                setImages(data.images)
-                data.images ?
-                    setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.images[0].s3Id}`)
+                setImage(data.image)
+                data.image ?
+                    setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${data.image.s3Id}`)
                     :
                     setImageUrl('')
             }).catch(err => console.log(err))
@@ -79,7 +81,8 @@ export default function DailyLog(props) {
                 didFlip: false,
                 didDefoliate: false,
                 notes: "",
-                grow: props.growId
+                grow: props.growId,
+                caption: ''
             }
             setFormData(form)
         }
@@ -139,6 +142,11 @@ export default function DailyLog(props) {
 
     const handleImageDbPost = async () => {
         setLoadingImage(true)
+        let img = dbPostImage
+        img.date = formData.date
+        img.caption = formData.caption
+        console.log("modified img:   ", img)
+        await setDbPostImage(img)
         let dbResponse = await Axios.post('/api/image/db', dbPostImage)
         console.log("DB res: ", dbResponse)
         setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${dbResponse.data.s3Id}`)
@@ -229,10 +237,16 @@ export default function DailyLog(props) {
                             loadingImage ?
                                 <Spinner />
                                 :
-                                images.map(image => (
-                                    <Image key={image._id} style={styles.image} src={`https://project-three-logger-photos.s3.amazonaws.com/${image.s3Id}`} rounded />
-                                ))
+                                <Image style={styles.image} src={imageUrl} rounded />
                         }
+                    </Col>
+                </Form.Row>
+                <Form.Row className="m-2">
+                    <Col>
+                        <Form.Group className="m-1" controlId="log.ControlTextarea2">
+                            <Form.Label>Image Caption:</Form.Label>
+                            <Form.Control value={formData.caption} name="caption" onChange={handleInputChange} as="textarea" rows="2" />
+                        </Form.Group>
                     </Col>
                 </Form.Row>
 

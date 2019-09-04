@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col'
 // import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
-import Dashboard from '../../components/Dashboard/Dashboard'
+import Dashboard from '../../components/Dashboard/dashboard-kw'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css";
 // import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
@@ -17,7 +17,7 @@ function HomePage() {
     // const userId = localStorage.getItem('p3aajjkw-id')
     const userId = localStorage.getItem('p3aajjkw-id')
     
-    const [user, setUser] = useState({})
+    // const [user, setUser] = useState({})
     // const [loading, setLoading] = useState(false)
 
     if (!userId) {

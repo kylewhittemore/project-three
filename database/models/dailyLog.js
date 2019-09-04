@@ -43,17 +43,19 @@ const DailyLogSchema = new Schema({
         type: String,
         required: false
     },
+    caption: {
+        type: String,
+        required: false
+    },
     grow: {
         type: Schema.Types.ObjectId,
         ref: "Grow"
     },
-    images: [
+    image:
         {
             type: Schema.Types.ObjectId,
             ref: "Image"
         }
-    ]
-
 })
 
 module.exports = mongoose.model('DailyLog', DailyLogSchema)
