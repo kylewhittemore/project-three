@@ -11,7 +11,9 @@ module.exports = (req, res) => {
         s3Id: req.body.s3Id,
         dailyLog: req.body.dailyLogId,
         grow: req.body.growId,
-        user: req.body.userId
+        user: req.body.userId,
+        date: req.body.date,
+        caption: req.body.caption
 
     }).then(dbImage => {
         image = dbImage
