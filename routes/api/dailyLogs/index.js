@@ -35,4 +35,10 @@ const getById = require('./getLogById')
 routes.get('/:id', getById)
 // routes.get('/:id', isAuth, getById)
 
+// This route ...
+// NOT TESTED
+const getEvent = require('./getEventsByGrow')
+routes.get('/grow/:id', getEvent)
+// routes.get('/:id', isAuth, getById)
+
 module.exports = routes
