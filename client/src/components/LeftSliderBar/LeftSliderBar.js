@@ -32,7 +32,7 @@ export default props => {
                 <Navbar>
                     <NavItem className="navbar-brand d-flex mx-auto mt-2">
                         <span className="text-white">
-                            Canna-Keeper  <i className="fas fa-cannabis"></i>
+                            Canna-Keeper 
                         </span>
                     </NavItem>
                 </Navbar>

@@ -7,7 +7,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Figure from 'react-bootstrap/Figure'
 import Axios from 'axios'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import './style.css'
+import Moment from "moment";
 
 export default function GrowTable(props) {
 
@@ -50,66 +50,69 @@ export default function GrowTable(props) {
         loading ?
             <LoadingSpinner />
             :
-            <Container>
+            <Container className="seasonsPage mx-auto">
                 {grows.map(grow => (
                     <div key={grow._id}>
-                        <Row >
-                            <Col >
-                                <h2 className="font-italic">{grow.seasonName}</h2>
-                                <p >System Id: {grow._id}</p>
-                            </Col>
-                            <Col md="auto">
-                                <div >
-                                    <Button onClick={event => {
-                                        event.preventDefault()
-                                        props.history.push(`/staticheader/?grow_id=${grow._id}`)
-                                    }}>Details</Button>
-                                    <Button onClick={event => {
-                                        event.preventDefault()
-                                        props.history.push(`/newseason/?grow_id=${grow._id}`)
-                                    }}>Edit</Button>
-                                    {(user.defaultGrow === grow._id)
-                                        ? <Button className="btn-success">IS DEFAULT</Button>
-                                        : <Button className="btn-warning" onClick={event => {
+                        <Container className="seasonBox">
+                            <Row >
+                                <Col className="boxTop">
+                                    <h2 className="font-italic text-capitalize">{grow.seasonName}</h2>
+                                    {/* <p >System Id: {grow._id}</p> */}
+                                </Col>
+                                <Col className="boxTop" md="auto">
+                                    <div >
+                                        <Button className="btn-primary gt-button btn-sm" onClick={event => {
                                             event.preventDefault()
-                                            setDefaultGrow(grow._id)
-                                                .then(response => console.log(response))
-                                                .catch(err => console.log(err))
+                                            props.history.push(`/staticheader/?grow_id=${grow._id}`)
+                                        }}>Details</Button>
+                                        <Button className="btn-info gt-button btn-sm" onClick={event => {
+                                            event.preventDefault()
+                                            props.history.push(`/newseason/?grow_id=${grow._id}`)
+                                        }}>Edit</Button>
+                                        {(user.defaultGrow === grow._id)
+                                            ? <Button className="btn-success gt-button btn-sm">Default Grow</Button>
+                                            : <Button className="btn-warning gt-button btn-sm" onClick={event => {
+                                                event.preventDefault()
+                                                setDefaultGrow(grow._id)
+                                                    .then(response => console.log(response))
+                                                    .catch(err => console.log(err))
 
-                                        }}>Make Default</Button>
-                                    }
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row >
-                            <Col md={4}>
-                                <Figure>
-                                    <Figure.Image
-                                        width={152}
-                                        height={152}
-                                        alt="171x180"
-                                        src="./leaf.png"
-                                    />
-                                    <Figure.Caption>
+                                            }}>Make Default</Button>
+                                        }
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row >
+                                <Col className="boxBottom my-auto d-block">
+                                    <Figure className="mx-auto d-block">
+                                        <Figure.Image
+                                            className="mx-auto d-block img-fluid"
+                                            width={152}
+                                            height={152}
+                                            alt="171x180"
+                                            src="./leaf.png"
+                                        />
+                                        {/* <Figure.Caption>
                                         Nulla vitae elit libero, a pharetra augue mollis interdum.
-                                </Figure.Caption>
-                                </Figure>
-                            </Col>
-                            <Col md={8}>
-                                <ListGroup>
-                                    <ListGroup.Item>Strain Name: {grow.strainName}</ListGroup.Item>
-                                    <ListGroup.Item>Breeder: {grow.breeder}</ListGroup.Item>
-                                    <ListGroup.Item>Start Date: {grow.dateStarted
-                                        ? grow.dateStarted.slice(0, 10)
-                                        : "Not Started"} </ListGroup.Item>
-                                    <ListGroup.Item>Date Completed: {!grow.dateCompleted && !grow.dateStarted
-                                        ? ''
-                                        : grow.dateCompleted
-                                            ? grow.dateCompleted.slice(0, 10)
-                                            : "In Progress"} </ListGroup.Item>
-                                </ListGroup>
-                            </Col>
-                        </Row>
+                                </Figure.Caption> */}
+                                    </Figure>
+                                </Col>
+                                <Col className="boxBottom" md={8}>
+                                    <ListGroup>
+                                        <ListGroup.Item className="text-capitalize"><strong>Strain Name:</strong> {grow.strainName}</ListGroup.Item>
+                                        <ListGroup.Item className="text-capitalize"><strong>Breeder:</strong> {grow.breeder}</ListGroup.Item>
+                                        <ListGroup.Item className="text-capitalize"><strong>Start Date:</strong> {grow.dateStarted
+                                            ? Moment(grow.dateStarted.slice(0, 10)).format("MM-DD-YYYY")
+                                            : "Not Started"} </ListGroup.Item>
+                                        <ListGroup.Item className="text-capitalize"><strong>Date Completed:</strong> {!grow.dateCompleted && !grow.dateStarted
+                                            ? ''
+                                            : grow.dateCompleted
+                                                ? Moment(grow.dateCompleted.slice(0, 10)).format("MM-DD-YYYY")
+                                                : "In Progress"} </ListGroup.Item>
+                                    </ListGroup>
+                                </Col>
+                            </Row>
+                        </Container>
                     </div>
                 ))}
             </Container>
