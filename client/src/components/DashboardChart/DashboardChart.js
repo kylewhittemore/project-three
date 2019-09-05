@@ -1,49 +1,48 @@
 import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
 import Axios from 'axios'
+import seedData from '../populate/sampleEnvData'
 
 import fmt from '../../utils/formatTime'
 
 export default function DashboardChart(props) {
 
     // The structure of the data is an array of objects
-    const initialState = [
-        {hiTemp: 80, loTemp:75, hiHum:60, loHum:57, lightOn: 12, date: '08/21/19'},
-        {hiTemp: 81, loTemp:75, hiHum:61, loHum:56, lightOn: 12, date: '08/22/19'},
-        {hiTemp: 82, loTemp:75, hiHum:61, loHum:58, lightOn: 12, date: '08/23/19'},
-        {hiTemp: 80, loTemp:75, hiHum:61, loHum:58, lightOn: 12, date: '08/24/19'},
-        {hiTemp: 79, loTemp:70, hiHum:62, loHum:59, lightOn: 12, date: '08/25/19'},
-        {hiTemp: 78, loTemp:69, hiHum:63, loHum:58, lightOn: 12, date: '08/26/19'},
-        {hiTemp: 77, loTemp:67, hiHum:64, loHum:57, lightOn: 12, date: '08/27/19'}
-    ]
+    const initialState = [ seedData ]
+    
     const [environ, setEnviron] = useState(initialState)
 
-    const [hiTemp, setHiTemp] = useState([80, 81, 82, 80, 79, 78, 77])
+    // var hiTemp, loTemp, hiHumidity, loHumidity = []
+    const [dateLogged, setDateLogged] = useState(["4/5/2019", "4/6/2019", "4/7/2019", "4/8/2019", "4/10/2019", "4/11/2019", "4/12/2019", "4/15/2019", "4/18/2019", "4/19/2019", "4/21/2019", "4/25/2019", "4/27/2019", "4/29/2019", "5/2/2019", "5/6/2019", "5/8/2019", "5/11/2019", "5/12/2019", "5/15/2019", "5/17/2019", "5/19/2019", "5/23/2019", "5/26/2019", "5/27/2019", "5/28/2019", "5/30/2019", "6/1/2019", "6/3/2019", "6/4/2019", "6/7/2019", "6/8/2019", "6/10/2019", "6/12/2019", "6/14/2019", "6/17/2019", "6/18/2019", "6/19/2019", "6/21/2019", "6/24/2019"])
+    const [hiTemp, setHiTemp] = useState([78, 76, 74, 77, 79, 78, 78, 72, 71, 75, 76, 76, 78, 81, 78, 77, 76, 76, 75, 74, 73, 73, 76, 77, 78, 79, 79, 75, 74, 75, 75, 76, 77, 72, 72, 71, 73, 74, 75, 75])
+    const [loTemp, setloTemp] = useState([67, 68, 69, 63, 64, 64, 65, 65, 66, 66, 67, 67, 61, 63, 64, 68, 68, 67, 67, 66, 65, 65, 65, 66, 67, 65, 64, 64, 63, 63, 64, 65, 65, 65, 66, 67, 67, 66, 67, 65])
+    const [hiHumidity, setHiHumidity] = useState([64, 64, 68, 69, 70, 70, 69, 64, 62, 64, 60, 61, 61, 61, 62, 63, 64, 64, 65, 65, 66, 68, 68, 68, 68, 67, 67, 64, 64, 64, 61, 62, 61, 62, 59, 59, 61, 62, 63, 64])
+    const [loHumidity, setloHumidity] = useState([58, 57, 56, 55, 55, 55, 55, 56, 56, 57, 58, 58, 50, 49, 48, 48, 49, 50, 51, 52, 54, 54, 54, 55, 55, 56, 57, 59, 53, 53, 55, 53, 53, 52, 54, 56, 51, 51, 52, 53])
 
     const [grow, setGrow] = useState({})
 
-    const [tempChartData, setTempChartData] = useState({
-        labels: ['08/21','08/22','08/23','08/24','08/25','08/26','08/27'],
-        datasets:[
-            {
-                label:'Hi Temps',
-            data: [80, 81, 82, 80, 79, 78, 77]
-        },{
-            label:'Lo Temps',
-            data: [75,75,75,75,70,69,67]
-          }
-        ]
-      })
+    // const [tempChartData, setTempChartData] = useState({
+    //     labels: [],
+    //     datasets:[
+    //         {
+    //         label:'Hi Temps',
+    //         data: []
+    //     },{
+    //         label:'Lo Temps',
+    //         data: []
+    //       }
+    //     ]
+    //   })
 
     const [humChartData, setHumChartData] = useState({
-        labels: ['08/21','08/22','08/23','08/24','08/25','08/26','08/27'],
+        labels: ["4/5/2019", "4/6/2019", "4/7/2019", "4/8/2019", "4/10/2019", "4/11/2019", "4/12/2019", "4/15/2019", "4/18/2019", "4/19/2019", "4/21/2019", "4/25/2019", "4/27/2019", "4/29/2019", "5/2/2019", "5/6/2019", "5/8/2019", "5/11/2019", "5/12/2019", "5/15/2019", "5/17/2019", "5/19/2019", "5/23/2019", "5/26/2019", "5/27/2019", "5/28/2019", "5/30/2019", "6/1/2019", "6/3/2019", "6/4/2019", "6/7/2019", "6/8/2019", "6/10/2019", "6/12/2019", "6/14/2019", "6/17/2019", "6/18/2019", "6/19/2019", "6/21/2019", "6/24/2019"],
         datasets:[
           {
             label:'Hi Humidity',
-            data: [60,61,61,61,62,63,64]
+            data: [64, 64, 68, 69, 70, 70, 69, 64, 62, 64, 60, 61, 61, 61, 62, 63, 64, 64, 65, 65, 66, 68, 68, 68, 68, 67, 67, 64, 64, 64, 61, 62, 61, 62, 59, 59, 61, 62, 63, 64]
           },{
             label:'Lo Humidity',
-            data: [57,56,58,59,58,57,57]
+            data: [58, 57, 56, 55, 55, 55, 55, 56, 56, 57, 58, 58, 50, 49, 48, 48, 49, 50, 51, 52, 54, 54, 54, 55, 55, 56, 57, 59, 53, 53, 55, 53, 53, 52, 54, 56, 51, 51, 52, 53]
         }
         
     ]
@@ -67,6 +66,19 @@ useEffect (() => {
             setGrow(response.data)
             // console.log(response.data)
             //++++++++++++
+            // const logs = response.data.dailyLogs
+            console.log("fetchGrow RESPONSE: ", response.data.dailyLogs.length, " objects")
+            console.log("ENVIRON: ", environ.length, " objects")
+            // setDateLogged = seedData.map(({date})=>date)
+            // console.log("DATES: ", dateLogged)
+            // hiTemp = seedData.map(({temp})=>temp.hi)
+            // console.log("HI TEMPS: ", hiTemp)
+            // loTemp = seedData.map(({temp})=>temp.lo)
+            // console.log("LO TEMPS: ", loTemp)
+            // hiHumidity = seedData.map(({humidity})=>humidity.hi)
+            // console.log("HI HUMIDITY: ", hiHumidity)
+            // loHumidity = seedData.map(({humidity})=>humidity.lo)
+            // console.log("LO HUMIDITY: ", loHumidity)
             // actual reading thru the array and creating the environ object goes here
             // setHiTemp(initialState.map)
             return response
@@ -84,24 +96,134 @@ useEffect (() => {
 
     }, [])
 
+// ************************************ Functions
+
+    function buildTempChart () {
+        const tempChartData = {
+            labels: dateLogged,
+            datasets:[
+                {
+                label:'Hi Temps',
+                data: hiTemp,
+                backgroundColor:['rgba(255, 99, 132, 0.6)']
+            },{
+                label:'Lo Temps',
+                data: loTemp,
+                backgroundColor:['rgba(54, 162, 235, 0.6)']
+                }
+            ]
+        }
+        return tempChartData
+    }
+
+    function buildTempChart2 () {
+        const tempChartData = {
+            labels: dateLogged,
+            datasets:[
+                {
+                    label:'Hi Temps',
+                    data: hiTemp,
+                    borderColor: "#8e5ea2",
+                    fill: false
+                },{
+                    label:'Lo Temps',
+                    data: loTemp,
+                    borderColor: "#3e95cd",
+                    borderWidth: 5,
+                    fill: false
+                    }
+            ]
+        }
+        return tempChartData
+    }
+
+    function buildTempChart3 () {
+        const tempChartData = {
+            labels: dateLogged,
+            datasets:[
+                {
+                    label:'Hi Temps',
+                    data: hiTemp,
+                    borderColor: "#2930EB",
+                    fill: false
+                },{
+                    label:'Lo Temps',
+                    data: loTemp,
+                    borderColor: "#B40EFF",
+                    fill: false
+                    },
+                    {
+                    label:'Hi Humidity',
+                    data: hiHumidity,
+                    borderColor: "#FF581F",
+                    fill: false
+                },{
+                    label:'Lo Temps',
+                    data: loHumidity,
+                    borderColor: "#FF7D13",
+                    fill: false
+                }
+            ]
+        }
+        return tempChartData
+    }
+
 
     return (
         <div>
             <Line
-                data={ tempChartData }
-                 
+                data={ buildTempChart }
                 options={{
                     title:{
                         display:true,
                         text:'Tempurature',
                         fontSize:25
                 }
-                
             }}
             />
             <Line
+                data={ buildTempChart2 }
+                options={{
+                    title:{
+                        display:true,
+                        text:'Tempurature',
+                        fontSize:25
+                    }
+                }}
+            />
+            <Line
+                data={ buildTempChart3 }
+                options={{
+                    title:{
+                        display:true,
+                        text:'Tempurature & Humidity',
+                        fontSize:25
+                    }
+                }}
+            />
+            {/* <Line
+                data={{ 
+                    labels: {dateLogged},
+                    datasets: [
+                        {
+                            label:'Hi Temps',
+                            data: {hiTemp}
+                        },{
+                            label:'Lo Temps',
+                            data: {loTemp}
+                        }
+                    ]
+                }}
+                options={{
+                    title:{
+                        display:true,
+                        text:'Tempurature',
+                        fontSize:25
+                    }
+                }}
+            /> */}
+            <Line
                 data={ humChartData }
-                
                 options={{
                     title:{
                         display:true,

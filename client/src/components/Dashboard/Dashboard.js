@@ -50,7 +50,7 @@ export default function Dashboard(props) {
         } else {
         fetchUserData()
             .then(response => {
-                console.log("fetch user data response:  ", response)
+                console.log("fetch user data response: ", response.status, "number of dailyLogs:", response.data.dailyLogs.length)
             })
         }
     }, [])
@@ -105,7 +105,9 @@ export default function Dashboard(props) {
             </Row>
 
             <Row>
-                <ListData />
+                <Col md={12} >
+                    <ListData />
+                </Col>
             </Row>
         </Container>
 
