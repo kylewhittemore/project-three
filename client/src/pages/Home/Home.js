@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css";
 // import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
 
-function HomePage() {
+function HomePage(props) {
     // const userId = localStorage.getItem('p3aajjkw-id')
     const userId = localStorage.getItem('p3aajjkw-id')
     
@@ -32,7 +32,7 @@ function HomePage() {
             <LeftSliderBar />
             <Row >
                 <Col className='col-md-6 mx-auto'>
-                    <Dashboard />
+                    <Dashboard {...props}/>
  
                 </Col>
             </Row>
