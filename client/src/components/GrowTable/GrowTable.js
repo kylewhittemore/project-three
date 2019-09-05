@@ -85,13 +85,22 @@ export default function GrowTable(props) {
                             <Row >
                                 <Col className="boxBottom my-auto d-block">
                                     <Figure className="mx-auto d-block">
+                                    {grow.coverImage ? 
                                         <Figure.Image
                                             className="mx-auto d-block img-fluid"
                                             width={152}
                                             height={152}
                                             alt="171x180"
-                                            src="./leaf.png"
+                                            src={`https://project-three-logger-photos.s3.amazonaws.com/${grow.coverImage}`}
                                         />
+                                        :
+                                        <Figure.Image
+                                        width={152}
+                                        height={152}
+                                        alt="171x180"
+                                        src="./leaf.png"
+                                        />
+                                    }
                                         {/* <Figure.Caption>
                                         Nulla vitae elit libero, a pharetra augue mollis interdum.
                                 </Figure.Caption> */}

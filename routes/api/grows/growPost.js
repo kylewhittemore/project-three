@@ -6,8 +6,6 @@ module.exports = (req, res) => {
     console.log("req.body", req.body)
     return Grow.create(req.body)
         .then(dbGrow => {
-
-            console.log("req user: ", dbGrow)
             return User.findByIdAndUpdate(req.params.id,
                 {
                     $push: { grows: dbGrow._id }
@@ -15,15 +13,9 @@ module.exports = (req, res) => {
                 {
                     new: true
                 }).then(user => {
-                    console.log("USER: ", user)
                     res.json(dbGrow)
-                    // res.json(dbGrow[dbGrow.length - 1])
                 })
             })
-            // .then(user => {
-            //     console.log("thennnnnnnnn", dbGrow)
-            //     res.json(dbGrow)
-            // })
             .catch(err => res.json(err))
 
 };

@@ -22,8 +22,6 @@ const bem = bn.create('sidebar');
 
 export default props => {
     const userId = localStorage.getItem('p3aajjkw-id')
-    console.log(userId)
-
 
     return (
         <aside className={bem.b()} data-image={sidebarBgImage}>

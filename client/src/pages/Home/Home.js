@@ -8,8 +8,8 @@ import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col'
 // import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
-import Dashboard from '../../components/Dashboard/dashboard-kw'
-import StaticHeaderPage from '../StaticHeaderPage/StaticHeaderPage'
+import Dashboard from '../../components/Dashboard/Dashboard'
+import DashboardChart from '../../components/DashboardChart/DashboardChart'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css";
 // import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
@@ -33,8 +33,9 @@ function HomePage(props) {
             <LeftSliderBar />
             <Row >
                 <Col className='col-md-6 mx-auto'>
-                    <Dashboard />
-                    {/* <StaticHeaderPage {...props} growId={props.growId}/> */}
+                    <Dashboard {...props}/>
+                    <DashboardChart {...props}/>
+ 
                 </Col>
             </Row>
         </div>

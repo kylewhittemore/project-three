@@ -24,7 +24,6 @@ module.exports = (req, res) => {
                     new: true
                 })
             .then(user => {
-                console.log("$$$$$$$$user: ", user)
                 return Grow
                     .findByIdAndUpdate(image.grow,
                         {
