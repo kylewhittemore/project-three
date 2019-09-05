@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 // import { Alert, Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
-import { Row, Col, Button, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import fmt from '../../utils/formatTime'
-import moment from 'moment';
+
+// import moment from 'moment'
 // const t = require('../../utils/formatTime')
 
 export default function Dashboard(props) {
@@ -21,6 +22,9 @@ export default function Dashboard(props) {
 
         async function fetchGrow(growId) {
             let response = await Axios.get(`/api/grow/${growId}`)
+            if (props.growId) { 
+                setGrow(response)
+            }
             return response
         }
 
@@ -30,7 +34,7 @@ export default function Dashboard(props) {
             // return user
             let response = await fetchGrow(user.defaultGrow)
             setGrow(response.data)
-            console.log(response.data)
+            // console.log(response.data)
             setWaterHistory(response.data.dailyLogs.filter(log => log.didWater))
             setFeedHistory(response.data.dailyLogs.filter(log => log.didFeed))
             setTransplantHistory(response.data.dailyLogs.filter(log => log.didFlip))
@@ -57,7 +61,8 @@ export default function Dashboard(props) {
     }
 
     function formatDateShort(date) {
-        return moment(date, "YYYY-MM-DDTHH:mm:ss.SSS").format("MM/DD/YY")
+        // return moment(date, "YYYY-MM-DDTHH:mm:ss.SSS").format("MM/DD/YY")
+        return fmt.shortFmt(date)
     }
 
     function ListData() {
@@ -76,7 +81,7 @@ export default function Dashboard(props) {
 
     return (
 
-        <div>
+        <Container>
             <Row>
                 <Col className="text-right">
                     <Button onClick={event => {
@@ -102,7 +107,7 @@ export default function Dashboard(props) {
             <Row>
                 <ListData />
             </Row>
-        </div>
+        </Container>
 
     )
 }
