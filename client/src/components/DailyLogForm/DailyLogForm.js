@@ -45,10 +45,8 @@ export default function DailyLog(props) {
     useEffect(() => {
 
         async function fetchGrows() {
-            // setLoading(true);
             let response = await Axios.get(`/api/grow/user/${userId}`);
             let data = response.data
-            // setLoading(false)
             return data;
         }
 
@@ -59,19 +57,10 @@ export default function DailyLog(props) {
         }
         async function setSeasonState() {
             let data = await fetchGrows()
-            // console.log("grows   ", data)
-            // let justNames = data.map(element => element.seasonName)
-            // console.log("just names:", justNames)
             await setSeasons(data)
             return data
         }
-        // fetchGrows().then(data => {
-        //     console.log("grows   ", data)
-        //     let justNames = data.map(element => element.seasonName)
-        //     console.log("just names:", justNames)
-        //     setSeasons(justNames)
-        // })
-
+        
         setSeasonState()
 
         if (props.logId) {
@@ -100,7 +89,6 @@ export default function DailyLog(props) {
                     setImageUrl('')
             }).catch(err => console.log(err))
         } else {
-            // console.log("pgId    ", props.growId)
             setGrowId(props.defaultGrow)
             const form = {
                 date: "",
@@ -122,9 +110,7 @@ export default function DailyLog(props) {
 
     async function postDailyLog() {
         let data = formData
-        console.log("grrrrrrrrow   ", growId)
         data.grow = growId
-        console.log("DATATATATATA:  ", data)
         let response = await Axios.post(`/api/daily/${growId}`, data)
 
         return response
@@ -136,7 +122,6 @@ export default function DailyLog(props) {
             url: `/api/daily/${props.logId}`,
             data: formData
         })
-
         //ensure that the response is the log if there are errors!!!!!!
         return response
     }
@@ -144,21 +129,12 @@ export default function DailyLog(props) {
     async function handleFormSubmit(event) {
         event.preventDefault()
         let response = props.logId ? await putDailyLog() : await postDailyLog()
-        console.log("response", response.data._id)
-        //***********************************************/
-
-
+       
         let img = dbPostImage
         img.date = formData.date
         img.caption = formData.caption
         img.dailyLogId = response.data._id
-        console.log("modified img:   ", img)
         await setDbPostImage(img)
-
-
-        //***********************************************/
-
-
 
         setFormData(initialFormState)
         response.data.message ?
@@ -166,63 +142,63 @@ export default function DailyLog(props) {
             :
             imageUrl ?
                 handleImageDbPost()
-                // .then(props.history.push('/'))
+                    .then(props.history.push('/'))
                 :
-                console.log('no image')
+                console.log('no image attached to log')
     }
 
     const handleInputChange = event => {
         const target = event.target
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
+
         if (name === 'season') {
+            
             let selectId = event.target[event.target.selectedIndex].getAttribute('data-id')
-            console.log("select", selectId)
+            
             setFormData({ ...formData, grow: selectId, season: target.value })
             setGrowId(selectId)
+        
         } else {
+            
             setFormData({ ...formData, [name]: value })
+        
         }
     }
 
     const handleImageAttach = async event => {
         event.preventDefault();
+        
         setLoadingImage(true)
         let apiResponse = await Axios.post('/api/image/s3', inputImageData)
         setLoadingImage(false)
-        console.log("API res: ", apiResponse)
+        
         let img = {
             name: apiResponse.data.name,
             s3Id: apiResponse.data.s3Id,
             userId: props.userId,
-            growId: growId,
-            // dailyLogId: props.logId
+            growId: growId
         }
         await setDbPostImage(img)
     }
 
-    //still needs work on the put route - doesnt update the image
-
     const handleImageDbPost = async () => {
         setLoadingImage(true)
-        // let img = dbPostImage
-        // img.date = formData.date
-        // img.caption = formData.caption
-        // console.log("modified img:   ", img)
-        // await setDbPostImage(img)
+        
         let dbResponse = await Axios.post('/api/image/db', dbPostImage)
-        console.log("DB res: ", dbResponse)
-        //need to take the returned imgs id and push it to the previously returned daily log
-
+        
         setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${dbResponse.data.s3Id}`)
         setInputImageData(new FormData())
         setLoadingImage(false)
+        
         return dbResponse
     }
 
     const handleUploadChange = async event => {
         const file = event.target.files[0]
+        
         inputImageData.append('image', file)
+        
         await setImageUrl(URL.createObjectURL(file))
         await setImageName(file.name)
     }
@@ -242,7 +218,7 @@ export default function DailyLog(props) {
                             <Form.Group className="m-1" controlId="log.ControlSelect1">
                                 <Form.Label>Plant appearance:</Form.Label>
                                 <Form.Control value={formData.plantAppearance} name="plantAppearance" onChange={handleInputChange} as="select">
-                                    <option>happy</option>
+                                    <option >happy</option>
                                     <option>neutral</option>
                                     <option>sad</option>
                                 </Form.Control>
@@ -254,19 +230,14 @@ export default function DailyLog(props) {
                             <Form.Group className="m-1" controlId="log.ControlSelect2">
                                 <Form.Label>Season:</Form.Label>
                                 <Form.Control value={formData.season} name="season" onChange={handleInputChange} as="select">
-                                    {/* <option>(default)</option> */}
                                     {seasons.map(season => <option data-id={season._id} >{season.seasonName}</option>)}
                                 </Form.Control>
                             </Form.Group>
                         </Col>
                         <Col>
-                            <Form.Group className="m-1" controlId="log.ControlSelect3">
-                                <Form.Label>Plant appearance:</Form.Label>
-                                <Form.Control value={formData.plantAppearance} name="plantAppearance" onChange={handleInputChange} as="select">
-                                    <option>happy</option>
-                                    <option>neutral</option>
-                                    <option>sad</option>
-                                </Form.Control>
+                            <Form.Group className="m-1" controlId="log.ControlInput1">
+                                <Form.Label>Hi temp</Form.Label>
+                                <Form.Control value={formData.hiTemp} name="hiTemp" onChange={handleInputChange} type="number" />
                             </Form.Group>
                         </Col>
                     </Form.Row>

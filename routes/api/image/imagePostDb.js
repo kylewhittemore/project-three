@@ -14,10 +14,9 @@ module.exports = (req, res) => {
         user: req.body.userId,
         date: req.body.date,
         caption: req.body.caption,   
-        dailyLog: req.body.dailyLogId            // the image needs to be attached back to the daily log!!!!!!!
+        dailyLog: req.body.dailyLogId            
 
     }).then(dbImage => {
-        console.log("REQQQQQQQ", dbImage)
         image = dbImage
         return User
             .findByIdAndUpdate(image.user,
@@ -28,7 +27,6 @@ module.exports = (req, res) => {
                     new: true
                 })
             .then(user => {
-                console.log("dailylog image set   ", image.dailyLog)
                 return DailyLog
                     .findByIdAndUpdate(image.dailyLog,
                         {

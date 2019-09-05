@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default props => {
     const userId = localStorage.getItem('p3aajjkw-id')
-    console.log(userId)
+    
     return (
         <Menu>
             <Link to={`/home`}>Dashboard</Link>

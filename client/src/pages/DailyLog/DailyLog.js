@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom'
 import Axios from 'axios'
 
 function DailyLogPage(props) {
+
     const [user, setUser] = useState('')
     const [growId, setGrowId] = useState('')
     const [logId, setLogId] = useState('')
@@ -17,7 +18,6 @@ function DailyLogPage(props) {
             setLoading(true);
             let response = await Axios.get(`/api/user/profile`);
             let data = response.data
-            // console.log("USER: " + JSON.stringify(data))
             setLoading(false)
             return data.user;
         }
@@ -33,7 +33,6 @@ function DailyLogPage(props) {
                     <Redirect to={'/'} />
                 )
             }
-            // console.log("fetch user", user)
             setUser(user)
             return user
         })
@@ -46,7 +45,6 @@ function DailyLogPage(props) {
                     setLogId(logId)
                     fetchLog(logId)
                         .then(log => {
-                            console.log("LOG:   ", log)
                             setGrowId(log.grow)
                         })
                         .catch(err => console.log(err))
