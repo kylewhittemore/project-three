@@ -75,7 +75,7 @@ class StaticForm extends Component {
                 coverImage: data.coverImage
             });
         };
-        console.log(this.state.coverImage)
+        console.log("USERID" , this.state.coverImage)
     };
 
 

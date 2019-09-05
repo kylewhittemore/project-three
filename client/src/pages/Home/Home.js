@@ -9,11 +9,12 @@ import Col from 'react-bootstrap/Col'
 // import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
 import Dashboard from '../../components/Dashboard/dashboard-kw'
+import StaticHeaderPage from '../StaticHeaderPage/StaticHeaderPage'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css";
 // import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
 
-function HomePage() {
+function HomePage(props) {
     // const userId = localStorage.getItem('p3aajjkw-id')
     const userId = localStorage.getItem('p3aajjkw-id')
     
@@ -32,7 +33,8 @@ function HomePage() {
             <LeftSliderBar />
             <Row >
                 <Col className='col-md-6 mx-auto'>
-                    <Dashboard />
+                    {/* <Dashboard /> */}
+                    <StaticHeaderPage {...props} growId={props.growId}/>
                 </Col>
             </Row>
         </div>
