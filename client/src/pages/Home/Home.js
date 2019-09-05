@@ -33,8 +33,8 @@ function HomePage(props) {
             <LeftSliderBar />
             <Row >
                 <Col className='col-md-6 mx-auto'>
-                    {/* <Dashboard /> */}
-                    <StaticHeaderPage {...props} growId={props.growId}/>
+                    <Dashboard />
+                    {/* <StaticHeaderPage {...props} growId={props.growId}/> */}
                 </Col>
             </Row>
         </div>
