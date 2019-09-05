@@ -5,7 +5,7 @@ const Grow = require('../../../database/models/grow')
 
 module.exports = (req, res) => {
     let image;
-
+    
     Image.create({
         name: req.body.name,
         s3Id: req.body.s3Id,
@@ -13,7 +13,8 @@ module.exports = (req, res) => {
         grow: req.body.growId,
         user: req.body.userId,
         date: req.body.date,
-        caption: req.body.caption
+        caption: req.body.caption,   
+        dailyLog: req.body.dailyLogId            
 
     }).then(dbImage => {
         image = dbImage
