@@ -84,12 +84,23 @@ export default function GrowTable(props) {
                         <Row >
                             <Col md={4}>
                                 <Figure>
-                                    <Figure.Image
+                                    {grow.coverImage ? 
+
+                                        <Figure.Image
+                                        width={152}
+                                        height={152}
+                                        alt="171x180"
+                                        src={`https://project-three-logger-photos.s3.amazonaws.com/${grow.coverImage}`}
+
+                                        />
+                                        :
+                                        <Figure.Image
                                         width={152}
                                         height={152}
                                         alt="171x180"
                                         src="./leaf.png"
-                                    />
+                                        />
+                                    }
                                     <Figure.Caption>
                                         Nulla vitae elit libero, a pharetra augue mollis interdum.
                                 </Figure.Caption>

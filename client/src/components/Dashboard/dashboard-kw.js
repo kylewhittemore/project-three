@@ -59,7 +59,7 @@ export default function Dashboard(props) {
                 <Col className="text-right">
                     <Button onClick={event => {
                         event.preventDefault()
-                        props.history.push(`/newseason/?grow_id=${props.growId}`)
+                        props.history.push(`/newseason/?grow_id=${grow._id}`)
                     }} variant="outline-dark" size="sm">Edit</Button>
                 </Col>
             </Row>
