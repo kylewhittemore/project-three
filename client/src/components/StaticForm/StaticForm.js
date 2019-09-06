@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Component, Row } from "react";
+import React, { Component } from "react";
 // import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -75,7 +75,7 @@ class StaticForm extends Component {
                 coverImage: data.coverImage
             });
         };
-        console.log(this.state.coverImage)
+        console.log("USERID" , this.state.coverImage)
     };
 
 
@@ -128,10 +128,7 @@ class StaticForm extends Component {
             :
             // this.setState({ redirect: true })
             this.props.history.push('/')
-
-
-        // console.log to see that the state is taking in the forms value.
-        // console.log(this.state.floweringTime);
+        
         // let response = this.props.growId ? await this.putSeasonStatic() : await this.postNewSeasonStatic()
         // console.log("form submit response: ", response)
 
@@ -154,7 +151,7 @@ class StaticForm extends Component {
             lightNotes: "",
             canopyTechnique: "",
             canopyTechniqueNotes: "",
-            coverImage: ''
+            coverImage: "",
             // user: ""
         });
     };
@@ -164,23 +161,22 @@ class StaticForm extends Component {
         return (
 
             <div>
-
-                <Form className="mx-5 my-5">
+                <Form className="mx-4 my-3">
                     <Form.Row>
                         <Form.Group as={Col} controlId="log.ControlInput1">
                             <Form.Label>Season Name:</Form.Label>
-                            <Form.Control name="seasonName" value={this.state.seasonName} onChange={this.handleInputChange} type="text" placeholder="Enter Name" />
+                            <Form.Control required name="seasonName" value={this.state.seasonName} onChange={this.handleInputChange} type="text" placeholder="Enter Name" />
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="log.ControlInput2">
-                            <Form.Label>Date:</Form.Label>
-                            <Form.Control name="dateStarted" value={this.state.dateStarted} onChange={this.handleInputChange} type="date" />
+                            <Form.Label>Started Date Season:</Form.Label>
+                            <Form.Control required name="dateStarted" value={this.state.dateStarted} onChange={this.handleInputChange} type="date" />
                         </Form.Group>
-                    </Form.Row>
+                        {/* </Form.Row>
 
-                    <Form.Row>
+                    <Form.Row> */}
                         <Form.Group as={Col} controlId="log.ControlInput3">
                             <Form.Label>Planned Harvest Date:</Form.Label>
                             <Form.Control name="dateCompleted" value={this.state.dateCompleted} onChange={this.handleInputChange} type="date" />
@@ -192,12 +188,17 @@ class StaticForm extends Component {
                             <Form.Label>Strain Name:</Form.Label>
                             <Form.Control name="strainName" value={this.state.strainName} onChange={this.handleInputChange} type="text" placeholder="Enter Strain" />
                         </Form.Group>
+
+                        <Form.Group as={Col} controlId="log.ControlInput7">
+                            <Form.Label>Breeder:</Form.Label>
+                            <Form.Control name="breeder" value={this.state.breeder} onChange={this.handleInputChange} type="text" />
+                        </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="log.ControlInput5">
                             <Form.Label>Lineage:</Form.Label>
-                            <Form.Control name="lineage" value={this.state.lineage} onChange={this.handleInputChange} type="text" />
+                            <Form.Control name="lineage" value={this.state.lineage} onChange={this.handleInputChange} type="text" placeholder="i.e: Chem x OG" />
                         </Form.Group>
 
                         <Form.Group as={Col} id="log.ControlInput6">
@@ -207,16 +208,9 @@ class StaticForm extends Component {
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group as={Col} controlId="log.ControlInput7">
-                            <Form.Label>Breeder:</Form.Label>
-                            <Form.Control name="breeder" value={this.state.breeder} onChange={this.handleInputChange} type="text" />
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Form.Row>
                         <Form.Group as={Col} controlId="log.ControlSelect3">
                             <Form.Label>Starting Plant Type:</Form.Label>
-                            <Form.Control name="starterPlantType" value={this.state.starterPlantType} onChange={this.handleInputChange} as="select">
+                            <Form.Control required name="starterPlantType" value={this.state.starterPlantType} onChange={this.handleInputChange} as="select">
                                 <option>(Select)</option>
                                 <option>Seeds</option>
                                 <option>Clones</option>
@@ -230,63 +224,63 @@ class StaticForm extends Component {
 
                         <Form.Group as={Col} controlId="log.ControlSelect1">
                             <Form.Label>Medium:</Form.Label>
-                            <Form.Control name="medium" value={this.state.medium} onChange={this.handleInputChange} as="select">
+                            <Form.Control required name="medium" value={this.state.medium} onChange={this.handleInputChange} as="select">
                                 <option>(Select)</option>
                                 <option>Soil</option>
                                 <option>Coco</option>
                                 <option>Rockwool</option>
-                                <option>Nutrient Film Technique (NFT)</option>
+                                <option>NFT</option>
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="log.ControlSelect2">
-                            <Form.Label>Veg Lighting Type:</Form.Label>
+                            <Form.Label>Veg Light:</Form.Label>
                             <Form.Control name="vegLightType" value={this.state.vegLightType} onChange={this.handleInputChange} as="select">
                                 <option>(Select)</option>
                                 <option>CFL</option>
-                                <option>T5 Flourescent</option>
-                                <option>Ceramic Metal Halide (CMH)</option>
-                                <option>High Pressure Sodium (HPS)</option>
-                                <option>Light Emitting Diode (LED)</option>
+                                <option>T5</option>
+                                <option>CMH</option>
+                                <option>HPS</option>
+                                <option>LED</option>
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="log.ControlInput9">
-                            <Form.Label>Veg Wattage:</Form.Label>
+                            <Form.Label>Veg Watts:</Form.Label>
                             <Form.Control name="vegLightWattage" value={this.state.vegLightWattage} onChange={this.handleInputChange} type="number" />
                         </Form.Group>
-                    </Form.Row>
+                    {/* </Form.Row>
 
-                    <Form.Row>
+                    <Form.Row> */}
                         <Form.Group as={Col} controlId="log.ControlSelect3">
-                            <Form.Label>Flower Lighting Type:</Form.Label>
+                            <Form.Label>Flower Light:</Form.Label>
                             <Form.Control name="flowerLightType" value={this.state.flowerLightType} onChange={this.handleInputChange} as="select">
                                 <option>(Select)</option>
                                 <option>CFL</option>
-                                <option>T5 Flourescent</option>
-                                <option>Ceramic Metal Halide (CMH)</option>
-                                <option>High Pressure Sodium (HPS)</option>
-                                <option>Light Emitting Diode (LED)</option>
+                                <option>T5</option>
+                                <option>CMH</option>
+                                <option>HPS</option>
+                                <option>LED</option>
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="log.ControlInput10">
-                            <Form.Label>Flower Wattage:</Form.Label>
+                            <Form.Label>Flower Watts:</Form.Label>
                             <Form.Control name="flowerLightWattage" value={this.state.flowerLightWattage} onChange={this.handleInputChange} type="number" />
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group controlId="log.ControlTextarea1">
+                        <Form.Group as={Col} controlId="log.ControlTextarea1">
                             <Form.Label>Lighting Notes</Form.Label>
-                            <Form.Control name="lightNotes" value={this.state.lightNotes} onChange={this.handleInputChange} as="textarea" rows="3" />
+                            <Form.Control name="lightNotes" value={this.state.lightNotes} onChange={this.handleInputChange} as="textarea" rows="1" placeholder="Example: Solistek CMH 36in above canopy" />
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group controlId="log.ControlSelect4">
+                        <Form.Group as={Col} controlId="log.ControlSelect4">
                             <Form.Label>Canopy Technique:</Form.Label>
                             <Form.Control name="canopyTechnique" value={this.state.canopyTechnique} onChange={this.handleInputChange} as="select">
                                 <option>(Select)</option>
@@ -294,12 +288,12 @@ class StaticForm extends Component {
                                 <option>Vertical</option>
                             </Form.Control>
                         </Form.Group>
-                    </Form.Row>
+                    {/* </Form.Row>
 
-                    <Form.Row>
-                        <Form.Group controlId="log.ControlTextarea2">
+                    <Form.Row> */}
+                        <Form.Group as={Col} controlId="log.ControlTextarea2">
                             <Form.Label>Canopy Technique Notes:</Form.Label>
-                            <Form.Control name="canopyTechniqueNotes" value={this.state.canopyTechniqueNotes} onChange={this.handleInputChange} as="textarea" rows="3" placeholder="Example: Scrog net used for flat, even horizontal canopy./No net or low-stress training used" />
+                            <Form.Control name="canopyTechniqueNotes" value={this.state.canopyTechniqueNotes} onChange={this.handleInputChange} as="textarea" rows="1" placeholder="Example: Scrog net used to guide branches" />
                         </Form.Group>
                     </Form.Row>
 
@@ -309,7 +303,7 @@ class StaticForm extends Component {
                         </Form.Group>
                     </Form.Row>
 
-                    <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit">
+                    <Button className="mb-3" onClick={this.handleFormSubmit} variant="outline-success" type="submit">
                         Submit
                      </Button>
                 </Form>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row'
+// import Row from 'react-bootstrap/Row'
 import Spinner from '../LoadingSpinner/LoadingSpinner'
 import Image from 'react-bootstrap/Image'
 import Axios from 'axios'
@@ -26,94 +26,88 @@ export default function AddPhotos(props) {
         //consider adding a setInputImageData        
     }, [props]);
 
-console.log(props)
-console.log(`https://project-three-logger-photos.s3.amazonaws.com/${props.coverImage}`)
+    console.log(props)
+    console.log(`https://project-three-logger-photos.s3.amazonaws.com/${props.coverImage}`)
 
-const handleImageAttach = async event => {
-    event.preventDefault();
-    setLoadingImage(true)
-    let apiResponse = await Axios.post('/api/image/s3', inputImageData)
-    setInputImageData(new FormData())
-    setLoadingImage(false)
-    console.log("API res: ", apiResponse)
-    let img = {
-        name: apiResponse.data.name,
-        s3Id: apiResponse.data.s3Id,
-        userId: props.userId,
-        growId: props.growId,
-        dailyLogId: props.logId
+    const handleImageAttach = async event => {
+        event.preventDefault();
+        setLoadingImage(true)
+        let apiResponse = await Axios.post('/api/image/s3', inputImageData)
+        setInputImageData(new FormData())
+        setLoadingImage(false)
+        console.log("API res: ", apiResponse)
+        let img = {
+            name: apiResponse.data.name,
+            s3Id: apiResponse.data.s3Id,
+            userId: props.userId,
+            growId: props.growId,
+            dailyLogId: props.logId
+        }
+        props.updateCoverImage(apiResponse.data.s3Id)
+        return img
     }
-    props.updateCoverImage(apiResponse.data.s3Id)
-    return img
-}
 
-const handleImageDbPost = async img => {
-    setLoadingImage(true)
-    let dbResponse = await Axios.post('/api/image/headerimage', img)
+    const handleImageDbPost = async img => {
+        setLoadingImage(true)
+        let dbResponse = await Axios.post('/api/image/headerimage', img)
 
-    console.log("DB res: ", dbResponse)
+        console.log("DB res: ", dbResponse)
 
-    setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${dbResponse.data.s3Id}`)
-    // setInputImageData(new FormData())
-    setLoadingImage(false)
-    setImages([...images, imageUrl])
-    return dbResponse
-}
+        setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${dbResponse.data.s3Id}`)
+        // setInputImageData(new FormData())
+        setLoadingImage(false)
+        setImages([...images, imageUrl])
+        return dbResponse
+    }
 
-const handleUploadChange = async event => {
-    const file = event.target.files[0]
-    inputImageData.append('image', file)
-    setImageUrl(URL.createObjectURL(file))
-    setImageName(file.name)
-}
+    const handleUploadChange = async event => {
+        const file = event.target.files[0]
+        inputImageData.append('image', file)
+        setImageUrl(URL.createObjectURL(file))
+        setImageName(file.name)
+    }
 
 
-return (
+    return (
+        <div>
+            <Form.Row>
+                <Form.Group as={Col} controlId="log.ControlTextarea1">
+                    <div className="input-group">
+                        <div className="custom-file">
+                            <input type="file" onChange={handleUploadChange} className="custom-file-input" id="inputGroupFile02" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{imageName ? imageName : "Choose file"}</label>
+                        </div>
+                        <div className="input-group-append">
+                            <span className="input-group-text" onClick={event => {
+                                handleImageAttach(event)
+                                    .then(response => {
+                                        console.log('handleImageAttach res: ', response)
+                                    })
+                                    // .then(response => {
+                                    //     handleImageDbPost(response)
+                                    //         .then(response => console.log(response))
+                                    //         .catch(err => console.log(err))
+                                    // })
+                                    .catch(err => console.log(err))
 
-    <Row>
-        <Col>
-            <Form className="col-md-6">
-                <Form.Row className="m-2">
-                    <Col>
-                        <Form.Group className="m-1" controlId="log.ControlTextarea1">
-                            <div className="input-group my-4">
-                                <div className="custom-file">
-                                    <input type="file" onChange={handleUploadChange} className="custom-file-input" id="inputGroupFile02" />
-                                    <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{imageName ? imageName : "Choose file"}</label>
-                                </div>
-                                <div className="input-group-append">
-                                    <span className="input-group-text" onClick={event => {
-                                        handleImageAttach(event)
-                                            .then(response => {
-                                                console.log('handleImageAttach res: ', response)
-                                            })
-                                            // .then(response => {
-                                            //     handleImageDbPost(response)
-                                            //         .then(response => console.log(response))
-                                            //         .catch(err => console.log(err))
-                                            // })
-                                            .catch(err => console.log(err))
+                            }} id="inputGroupFileAddon02">Upload</span>
+                        </div>
+                    </div>
+                </Form.Group>
+            </Form.Row>
+            <Form.Row>
 
-                                    }} id="inputGroupFileAddon02">Upload</span>
-                                </div>
-                            </div>
+                {
+                    loadingImage ?
+                        <Spinner />
+                        :
+                        <Form.Group as={Col}>
+                            {imageUrl ? <Image style={styles.image} src={imageUrl} rounded /> : <div>no image</div>}
                         </Form.Group>
-                    </Col>
-                </Form.Row>
-                <Form.Row className="m-2">
-                    {
-                        loadingImage ?
-                            <Spinner />
-                            :
-                            <Col>
-                                {imageUrl ? <Image style={styles.image} src={imageUrl} rounded /> : <div>no image</div>}
-                            </Col>
-                    }
-                </Form.Row>
-            </Form>
-        </Col>
-    </Row>
 
-)
+                }
+            </Form.Row>
+        </div>
+    )
 
 }

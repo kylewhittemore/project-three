@@ -4,6 +4,7 @@ import Moment from 'moment';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import { Container, Row, Col, Button, Figure } from 'react-bootstrap';
+import DailyLogTable from '../DailyLogTable/DailyLogTable';
 
 
 class StaticHeader extends Component {
@@ -76,12 +77,12 @@ class StaticHeader extends Component {
         this.setState({ loading: true })
         let response = await Axios.get(`/api/grow/${this.props.growId}`);
         this.setState({ loading: false })
-        console.log("componentDidMount:" , response);
+        console.log("componentDidMount:", response);
         let data = response.data;
         this.setState({
             seasonName: data.seasonName,
-            dateStarted: Moment(data.dateStarted.slice(0, 10)).format("MM-DD-YYYY"),
-            dateCompleted: Moment(data.dateCompleted.slice(0, 10)).format("MM-DD-YYYY"),
+            dateStarted: data.dateStarted ? Moment(data.dateStarted.slice(0, 10)).format("MM-DD-YYYY") : '',
+            dateCompleted: data.dateCompleted ? Moment(data.dateCompleted.slice(0, 10)).format("MM-DD-YYYY") : '',
             strainName: data.strainName,
             lineage: data.lineage,
             floweringTime: data.floweringTime,
@@ -107,98 +108,64 @@ class StaticHeader extends Component {
             <div>
                 {this.state.loading ? <div>loading</div>
                     :
-                    <Container>
+                    <Container className="staticHeaderPage mx-auto">
                         <Row>
+                            <Col className="mx-auto text-center">
+                                <h2 className="text-capitalize">{this.state.seasonName}</h2>
+                            </Col>
                             <Col className="text-right">
-                                <Button onClick={event => {
-                                    event.preventDefault()
-                                    console.log("history", this.props.history)
-                                    this.props.history.push(`/newseason/?grow_id=${this.props.growId}`)
-                                }} variant="outline-dark" size="sm">Edit</Button>
+                                <Button className="text-right btn-info"
+                                    onClick={event => {
+                                        event.preventDefault()
+                                        console.log("history", this.props.history)
+                                        this.props.history.push(`/newseason/?grow_id=${this.props.growId}`)
+                                    }} variant="outline-light" size="sm">Edit</Button>
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <h2 className="text-center">{this.state.seasonName}</h2>
+                                <Figure>
+                                    <Figure.Image
+                                        // width={171}
+                                        // height={180}
+                                        alt="171x180"
+                                        src={`https://project-three-logger-photos.s3.amazonaws.com/${this.state.coverImage}`}
+                                    >
+                                    </Figure.Image>
+                                </Figure>
                             </Col>
+                            <Row>
+                                <Col >
+                                    <p><strong>Date Started: </strong>{this.state.dateStarted}</p>
+                                    <p><strong>Date Completed: </strong>{this.state.dateCompleted}</p>
+                                    <p><strong>Breeder: </strong>{this.state.breeder}</p>
+                                    <p><strong>Veg Light Type: </strong>{this.state.vegLightType}</p>
+                                    <p><strong>Veg Light Wattage: </strong>{this.state.vegLightWattage} Watts</p>
+
+
+                                </Col>
+                                <Col>
+                                    <p><strong>Strain: </strong>{this.state.strainName}</p>
+                                    <p><strong>Lineage: </strong>{this.state.lineage}</p>
+                                    <p><strong>Flowering Time: </strong>{this.state.floweringTime} Days</p>
+                                    <p><strong>Flower Light Type: </strong>{this.state.flowerLightType}</p>
+                                    <p><strong>Flower Light Wattage: </strong>{this.state.flowerLightWattage} Watts</p>
+                                </Col>
+                                <Col >
+                                    <p><strong>Starter Plant Type: </strong>{this.state.starterPlantType}</p>
+                                    <p><strong>Number of Plants: </strong>{this.state.numPlants}</p>
+                                    <p><strong>Medium: </strong>{this.state.medium}</p>
+                                    <p><strong>Canopy Technique: </strong>{this.state.canopyTechnique}</p>
+                                    <p><strong>Lighting Notes: </strong>{this.state.lightNotes}</p>
+
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p><strong>Canopy Technique Notes: </strong>{this.state.canopyTechniqueNotes}</p>
+                                </Col>
+                            </Row>
                         </Row>
-
-                        <Figure>
-                            <Figure.Image
-                                width={171}
-                                height={180}
-                                alt="171x180"
-                                src={`https://project-three-logger-photos.s3.amazonaws.com/${this.state.coverImage}`}
-                            >
-                            </Figure.Image>
-                        </Figure>
-
-                        <Row>
-                            <Col lg={6} className="text-center">
-                                <p><strong>Date Started: </strong>{this.state.dateStarted}</p>
-                            </Col>
-                            <Col lg={6} className="text-center">
-                                <p><strong>Date Completed: </strong>{this.state.dateCompleted}</p>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col lg={3} className="text-center">
-                                <p><strong>Breeder: </strong>{this.state.breeder}</p>
-                            </Col>
-                            <Col lg={3} className="text-center">
-                                <p><strong>Strain: </strong>{this.state.strainName}</p>
-                            </Col>
-                            <Col lg={3} className="text-center">
-                                <p><strong>Lineage: </strong>{this.state.lineage}</p>
-                            </Col>
-                            <Col lg={3} className="text-center">
-                                <p><strong>Flowering Time: </strong>{this.state.floweringTime} Days</p>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col lg={4} className="text-center">
-                                <p><strong>Starter Plant Type: </strong>{this.state.starterPlantType}</p>
-                            </Col>
-                            <Col lg={4} className="text-center">
-                                <p><strong>Number of Plants: </strong>{this.state.numPlants}</p>
-                            </Col>
-                            <Col lg={4} className="text-center">
-                                <p><strong>Medium: </strong>{this.state.medium}</p>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col lg={3} className="text-center">
-                                <p><strong>Veg Light Type: </strong>{this.state.vegLightType}</p>
-                            </Col>
-                            <Col lg={3} className="text-center">
-                                <p><strong>Veg Light Wattage: </strong>{this.state.vegLightWattage} Watts</p>
-                            </Col>
-                            <Col lg={3} className="text-center">
-                                <p><strong>Flower Light Type: </strong>{this.state.flowerLightType}</p>
-                            </Col>
-                            <Col lg={3} className="text-center">
-                                <p><strong>Flower Light Wattage: </strong>{this.state.flowerLightWattage} Watts</p>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col className="text-center">
-                                <p><strong>Lighting Notes: </strong>{this.state.lightNotes}</p>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col lg={6} className="text-center">
-                                <p><strong>Canopy Technique: </strong>{this.state.canopyTechnique}</p>
-                            </Col>
-                            <Col lg={6} className="text-center">
-                                <p><strong>Canopy Technique Notes: </strong>{this.state.canopyTechniqueNotes}</p>
-                            </Col>
-                        </Row>
-
                     </Container>
                 }
             </div>
