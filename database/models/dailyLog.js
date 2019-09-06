@@ -52,24 +52,12 @@ const DailyLogSchema = new Schema({
         ref: "Grow"
     },
     temp: {
-        hi: {
-            type: Number,
-            required: false
-        },
-        lo: {
-            type: Number,
-            required: false
-        }
+        type: Object,
+        required: false
     },
     humidity: {
-        hi: {
-            type: Number,
-            required: false
-        },
-        lo: {
-            type: Number,
-            required: false
-        }
+        type: Object,
+        required: false
     },
     image:
         {
