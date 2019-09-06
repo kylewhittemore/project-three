@@ -9,7 +9,7 @@ const isAuth = passport.authenticate('jwt', {session: false })
 // we will need to restrict it to the authenticated user
 // Tested Working
 const getByDate = require('./getLogByDate')
-routes.get('/', getByDate)
+routes.post('/', getByDate)
 // routes.get('/', isAuth, getAllLogs)
 
 
