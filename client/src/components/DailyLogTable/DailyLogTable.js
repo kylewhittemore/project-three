@@ -118,10 +118,13 @@ export default function DailyLogTable(props) {
         loading ?
             <LoadingSpinner />
             :
-            <Table>
-                <TableHead />
-                <TableBody />
-            </Table>
+            logs ?
+                <Table>
+                    <TableHead />
+                    <TableBody />
+                </Table>
+                :
+                <div>no logs</div>
     )
 
 }
