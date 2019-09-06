@@ -166,7 +166,6 @@ class StaticHeader extends Component {
                                 </Col>
                             </Row>
                         </Row>
-                        <DailyLogTable/>
                     </Container>
                 }
             </div>

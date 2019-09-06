@@ -1,5 +1,6 @@
 import React from 'react';
 import StaticHeader from '../../components/StaticHeader/StaticHeader';
+import DailyLogTable from '../../components/DailyLogTable/DailyLogTable'
 
 //----------------
 //Test page used to test out the edit function on the static header. 
@@ -16,7 +17,10 @@ export default function StaticHeaderPage(props) {
     };
 
     return (
+        <>
         <StaticHeader {...props} growId={growId} />
+        <DailyLogTable {...props}/>
+        </>
     )
 
 }
