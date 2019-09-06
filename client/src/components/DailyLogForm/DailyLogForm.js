@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row'
+// import Row from 'react-bootstrap/Row'
 import Spinner from '../LoadingSpinner/LoadingSpinner'
 import Image from 'react-bootstrap/Image'
 import Axios from 'axios'
@@ -60,7 +60,7 @@ export default function DailyLog(props) {
             await setSeasons(data)
             return data
         }
-        
+
         setSeasonState()
 
         if (props.logId) {
@@ -129,7 +129,7 @@ export default function DailyLog(props) {
     async function handleFormSubmit(event) {
         event.preventDefault()
         let response = props.logId ? await putDailyLog() : await postDailyLog()
-       
+
         let img = dbPostImage
         img.date = formData.date
         img.caption = formData.caption
@@ -153,26 +153,26 @@ export default function DailyLog(props) {
         const name = target.name
 
         if (name === 'season') {
-            
+
             let selectId = event.target[event.target.selectedIndex].getAttribute('data-id')
-            
+
             setFormData({ ...formData, grow: selectId, season: target.value })
             setGrowId(selectId)
-        
+
         } else {
-            
+
             setFormData({ ...formData, [name]: value })
-        
+
         }
     }
 
     const handleImageAttach = async event => {
         event.preventDefault();
-        
+
         setLoadingImage(true)
         let apiResponse = await Axios.post('/api/image/s3', inputImageData)
         setLoadingImage(false)
-        
+
         let img = {
             name: apiResponse.data.name,
             s3Id: apiResponse.data.s3Id,
@@ -184,145 +184,148 @@ export default function DailyLog(props) {
 
     const handleImageDbPost = async () => {
         setLoadingImage(true)
-        
+
         let dbResponse = await Axios.post('/api/image/db', dbPostImage)
-        
+
         setImageUrl(`https://project-three-logger-photos.s3.amazonaws.com/${dbResponse.data.s3Id}`)
         setInputImageData(new FormData())
         setLoadingImage(false)
-        
+
         return dbResponse
     }
 
     const handleUploadChange = async event => {
         const file = event.target.files[0]
-        
+
         inputImageData.append('image', file)
-        
+
         await setImageUrl(URL.createObjectURL(file))
         await setImageName(file.name)
     }
 
     return (
         <>
-            <Row>
-                <Form onSubmit={handleFormSubmit} className="col-md-6">
-                    <Form.Row className="m-2">
-                        <Col>
-                            <Form.Group className="m-1" controlId="log.ControlInput1">
-                                <Form.Label>Date:</Form.Label>
-                                <Form.Control value={formData.date} name="date" onChange={handleInputChange} type="date" />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="m-1" controlId="log.ControlSelect1">
-                                <Form.Label>Plant appearance:</Form.Label>
-                                <Form.Control value={formData.plantAppearance} name="plantAppearance" onChange={handleInputChange} as="select">
-                                    <option >happy</option>
-                                    <option>neutral</option>
-                                    <option>sad</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="m-2">
-                        <Col>
-                            <Form.Group className="m-1" controlId="log.ControlSelect2">
-                                <Form.Label>Season:</Form.Label>
-                                <Form.Control value={formData.season} name="season" onChange={handleInputChange} as="select">
-                                    {seasons.map(season => <option data-id={season._id} >{season.seasonName}</option>)}
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="m-1" controlId="log.ControlInput1">
-                                <Form.Label>Hi temp</Form.Label>
-                                <Form.Control value={formData.hiTemp} name="hiTemp" onChange={handleInputChange} type="number" />
-                            </Form.Group>
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="m-2">
-                        <Col>
-                            <Form.Group className="m-1" controlId="formBasicCheckbox1">
-                                <Form.Check name="didWater" checked={formData.didWater} onChange={handleInputChange} type="checkbox" label="Water" />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="m-1" controlId="formBasicCheckbox2">
-                                <Form.Check name="didFeed" checked={formData.didFeed} onChange={handleInputChange} type="checkbox" label="Feed" />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="m-1" controlId="formBasicCheckbox3">
-                                <Form.Check name="didTransplant" checked={formData.didTransplant} onChange={handleInputChange} type="checkbox" label="Transplant" />
-                            </Form.Group>
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="m-2">
-                        <Col>
-                            <Form.Group className="m-1" controlId="formBasicCheckbox4">
-                                <Form.Check name="didFlush" checked={formData.didFlush} onChange={handleInputChange} type="checkbox" label="Flush" />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="m-1" controlId="formBasicCheckbox5">
-                                <Form.Check name="didFlip" checked={formData.didFlip} onChange={handleInputChange} type="checkbox" label="Flip to Flower" />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="m-1" controlId="formBasicCheckbox6">
-                                <Form.Check name="didDefoliate" checked={formData.didDefoliate} onChange={handleInputChange} type="checkbox" label="Defoliate" />
-                            </Form.Group>
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="m-2">
-                        <Col>
-                            <Form.Group className="m-1" controlId="log.ControlTextarea1">
-                                <Form.Label>Notes:</Form.Label>
-                                <Form.Control value={formData.notes} name="notes" onChange={handleInputChange} as="textarea" rows="3" />
-                            </Form.Group>
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="m-2">
-                        <Col>
-                            <Form.Group className="m-1" controlId="log.ControlTextarea1">
-                                <div className="input-group my-4">
-                                    <div className="custom-file">
-                                        <input type="file" onChange={handleUploadChange} className="custom-file-input" id="inputGroupFile02" />
-                                        <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{imageName ? imageName : "Choose file"}</label>
-                                    </div>
-                                    <div className="input-group-append">
-                                        <span className="input-group-text" onClick={handleImageAttach} id="inputGroupFileAddon02">Upload</span>
-                                    </div>
-                                </div>
-                            </Form.Group>
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="m-2">
-                        <Col>
-                            {
-                                loadingImage ?
-                                    <Spinner />
-                                    :
-                                    <Image style={styles.image} src={imageUrl} rounded />
-                            }
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="m-2">
-                        <Col>
-                            <Form.Group className="m-1" controlId="log.ControlTextarea2">
-                                <Form.Label>Image Caption:</Form.Label>
-                                <Form.Control value={formData.caption} name="caption" onChange={handleInputChange} as="textarea" rows="2" />
-                            </Form.Group>
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="m-2">
-                        <Button className="m-2" variant="primary" type="submit">
-                            Submit
+            <Form onSubmit={handleFormSubmit} className="mx-auto">
+                <Form.Row className="m-2">
+                    <Form.Group as={Col} className="m-1" controlId="log.ControlInput1">
+                        <Form.Label>Date:</Form.Label>
+                        <Form.Control value={formData.date} name="date" onChange={handleInputChange} type="date" />
+                    </Form.Group>
+
+                    <Form.Group as={Col} className="m-1" controlId="log.ControlSelect1">
+                        <Form.Label>Plant appearance:</Form.Label>
+                        <Form.Control value={formData.plantAppearance} name="plantAppearance" onChange={handleInputChange} as="select">
+                            <option>happy</option>
+                            <option>neutral</option>
+                            <option>sad</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Form.Row>
+
+                <Form.Row className="m-2">
+                    <Col>
+                        <Form.Group className="m-1" controlId="log.ControlSelect2">
+                            <Form.Label>Season:</Form.Label>
+                            <Form.Control value={formData.season} name="season" onChange={handleInputChange} as="select">
+                                {seasons.map(season => <option data-id={season._id} >{season.seasonName}</option>)}
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group className="m-1" controlId="log.ControlInput1">
+                            <Form.Label>Hi temp</Form.Label>
+                            <Form.Control value={formData.hiTemp} name="hiTemp" onChange={handleInputChange} type="number" />
+                        </Form.Group>
+                    </Col>
+                </Form.Row>
+                <Form.Row className="m-2">
+                    <Col>
+                        <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox1">
+                            <Form.Check name="didWater" checked={formData.didWater} onChange={handleInputChange} type="checkbox" label="Water" />
+                        </Form.Group>
+
+                        <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox2">
+                            <Form.Check name="didFeed" checked={formData.didFeed} onChange={handleInputChange} type="checkbox" label="Feed" />
+                        </Form.Group>
+
+                        <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox3">
+                            <Form.Check name="didTransplant" checked={formData.didTransplant} onChange={handleInputChange} type="checkbox" label="Transplant" />
+                        </Form.Group>
+                    </Col>
+                </Form.Row>
+
+                <Form.Row className="m-2">
+                    <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox4">
+                        <Form.Check name="didFlush" checked={formData.didFlush} onChange={handleInputChange} type="checkbox" label="Flush" />
+                    </Form.Group>
+
+                    <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox5">
+                        <Form.Check name="didFlip" checked={formData.didFlip} onChange={handleInputChange} type="checkbox" label="Flip to Flower" />
+                    </Form.Group>
+
+                    <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox6">
+                        <Form.Check name="didDefoliate" checked={formData.didDefoliate} onChange={handleInputChange} type="checkbox" label="Defoliate" />
+                    </Form.Group>
+                </Form.Row>
+
+                <Form.Row className="m-2">
+                    <Form.Group as={Col} className="m-1" controlId="log.ControlTextarea1">
+                        <Form.Label>Notes:</Form.Label>
+                        <Form.Control value={formData.notes} name="notes" onChange={handleInputChange} as="textarea" rows="3" />
+                    </Form.Group>
+                </Form.Row>
+
+                <Form.Row className="m-2">
+                    <Form.Group as={Col} className="m-1" controlId="log.ControlTextarea1">
+                        {/* <Form.Label>upload:</Form.Label> */}
+                        <div className="input-group my-4">
+                            <div className="custom-file">
+                                <input type="file" onChange={handleUploadChange} className="custom-file-input" id="inputGroupFile02" />
+                                <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{imageName ? imageName : "Choose file"}</label>
+                            </div>
+                            <div className="input-group-append">
+                                <span className="input-group-text" onClick={handleImageAttach} id="inputGroupFileAddon02">Upload</span>
+                            </div>
+                        </div>
+                    </Form.Group>
+                </Form.Row>
+
+                <Form.Row className="m-2">
+                    <Col>
+                        {
+                            loadingImage ?
+                                <Spinner />
+                                :
+                                <Image style={styles.image} src={imageUrl} rounded />
+                        }
+                    </Col>
+                </Form.Row>
+                <Form.Row className="m-2">
+                    <Col>
+                        <Form.Group className="m-1" controlId="log.ControlTextarea2">
+                            <Form.Label>Image Caption:</Form.Label>
+                            <Form.Control value={formData.caption} name="caption" onChange={handleInputChange} as="textarea" rows="2" />
+                        </Form.Group>
+                    </Col>
+                </Form.Row>
+
+                <Form.Row className="m-2">
+                    <Button className="m-2" variant="primary" type="submit">
+                        Submit
                         </Button>
-                    </Form.Row>
-                </Form>
-            </Row>
+                </Form.Row>
+            </Form>
+            {/* 
+            <Row className="m-2">
+                <Col>
+                    {
+                        loadingImage ?
+                            <Spinner />
+                            :
+                            <Image style={styles.image} src={imageUrl} thumbnail />
+                    }
+                </Col>
+            </Row> */}
         </>
 
     )
