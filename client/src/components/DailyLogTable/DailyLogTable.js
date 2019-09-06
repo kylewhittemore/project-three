@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Axios from 'axios'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import fmt from '../../utils/formatTime'
 
 
 export default function DailyLogTable(props) {
@@ -28,13 +29,7 @@ export default function DailyLogTable(props) {
             return data;
         }
         fetchLogs().then(data => {
-            console.log(props.growId)
-            // let filtered
-            // let filtered = data.filter(element => element.grow === props.growId)
-            // let filtered = data.filter(element => element)
-            // console.log("filtered", data)
             setLogs(data)
-            // setLogs(data)
             setLoading(false)
         })
             .catch(err => setLoading(false))
@@ -58,14 +53,18 @@ export default function DailyLogTable(props) {
         return response.data.notes
     }
 
+    function formatDateShort(date) {
+        // return moment(date, "YYYY-MM-DDTHH:mm:ss.SSS").format("MM/DD/YY")
+        return fmt.shortFmt(date)
+    }
+
     function TableHead() {
         return (
             <thead>
                 <tr>
-                    <th>Daily Log ID</th>
                     <th>Date</th>
-                    <th>Grow</th>
                     <th>Notes</th>
+                    <th></th>
                 </tr>
             </thead>
         )
@@ -76,16 +75,16 @@ export default function DailyLogTable(props) {
 
             <tbody>
                 {logs.map(log => {
-
                     // console.log(log.grow.seasonName)
                     return (
                         <tr key={log._id}>
-                            <td>{log.logId}</td>
-                            <td>{log.date.slice(0, 10)}</td>
-                            <td></td>
+                            {/* <td>{log.logId}</td> */}
+                            <td>{formatDateShort(log.date)}</td>
+                            {/* <td>{log.date.slice(0, 10)}</td> */}
+                            <td>{log.notes.length > 30 ? log.notes.slice(0, 30) + "..." : log.notes}</td>
                             {/* <td>{log.grow.seasonName}</td> */}
                             <td>
-                                {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
+                                {/* {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
                                     event.preventDefault()
                                     getNotes(log._id).then(notes => console.log(notes))
 
@@ -93,7 +92,7 @@ export default function DailyLogTable(props) {
                                 ></i>
                                     :
                                     <i style={styles.placeholder} className="p-1 far fa-sticky-note"></i>
-                                }
+                                } */}
                                 <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
                                     event.preventDefault()
                                     // updateLog(log._id).then(getLogs)
@@ -118,13 +117,12 @@ export default function DailyLogTable(props) {
         loading ?
             <LoadingSpinner />
             :
-            logs ?
-                <Table>
-                    <TableHead />
-                    <TableBody />
-                </Table>
-                :
-                <div>no logs</div>
+
+            <Table>
+                <TableHead />
+                <TableBody />
+            </Table>
+
     )
 
 }

@@ -68,7 +68,7 @@ export default props => {
                             <span className="">Seasons</span>
                         </BSNavLink>
                     </NavItem>
-                    <NavItem className={bem.e('nav-item')}>
+                    {/* <NavItem className={bem.e('nav-item')}>
                         <BSNavLink
                             className="text-uppercase"
                             tag={NavLink}
@@ -78,7 +78,7 @@ export default props => {
                         >
                             <span className="">Daily Logs</span>
                         </BSNavLink>
-                    </NavItem>
+                    </NavItem> */}
                     <NavItem className={bem.e('nav-item')}>
                         <BSNavLink
                             className="text-uppercase"
