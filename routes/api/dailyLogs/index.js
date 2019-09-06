@@ -23,6 +23,12 @@ const updateById = require('./dailyLogPut')
 routes.put('/:id', updateById)
 // routes.put('/:id', isAuth, updateById)
 
+// This route updates a log by its date
+// Not Tested
+const updateByDate = require('./dailyLogPutByDate')
+routes.put('/bydate/', updateByDate)
+// routes.put('/:id', isAuth, updateByDate)
+
 // This route deletes a daily log by its mongo ID
 // Tested working
 const deleteById = require('./dailyLogDelete')
