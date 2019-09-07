@@ -51,6 +51,14 @@ const DailyLogSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Grow"
     },
+    temp: {
+        type: Object,
+        required: false
+    },
+    humidity: {
+        type: Object,
+        required: false
+    },
     image:
         {
             type: Schema.Types.ObjectId,
