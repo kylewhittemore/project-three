@@ -312,7 +312,7 @@ export default function DailyLog(props) {
                         </Form.Group>
                     {/* </Col> */}
                 {/* </Form.Row>
-
+ 
                 <Form.Row className="m-2"> */}
                     {/* <Col> */}
                         <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox4">
