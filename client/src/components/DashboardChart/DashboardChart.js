@@ -2,52 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
 import Axios from 'axios'
 
-import fmt from '../../utils/formatTime'
+import t from '../../utils/formatTime'
 
 export default function DashboardChart(props) {
 
     // The structure of the data is an array of objects
-    const initialState = [
-        {hiTemp: 80, loTemp:75, hiHum:60, loHum:57, lightOn: 12, date: '08/21/19'},
-        {hiTemp: 81, loTemp:75, hiHum:61, loHum:56, lightOn: 12, date: '08/22/19'},
-        {hiTemp: 82, loTemp:75, hiHum:61, loHum:58, lightOn: 12, date: '08/23/19'},
-        {hiTemp: 80, loTemp:75, hiHum:61, loHum:58, lightOn: 12, date: '08/24/19'},
-        {hiTemp: 79, loTemp:70, hiHum:62, loHum:59, lightOn: 12, date: '08/25/19'},
-        {hiTemp: 78, loTemp:69, hiHum:63, loHum:58, lightOn: 12, date: '08/26/19'},
-        {hiTemp: 77, loTemp:67, hiHum:64, loHum:57, lightOn: 12, date: '08/27/19'}
-    ]
-    const [environ, setEnviron] = useState(initialState)
+    
+    // const [environ, setEnviron] = useState()
 
-    const [hiTemp, setHiTemp] = useState([80, 81, 82, 80, 79, 78, 77])
+    // var hiTemp, loTemp, hiHumidity, loHumidity = []
+    const [dateLogged, setDateLogged] = useState([])
+    const [hiTemp, setHiTemp] = useState([])
+    const [loTemp, setLoTemp] = useState([])
+    const [hiHumidity, setHiHumidity] = useState([])
+    const [loHumidity, setLoHumidity] = useState([])
 
     const [grow, setGrow] = useState({})
-
-    const [tempChartData, setTempChartData] = useState({
-        labels: ['08/21','08/22','08/23','08/24','08/25','08/26','08/27'],
-        datasets:[
-            {
-                label:'Hi Temps',
-            data: [80, 81, 82, 80, 79, 78, 77]
-        },{
-            label:'Lo Temps',
-            data: [75,75,75,75,70,69,67]
-          }
-        ]
-      })
-
-    const [humChartData, setHumChartData] = useState({
-        labels: ['08/21','08/22','08/23','08/24','08/25','08/26','08/27'],
-        datasets:[
-          {
-            label:'Hi Humidity',
-            data: [60,61,61,61,62,63,64]
-          },{
-            label:'Lo Humidity',
-            data: [57,56,58,59,58,57,57]
-        }
-        
-    ]
-})
 
 useEffect (() => {
     
@@ -62,13 +32,14 @@ useEffect (() => {
         async function fetchUserData() {
             let data = await Axios.get(`/api/user/profile`)
             let user = data.data.user
-            // return user
             let response = await fetchGrow(user.defaultGrow)
             setGrow(response.data)
-            // console.log(response.data)
-            //++++++++++++
-            // actual reading thru the array and creating the environ object goes here
-            // setHiTemp(initialState.map)
+            console.log(response.data)
+            setDateLogged(response.data.dailyLogs.map(({date})=>t.shortFmt(date)))
+            setHiTemp(response.data.dailyLogs.map(({temp})=>temp.hi))
+            setLoTemp(response.data.dailyLogs.map(({temp})=>temp.lo))
+            setHiHumidity(response.data.dailyLogs.map(({humidity})=>humidity.hi))
+            setLoHumidity(response.data.dailyLogs.map(({humidity})=>humidity.lo))
             return response
         }
 
@@ -85,33 +56,56 @@ useEffect (() => {
     }, [])
 
 
+    function buildTempChart () {
+        const tempChartData = {
+            labels: dateLogged,
+            datasets:[
+                {
+                    label:'Hi Temps',
+                    data: hiTemp,
+                    borderColor: "#2930EB", 
+                    pointRadius: 0,
+                    fill: false
+                },{
+                    label:'Lo Temps',
+                    data: loTemp,
+                    borderColor: "#B40EFF",
+                    pointRadius: 0,
+                    fill: false
+                    },
+                    {
+                    label:'Hi Humidity',
+                    data: hiHumidity,
+                    borderColor: "#FF581F",
+                    pointRadius: 0,
+                    fill: false
+                },{
+                    label:'Lo Humidity',
+                    data: loHumidity,
+                    borderColor: "#FF7D13",
+                    pointRadius: 0,
+                    fill: false
+                }
+            ]
+        }
+        return tempChartData
+    }
+
+
     return (
         <div>
             <Line
-                data={ tempChartData }
-                 
+                data={ buildTempChart }
+                height={300}
                 options={{
                     title:{
                         display:true,
-                        text:'Tempurature',
+                        text:'Tempurature & Humidity',
                         fontSize:25
-                }
-                
-            }}
-            />
-            <Line
-                data={ humChartData }
-                
-                options={{
-                    title:{
-                        display:true,
-                        text:'Humidity',
-                        fontSize:25
-                    }
-                   
+                    },
+                    maintainAspectRatio: true
                 }}
             />
-        
         </div>
 
     )

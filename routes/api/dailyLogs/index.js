@@ -23,6 +23,7 @@ const updateById = require('./dailyLogPut')
 routes.put('/:id', updateById)
 // routes.put('/:id', isAuth, updateById)
 
+
 // This route deletes a daily log by its mongo ID
 // Tested working
 const deleteById = require('./dailyLogDelete')
@@ -39,7 +40,7 @@ routes.get('/:id', getById)
 // NOT TESTED
 //jan - I commented this out for now b/c it made sense to use "/grow/:id" for the get logs by grow route below.  I am pretty sure you arent using it?  
 
-const getEvent = require('./getEventsByGrow')
+// const getEvent = require('./getEventsByGrow')
 // routes.get('/grow/:id', getEvent)
 // routes.get('/:id', isAuth, getById)
 
