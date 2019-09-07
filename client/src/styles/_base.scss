@@ -40,3 +40,8 @@ button,
   margin: 0;
   // overflow-x: hidden;
 }
+
+.custom-file {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
