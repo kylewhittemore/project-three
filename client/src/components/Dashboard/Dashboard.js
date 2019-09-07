@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import fmt from '../../utils/formatTime'
+import { set } from 'mongoose';
 
 // import moment from 'moment'
 // const t = require('../../utils/formatTime')
@@ -11,6 +12,7 @@ import fmt from '../../utils/formatTime'
 export default function Dashboard(props) {
 
     const [grow, setGrow] = useState({})
+    const [growId, setGrowId] = useState({})
     const [waterHistory, setWaterHistory] = useState([])
     const [feedHistory, setFeedHistory] = useState([])
     const [transplantHistory, setTransplantHistory] = useState([])
@@ -24,6 +26,7 @@ export default function Dashboard(props) {
             let response = await Axios.get(`/api/grow/${growId}`)
             if (props.growId) { 
                 setGrow(response)
+                setGrowId(response._id)
             }
             return response
         }
@@ -34,7 +37,8 @@ export default function Dashboard(props) {
             // return user
             let response = await fetchGrow(user.defaultGrow)
             setGrow(response.data)
-            // console.log(response.data)
+            setGrowId(response.data._id)
+            console.log("USER DATA", response.data)
             setWaterHistory(response.data.dailyLogs.filter(log => log.didWater))
             setFeedHistory(response.data.dailyLogs.filter(log => log.didFeed))
             setTransplantHistory(response.data.dailyLogs.filter(log => log.didFlip))
@@ -86,7 +90,7 @@ export default function Dashboard(props) {
                 <Col className="text-right">
                     <Button onClick={event => {
                         event.preventDefault()
-                        props.history.push(`/newseason/?grow_id=${props.growId}`)
+                        props.history.push(`/newseason/?grow_id=${growId}`)
                     }} variant="outline-dark" size="sm">Edit</Button>
                 </Col>
             </Row>

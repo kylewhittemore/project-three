@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function LogOutPage() {
+function LogOutPage(props) {
 
     localStorage.removeItem('p3aajjkw-jwt')
     localStorage.removeItem('p3aajjkw-id')
@@ -17,7 +17,11 @@ function LogOutPage() {
                 <Col md={6} className='log-out mx-auto'>
                     <h3>You have been logged out!</h3>
                     <div className='mt-5'>
-                        <Button type='submit' className='btn btn-primary btn-block'>Log In</Button>
+                        <Button type='button' className='btn btn-primary btn-block' 
+                        onClick={event => {
+                            event.preventDefault()
+                            props.history.push('/')
+                        }}>Log In</Button>
                     </div>
                 </Col>
             </Row>

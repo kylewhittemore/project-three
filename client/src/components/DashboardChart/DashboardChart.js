@@ -35,6 +35,8 @@ useEffect (() => {
             let response = await fetchGrow(user.defaultGrow)
             setGrow(response.data)
             console.log(response.data)
+            
+            // consider using a ternary in the .mao fn's below
             setDateLogged(response.data.dailyLogs.map(({date})=>t.shortFmt(date)))
             setHiTemp(response.data.dailyLogs.map(({temp})=>temp.hi))
             setLoTemp(response.data.dailyLogs.map(({temp})=>temp.lo))
@@ -58,30 +60,30 @@ useEffect (() => {
 
     function buildTempChart () {
         const tempChartData = {
-            labels: dateLogged,
+            labels: dateLogged ? dateLogged : null,
             datasets:[
                 {
                     label:'Hi Temps',
-                    data: hiTemp,
+                    data: hiTemp ? hiTemp : null,
                     borderColor: "#2930EB", 
                     pointRadius: 0,
                     fill: false
                 },{
                     label:'Lo Temps',
-                    data: loTemp,
+                    data: loTemp ? loTemp : null,
                     borderColor: "#B40EFF",
                     pointRadius: 0,
                     fill: false
                     },
                     {
                     label:'Hi Humidity',
-                    data: hiHumidity,
+                    data: hiHumidity ? hiHumidity : null,
                     borderColor: "#FF581F",
                     pointRadius: 0,
                     fill: false
                 },{
                     label:'Lo Humidity',
-                    data: loHumidity,
+                    data: loHumidity ? loHumidity : null,
                     borderColor: "#FF7D13",
                     pointRadius: 0,
                     fill: false

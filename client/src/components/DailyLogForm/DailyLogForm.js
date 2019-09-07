@@ -345,7 +345,7 @@ export default function DailyLog(props) {
                                 <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{imageName ? imageName : "Choose file"}</label>
                             </div>
                             <div className="input-group-append">
-                                <span className="input-group-text" onClick={handleImageAttach} id="inputGroupFileAddon02">Upload</span>
+                                <span className="input-group-text" onClick={handleImageAttach} id="inputGroupFileAddon02">Attach</span>
                             </div>
                         </div>
                     </Form.Group>
