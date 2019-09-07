@@ -8,13 +8,27 @@
     margin-left: auto;
   }
 
-  // &__notification-popover {
-  //   &.popover {
-  //     width: 320px;
-  //     max-width: 320px;
-  //     max-height: 100vh;
-  //     overflow-y: scroll;
-  //     cursor: pointer;
-  //   }
-  // }
+};
+
+.headroom {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.headroom--unfixed {
+  position: relative;
+  transform: translate3D(0, 0, 0);
+}
+.headroom--scrolled {
+  transition: transform 200ms ease-in-out;
+}
+.headroom--unpinned {
+  position: fixed;
+  transform: translate3D(0, -100%, 0);
+}
+.headroom--pinned {
+  position: fixed;
+  transform: translate3D(0, 0, 0);
 }
