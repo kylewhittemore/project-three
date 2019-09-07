@@ -29,7 +29,11 @@ export default function DailyLog(props) {
         didDefoliate: false,
         notes: "",
         grow: '',
-        season: props.defaultGrow
+        season: props.defaultGrow,
+        hiTemp: 0,
+        loTemp: 0,
+        hiHumidity: 0,
+        loHumidity: 0
     }
 
     const [formData, setFormData] = useState('')
@@ -78,7 +82,11 @@ export default function DailyLog(props) {
                     notes: data.notes,
                     grow: data.grow,
                     caption: data.caption,
-                    season: data.grow.seasonName
+                    season: data.grow.seasonName,
+                    hiTemp: data.temp.hi,
+                    loTemp: data.temp.lo,
+                    hiHumidity: data.humidity.hi,
+                    loHumidity: data.humidity.lo
                 }
                 // setGrowId(data.grow)
                 setFormData(form)
@@ -103,25 +111,33 @@ export default function DailyLog(props) {
                 notes: "",
                 grow: props.growId,
                 caption: '',
-                season: props.defaultGrow
+                season: props.defaultGrow,
+                hiTemp: 0,
+                loTemp: 0,
+                hiHumidity: 0,
+                loHumidity: 0
             }
             setFormData(form)
         }
     }, [props]);
 
-    async function postDailyLog() {
-        let data = formData
+    async function postDailyLog(frm) {
+        let data = frm
         data.grow = growId
+        console.log("data from post", data)
         let response = await Axios.post(`/api/daily/${growId}`, data)
 
         return response
     }
 
-    async function putDailyLog() {
+    async function putDailyLog(frm) {
+
+        console.log("data from put", frm)
+
         let response = await Axios({
             method: "PUT",
             url: `/api/daily/${props.logId}`,
-            data: formData
+            data: frm
         })
         //ensure that the response is the log if there are errors!!!!!!
         return response
@@ -129,12 +145,32 @@ export default function DailyLog(props) {
 
     async function handleFormSubmit(event) {
         event.preventDefault()
-        let response = props.logId ? await putDailyLog() : await postDailyLog()
+        let frm = {
+            date: formData.date,
+            plantAppearance: formData.plantAppearance,
+            didWater: formData.didWater,
+            didFeed: formData.didFeed,
+            didTransplant: formData.didTransplant,
+            didFlush: formData.didFlush,
+            didFlip: formData.didFlip,
+            didDefoliate: formData.didDefoliate,
+            notes: formData.notes,
+            grow: props.growId,
+            caption: formData.caption,
+            season: props.defaultGrow,
+            temp: { hi: parseInt(formData.hiTemp), lo: parseInt(formData.loTemp)  },
+            humidity: { hi: parseInt(formData.hiHumidity), lo: parseInt(formData.loHumidity) }
+        }
+         
+        console.log(frm)
+
+        let response = props.logId ? await putDailyLog(frm) : await postDailyLog(frm)
 
         let img = dbPostImage
         img.date = formData.date
         img.caption = formData.caption
         img.dailyLogId = response.data._id
+        
         await setDbPostImage(img)
 
         setFormData(initialFormState)
@@ -147,7 +183,7 @@ export default function DailyLog(props) {
                     .then(props.history.push(`/staticheader/?grow_id=${growId}`))
                 :
                 console.log('no image attached to log')
-                props.history.push(`/staticheader/?grow_id=${growId}`)
+        props.history.push(`/staticheader/?grow_id=${growId}`)
     }
 
     const handleInputChange = event => {
@@ -224,7 +260,6 @@ export default function DailyLog(props) {
                         </Form.Control>
                     </Form.Group>
                 </Form.Row>
-
                 <Form.Row className="m-2">
                     <Col>
                         <Form.Group className="m-1" controlId="log.ControlSelect2">
@@ -234,10 +269,31 @@ export default function DailyLog(props) {
                             </Form.Control>
                         </Form.Group>
                     </Col>
+                </Form.Row>
+                <Form.Row className="m-2">
+
                     <Col>
-                        <Form.Group className="m-1" controlId="log.ControlInput1">
+                        <Form.Group className="m-1" controlId="log.ControlInput2">
                             <Form.Label>Hi temp</Form.Label>
                             <Form.Control value={formData.hiTemp} name="hiTemp" onChange={handleInputChange} type="number" />
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group className="m-1" controlId="log.ControlInput3">
+                            <Form.Label>Lo temp</Form.Label>
+                            <Form.Control value={formData.loTemp} name="loTemp" onChange={handleInputChange} type="number" />
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group className="m-1" controlId="log.ControlInput4">
+                            <Form.Label>Hi humidity</Form.Label>
+                            <Form.Control value={formData.hiHumidity} name="hiHumidity" onChange={handleInputChange} type="number" />
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group className="m-1" controlId="log.ControlInput5">
+                            <Form.Label>Low humidity</Form.Label>
+                            <Form.Control value={formData.loHumidity} name="loHumidity" onChange={handleInputChange} type="number" />
                         </Form.Group>
                     </Col>
                 </Form.Row>
@@ -255,20 +311,22 @@ export default function DailyLog(props) {
                             <Form.Check name="didTransplant" checked={formData.didTransplant} onChange={handleInputChange} type="checkbox" label="Transplant" />
                         </Form.Group>
                     </Col>
-                </Form.Row>
+                {/* </Form.Row>
 
-                <Form.Row className="m-2">
-                    <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox4">
-                        <Form.Check name="didFlush" checked={formData.didFlush} onChange={handleInputChange} type="checkbox" label="Flush" />
-                    </Form.Group>
+                <Form.Row className="m-2"> */}
+                    <Col>
+                        <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox4">
+                            <Form.Check name="didFlush" checked={formData.didFlush} onChange={handleInputChange} type="checkbox" label="Flush" />
+                        </Form.Group>
 
-                    <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox5">
-                        <Form.Check name="didFlip" checked={formData.didFlip} onChange={handleInputChange} type="checkbox" label="Flip to Flower" />
-                    </Form.Group>
+                        <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox5">
+                            <Form.Check name="didFlip" checked={formData.didFlip} onChange={handleInputChange} type="checkbox" label="Flip to Flower" />
+                        </Form.Group>
 
-                    <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox6">
-                        <Form.Check name="didDefoliate" checked={formData.didDefoliate} onChange={handleInputChange} type="checkbox" label="Defoliate" />
-                    </Form.Group>
+                        <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox6">
+                            <Form.Check name="didDefoliate" checked={formData.didDefoliate} onChange={handleInputChange} type="checkbox" label="Defoliate" />
+                        </Form.Group>
+                    </Col>
                 </Form.Row>
 
                 <Form.Row className="m-2">
@@ -287,7 +345,7 @@ export default function DailyLog(props) {
                                 <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{imageName ? imageName : "Choose file"}</label>
                             </div>
                             <div className="input-group-append">
-                                <span className="input-group-text" onClick={handleImageAttach} id="inputGroupFileAddon02">Upload</span>
+                                <span className="input-group-text" onClick={handleImageAttach} id="inputGroupFileAddon02">Attach</span>
                             </div>
                         </div>
                     </Form.Group>

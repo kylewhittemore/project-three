@@ -18,8 +18,17 @@ function HomePage(props) {
     // const userId = localStorage.getItem('p3aajjkw-id')
     const userId = localStorage.getItem('p3aajjkw-id')
     
+
     // const [user, setUser] = useState({})
     // const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        Axios.get('api/user/profile')
+        .then (res => {
+            console.log(res)
+        })
+        .catch(console.log('Unauthenticated'))
+    })
 
     if (!userId) {
         return (
@@ -33,7 +42,7 @@ function HomePage(props) {
             <LeftSliderBar />
             <Row >
                 <Col className='col-md-6 mx-auto'>
-                    <Dashboard {...props}/>
+                    <Dashboard {...props} />
                     <DashboardChart {...props}/>
  
                 </Col>
