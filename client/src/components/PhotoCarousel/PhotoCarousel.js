@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-import { Carousel, Figure } from 'react-bootstrap'
+import { Figure } from 'react-bootstrap/'
 import Spinner from '../LoadingSpinner/LoadingSpinner'
-import StackGrid, { transitions, easings } from 'react-stack-grid';
+import StackGrid, { transitions } from 'react-stack-grid';
+
+const { scaleDown } = transitions;
 
 export default function PhotoCarousel(props) {
 
@@ -27,7 +29,7 @@ export default function PhotoCarousel(props) {
 
     }, [props]);
 
-    const transition = transitions.scaleDown;
+    
 
     return (
         <div>
@@ -37,19 +39,18 @@ export default function PhotoCarousel(props) {
                 monitorImagesLoaded
                 columnWidth={300}
                 duration={600}
-                gutterWidth={15}
-                gutterHeight={15}
-                easing={easings.cubicOut}
+                gutterWidth={10}
+                gutterHeight={10}
+                easing={scaleDown.cubicOut}
                 appearDelay={60}
-                appear={transition.appear}
-                appeared={transition.appeared}
-                enter={transition.enter}
-                entered={transition.entered}
-                leaved={transition.leaved}
+                appear={scaleDown.appear}
+                appeared={scaleDown.appeared}
+                enter={scaleDown.enter}
+                entered={scaleDown.entered}
+                leaved={scaleDown.leaved}
               >
                 {photos.map(photo => (
                   <Figure
-                    key={photo.s3Id}
                     className="image"
                   >
                     <Figure.Image className="img-fluid" alt={photo.name} src={`https://project-three-logger-photos.s3.amazonaws.com/${photo.s3Id}`} />
