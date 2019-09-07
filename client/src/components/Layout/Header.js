@@ -23,11 +23,39 @@ import {
 } from 'reactstrap';
 import bn from '../../utils/bemnames';
 import Headroom from 'react-headroom';
+import Axios from 'axios';
 
 const bem = bn.create('header');
 
 
 class Header extends React.Component {
+
+  state = {
+    isAuth: false,
+    username: ''
+  };
+
+  getUserName() {
+    Axios.get('api/user/profile')
+    .then (res => {
+        this.setState ({ isAuth: true })
+        const {username, email, _id} = res.data.user
+        this.setState ( { username, email, _id })
+    })
+    .catch(console.log('Unauthenticated'))
+  }
+
+  componentDidMount() {
+    // isAuth();
+    this.getUserName();
+ 
+};
+
+componentWillUnmount() {
+  this.getUserName();
+};
+
+
 
   handleSidebarControlButton = event => {
     event.preventDefault();
@@ -54,7 +82,8 @@ class Header extends React.Component {
                 tag={NavLink}
                 to={`/logout`}
               >
-                <span className="font-weight-bold">Log Out</span>
+                 <span className="userId">{`${this.state.username} |`} <span><strong>Log Out</strong></span></span>
+                
               </BSNavLink>
             </NavItem>
           </Nav>

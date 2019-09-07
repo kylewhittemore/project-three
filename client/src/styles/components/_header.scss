@@ -15,20 +15,27 @@
   left: 0;
   right: 0;
   z-index: 1;
-}
+};
 
 .headroom--unfixed {
   position: relative;
   transform: translate3D(0, 0, 0);
-}
+};
+
 .headroom--scrolled {
   transition: transform 200ms ease-in-out;
-}
+};
+
 .headroom--unpinned {
   position: fixed;
   transform: translate3D(0, -100%, 0);
-}
+};
+
 .headroom--pinned {
   position: fixed;
   transform: translate3D(0, 0, 0);
+};
+
+.userId {
+  color: black;
 }
