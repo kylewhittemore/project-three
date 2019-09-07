@@ -64,6 +64,7 @@ export default function DailyLog(props) {
         setSeasonState()
 
         if (props.logId) {
+            setGrowId(props.growId._id)
             fetchLog(props.logId).then(data => {
                 const form = {
                     date: data.date.slice(0, 10),
@@ -79,7 +80,7 @@ export default function DailyLog(props) {
                     caption: data.caption,
                     season: data.grow.seasonName
                 }
-
+                // setGrowId(data.grow)
                 setFormData(form)
                 console.log("data: ", data)
                 setImage(data.image)
@@ -142,9 +143,11 @@ export default function DailyLog(props) {
             :
             imageUrl ?
                 handleImageDbPost()
-                    .then(props.history.push('/'))
+                    .then(console.log(props))
+                    .then(props.history.push(`/staticheader/?grow_id=${growId}`))
                 :
                 console.log('no image attached to log')
+                props.history.push(`/staticheader/?grow_id=${growId}`)
     }
 
     const handleInputChange = event => {

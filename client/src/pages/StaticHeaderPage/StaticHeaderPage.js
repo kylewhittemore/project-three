@@ -1,6 +1,7 @@
 import React from 'react';
 import StaticHeader from '../../components/StaticHeader/StaticHeader';
 import DailyLogTable from '../../components/DailyLogTable/DailyLogTable'
+import { userInfo } from 'os';
 
 //----------------
 //Test page used to test out the edit function on the static header. 
@@ -8,6 +9,8 @@ import DailyLogTable from '../../components/DailyLogTable/DailyLogTable'
 
 export default function StaticHeaderPage(props) {
 
+    const userId = localStorage.getItem('p3aajjkw-id')
+    console.log(userId)
     let growId;
     let url = window.location.href;
 
@@ -19,7 +22,7 @@ export default function StaticHeaderPage(props) {
     return (
         <>
         <StaticHeader {...props} growId={growId} />
-        <DailyLogTable {...props}/>
+        <DailyLogTable {...props} growId={growId} userId={userId} />
         </>
     )
 
