@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Figure from 'react-bootstrap/Figure'
 import Axios from 'axios'
-import fmt from '../utils/formatTime'
+import fmt from '../../utils/formatTime'
 
 export default function DailyLogView(props) {
 
@@ -100,12 +100,24 @@ export default function DailyLogView(props) {
             <Row>
                 <Col>
                     <Figure>
-                        <Figure.Image
-                            alt="171x180"
-                            src={`https://project-three-logger-photos.s3.amazonaws.com/${displayObj.s3Id}`}
-                        >
-                        </Figure.Image>
-                        <Figure.Caption>{log.caption}</Figure.Caption>
+                        {displayObj.s3Id ?
+                            <>
+                                <Figure.Image
+                                    alt=""
+                                    src={`https://project-three-logger-photos.s3.amazonaws.com/${displayObj.s3Id}`}
+                                >
+                                </Figure.Image>
+                                <Figure.Caption>{log.caption}</Figure.Caption>
+                            </>
+                            :
+                            <Figure.Image
+                                width={152}
+                                height={152}
+                                alt=""
+                                src="./leaf.png"
+                            />
+                            
+                        }
                     </Figure>
                 </Col>
             </Row>
@@ -118,8 +130,7 @@ export default function DailyLogView(props) {
             <Row>
                 {log.notes ?
                     <>
-                        <h4>Notes:</h4>
-                        <p><strong>{log.notes}</strong></p>
+                        <p><strong>Notes: </strong>{log.notes}</p>
                     </>
                     :
                     <></>}

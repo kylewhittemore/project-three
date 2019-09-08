@@ -5,7 +5,7 @@ import DailyLogForm from '../../components/DailyLogForm/DailyLogForm'
 import LeftSliderBar from "../../components/LeftSliderBar/LeftSliderBar";
 import { Redirect } from 'react-router-dom'
 import Axios from 'axios'
-import DailyLogView from "../../components/DailyLogView";
+import DailyLogView from "../../components/DailyLogView/DailyLogView";
 
 function DailyLogPage(props) {
 
