@@ -93,12 +93,12 @@ useEffect (() => {
         return tempChartData
     }
 
-
+    
     return (
         <div>
             <Line
                 data={ buildTempChart }
-                height={300}
+                // height="auto"
                 // width={300}
                 options={{
                     title:{
@@ -106,7 +106,7 @@ useEffect (() => {
                         text:'Tempurature & Humidity',
                         fontSize:25
                     },
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
                     responsive: true
 
                 }}
