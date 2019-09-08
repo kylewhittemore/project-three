@@ -29,13 +29,13 @@
     background: theme-color('light');
   }
 
-  .row {
-    // stylelint-disable-next-line
-    .col,
-    > [class^='col-'] {
-      margin-bottom: 1rem;
-    }
-  }
+  // .row {
+  //   // stylelint-disable-next-line
+  //   .col,
+  //   > [class^='col-'] {
+  //     margin-bottom: 1rem;
+  //   }
+  // }
 }
 
 .cr-page-spinner {
