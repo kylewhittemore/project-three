@@ -10,7 +10,7 @@ export function diffNow(datetime) {
 
 export function longFmt(datetime) {
             let convertedDate = moment(datetime, "YYYY-MM-DDTHH:mm:ss.SSS")
-            const response = convertedDate.format("dddd, MMMM Do YYYY")
+            const response = convertedDate.format("ddd, MMM Do YYYY")
             return response
 
     }
@@ -22,4 +22,11 @@ export function shortFmt(datetime) {
 
     }
 
-export default { diffNow, longFmt, shortFmt }
+export function shortMonFmt(datetime) {
+            let convertedDate = moment(datetime, "YYYY-MM-DDTHH:mm:ss.SSS")
+            const response = convertedDate.format("MMM Do, YYYY ")
+            return response
+
+    }
+
+export default { diffNow, longFmt, shortFmt, shortMonFmt }

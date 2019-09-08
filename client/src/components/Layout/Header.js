@@ -1,9 +1,3 @@
-// import Avatar from 'components/Avatar';
-// import { UserCard } from 'components/Card';
-// import Notifications from 'components/Notifications';
-// import SearchInput from 'components/SearchInput';
-// import { notificationsData } from 'demos/header';
-// import withBadge from 'hocs/withBadge';
 import React from 'react';
 import { NavLink } from "react-router-dom";
 import {
@@ -26,48 +20,42 @@ import {
   Navbar,
   NavItem,
   NavLink as BSNavLink,
-  // Popover,
-  // PopoverBody,
 } from 'reactstrap';
 import bn from '../../utils/bemnames';
+import Headroom from 'react-headroom';
+import Axios from 'axios';
 
 const bem = bn.create('header');
 
-// const MdNotificationsActiveWithBadge = withBadge({
-//   size: 'md',
-//   color: 'primary',
-//   style: {
-//     top: -10,
-//     right: -10,
-//     display: 'inline-flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   children: <small>5</small>,
-// })(MdNotificationsActive);
 
 class Header extends React.Component {
-  //   state = {
-  //     isOpenNotificationPopover: false,
-  //     isNotificationConfirmed: false,
-  //     isOpenUserCardPopover: false,
-  //   };
 
-  //   toggleNotificationPopover = () => {
-  //     this.setState({
-  //       isOpenNotificationPopover: !this.state.isOpenNotificationPopover,
-  //     });
+  state = {
+    isAuth: false,
+    username: ''
+  };
 
-  //     if (!this.state.isNotificationConfirmed) {
-  //       this.setState({ isNotificationConfirmed: true });
-  //     }
-  //   };
+  getUserName() {
+    Axios.get('api/user/profile')
+    .then (res => {
+        this.setState ({ isAuth: true })
+        const {username, email, _id} = res.data.user
+        this.setState ( { username, email, _id })
+    })
+    .catch(console.log('Unauthenticated'))
+  }
 
-  //   toggleUserCardPopover = () => {
-  //     this.setState({
-  //       isOpenUserCardPopover: !this.state.isOpenUserCardPopover,
-  //     });
-  //   };
+  componentDidMount() {
+    // isAuth();
+    this.getUserName();
+ 
+};
+
+componentWillUnmount() {
+  this.getUserName();
+};
+
+
 
   handleSidebarControlButton = event => {
     event.preventDefault();
@@ -77,32 +65,30 @@ class Header extends React.Component {
   };
 
   render() {
-    // const { isNotificationConfirmed } = this.state;
 
     return (
-      <Navbar light expand className={bem.b('bg-white')}>
-        <Nav navbar className="mr-2">
-          <Button outline onClick={this.handleSidebarControlButton}>
-            <MdClearAll size={25} />
-          </Button>
-        </Nav>
-        {/* <Nav navbar>
-          <SearchInput />
-        </Nav> */}
+      <Headroom disableInlineStyles>
+        <Navbar light expand className={bem.b('bg-white')}>
+          <Nav navbar className="mr-2">
+            <Button outline size="sm" onClick={this.handleSidebarControlButton}>
+              <MdClearAll size={25} />
+            </Button>
+          </Nav>
 
-        <Nav navbar className={bem.e('nav-right')}>
-          <NavItem className="d-inline-flex">
-            <BSNavLink 
+          <Nav navbar className={bem.e('nav-right')}>
+            <NavItem className="d-inline-flex">
+              <BSNavLink
                 className="position-relative"
                 tag={NavLink}
                 to={`/logout`}
-                >
-                  <span className="font-weight-bold">Log Out</span>
-            </BSNavLink>
-          </NavItem>
-        </Nav>
+              >
+                 <span className="userId">{`${this.state.username} |`} <span><strong>Log Out</strong></span></span>
+                
+              </BSNavLink>
+            </NavItem>
+          </Nav>
 
-        {/* <NavItem>
+          {/* <NavItem>
             <NavLink id="Popover2">
               <Avatar
                 onClick={this.toggleUserCardPopover}
@@ -149,7 +135,9 @@ class Header extends React.Component {
             </Popover>
           </NavItem>
         </Nav> */}
-      </Navbar>
+        </Navbar>
+      </Headroom>
+
     );
   }
 }

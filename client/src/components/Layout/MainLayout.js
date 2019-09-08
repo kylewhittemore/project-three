@@ -99,13 +99,6 @@ class MainLayout extends React.Component {
           {/* <Footer /> */}
         </Content>
 
-        {/* <NotificationSystem
-          dismissible={false}
-          ref={notificationSystem =>
-            (this.notificationSystem = notificationSystem)
-          }
-          style={NOTIFICATION_SYSTEM_STYLE}
-        /> */}
       </main>
     );
   }

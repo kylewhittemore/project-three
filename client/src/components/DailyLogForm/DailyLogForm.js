@@ -298,7 +298,7 @@ export default function DailyLog(props) {
                     </Col>
                 </Form.Row>
                 <Form.Row className="m-2">
-                    <Col>
+                    {/* <Col> */}
                         <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox1">
                             <Form.Check name="didWater" checked={formData.didWater} onChange={handleInputChange} type="checkbox" label="Water" />
                         </Form.Group>
@@ -310,11 +310,11 @@ export default function DailyLog(props) {
                         <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox3">
                             <Form.Check name="didTransplant" checked={formData.didTransplant} onChange={handleInputChange} type="checkbox" label="Transplant" />
                         </Form.Group>
-                    </Col>
+                    {/* </Col> */}
                 {/* </Form.Row>
-
+ 
                 <Form.Row className="m-2"> */}
-                    <Col>
+                    {/* <Col> */}
                         <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox4">
                             <Form.Check name="didFlush" checked={formData.didFlush} onChange={handleInputChange} type="checkbox" label="Flush" />
                         </Form.Group>
@@ -326,7 +326,7 @@ export default function DailyLog(props) {
                         <Form.Group as={Col} className="m-1" controlId="formBasicCheckbox6">
                             <Form.Check name="didDefoliate" checked={formData.didDefoliate} onChange={handleInputChange} type="checkbox" label="Defoliate" />
                         </Form.Group>
-                    </Col>
+                    {/* </Col> */}
                 </Form.Row>
 
                 <Form.Row className="m-2">

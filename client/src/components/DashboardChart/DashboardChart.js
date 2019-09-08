@@ -63,49 +63,52 @@ useEffect (() => {
             labels: dateLogged ? dateLogged : null,
             datasets:[
                 {
-                    label:'Hi Temps',
+                    label:'High Temps',
                     data: hiTemp ? hiTemp : null,
                     borderColor: "#2930EB", 
-                    pointRadius: 0,
+                    pointRadius: 2,
                     fill: false
                 },{
-                    label:'Lo Temps',
+                    label:'Low Temps',
                     data: loTemp ? loTemp : null,
                     borderColor: "#B40EFF",
-                    pointRadius: 0,
+                    pointRadius: 2,
                     fill: false
                     },
                     {
-                    label:'Hi Humidity',
+                    label:'High Humidity',
                     data: hiHumidity ? hiHumidity : null,
                     borderColor: "#FF581F",
-                    pointRadius: 0,
+                    pointRadius: 1.5,
                     fill: false
                 },{
-                    label:'Lo Humidity',
+                    label:'Low Humidity',
                     data: loHumidity ? loHumidity : null,
                     borderColor: "#FF7D13",
-                    pointRadius: 0,
+                    pointRadius: 1.5,
                     fill: false
                 }
-            ]
+            ],
         }
         return tempChartData
     }
 
-
+    
     return (
         <div>
             <Line
                 data={ buildTempChart }
-                height={300}
+                // height="auto"
+                // width={300}
                 options={{
                     title:{
                         display:true,
                         text:'Tempurature & Humidity',
                         fontSize:25
                     },
-                    maintainAspectRatio: true
+                    maintainAspectRatio: true,
+                    responsive: true
+
                 }}
             />
         </div>

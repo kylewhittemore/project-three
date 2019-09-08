@@ -11,7 +11,6 @@ import LeftSliderBar from '../../components/LeftSliderBar/LeftSliderBar'
 import Dashboard from '../../components/Dashboard/Dashboard'
 import DashboardChart from '../../components/DashboardChart/DashboardChart'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./style.css";
 // import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
 
 function HomePage(props) {
@@ -38,14 +37,14 @@ function HomePage(props) {
 
     return (
         <div>
-            <LeftSliderBar />
+            {/* <LeftSliderBar />
             <Row >
-                <Col className='col-md-6 mx-auto'>
+                <Col className='col-md-6 mx-auto'> */}
                     <Dashboard {...props} />
-                    <DashboardChart {...props}/>
+                    {/* <DashboardChart {...props}/> */}
  
-                </Col>
-            </Row>
+                {/* </Col>
+            </Row> */}
         </div>
                 
     )
