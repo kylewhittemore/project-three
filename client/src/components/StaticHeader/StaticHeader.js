@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import Moment from 'moment';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css';
 import { Container, Row, Col, Button, Figure } from 'react-bootstrap';
+import fmt from '../../utils/formatTime';
 import DailyLogTable from '../DailyLogTable/DailyLogTable';
 
 
@@ -102,15 +102,20 @@ class StaticHeader extends Component {
         console.log("DATA", data.coverImage)
     };
 
+    
     render() {
+
+        function formatMonDateShort(date) {
+            return fmt.shortMonFmt(date);
+        };
 
         return (
             <div>
                 {this.state.loading ? <div>loading</div>
                     :
-                    <Container className="staticHeaderPage mx-auto">
+                    <Container className="staticHeaderContainer mx-auto">
                         <Row>
-                            <Col className="mx-auto text-center">
+                            <Col md="8" className="mx-auto text-left">
                                 <h2 className="text-capitalize">{this.state.seasonName}</h2>
                             </Col>
                             <Col className="text-right">
@@ -123,48 +128,61 @@ class StaticHeader extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <Figure>
+                            <Col md="2" className="my-auto">
+                                <Figure className="my-auto staticImage">
                                     <Figure.Image
                                         // width={171}
                                         // height={180}
+                                        className="img-fluid img-thumbnail"
                                         alt="171x180"
                                         src={`https://project-three-logger-photos.s3.amazonaws.com/${this.state.coverImage}`}
                                     >
                                     </Figure.Image>
                                 </Figure>
                             </Col>
-                            <Row>
-                                <Col >
-                                    <p><strong>Date Started: </strong>{this.state.dateStarted}</p>
-                                    <p><strong>Date Completed: </strong>{this.state.dateCompleted}</p>
-                                    <p><strong>Breeder: </strong>{this.state.breeder}</p>
-                                    <p><strong>Veg Light Type: </strong>{this.state.vegLightType}</p>
-                                    <p><strong>Veg Light Wattage: </strong>{this.state.vegLightWattage} Watts</p>
+                            {/* <Row> */}
+                            <Col md="3" className="my-auto">
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Started: </strong>{formatMonDateShort(this.state.dateStarted)}</p>
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Harvest: </strong>{formatMonDateShort(this.state.dateCompleted)}</p>
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Flowering Time: </strong>{this.state.floweringTime} Days</p>
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Medium: </strong>{this.state.medium}</p>
 
+                            </Col>
+                            <Col md="6" className="my-auto">
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Strain: </strong>{this.state.strainName}</p>
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Lineage: </strong>{this.state.lineage}</p>
+                                <p className="my-1 dashInfo ellipses"><strong className="dashInfoTitle">Breeder: </strong>{this.state.breeder}</p>
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Starter Plant Type: </strong>{this.state.numPlants} {this.state.starterPlantType}</p>
 
-                                </Col>
-                                <Col>
-                                    <p><strong>Strain: </strong>{this.state.strainName}</p>
-                                    <p><strong>Lineage: </strong>{this.state.lineage}</p>
-                                    <p><strong>Flowering Time: </strong>{this.state.floweringTime} Days</p>
-                                    <p><strong>Flower Light Type: </strong>{this.state.flowerLightType}</p>
-                                    <p><strong>Flower Light Wattage: </strong>{this.state.flowerLightWattage} Watts</p>
-                                </Col>
-                                <Col >
-                                    <p><strong>Starter Plant Type: </strong>{this.state.starterPlantType}</p>
-                                    <p><strong>Number of Plants: </strong>{this.state.numPlants}</p>
-                                    <p><strong>Medium: </strong>{this.state.medium}</p>
-                                    <p><strong>Canopy Technique: </strong>{this.state.canopyTechnique}</p>
-                                    <p><strong>Lighting Notes: </strong>{this.state.lightNotes}</p>
+                            </Col>
+                            {/* <Col xs="3">
+                                
 
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <p><strong>Canopy Technique Notes: </strong>{this.state.canopyTechniqueNotes}</p>
-                                </Col>
-                            </Row>
+                            </Col> */}
+                        </Row>
+                        <Row>
+                            <h5 className="mx-auto">Environment and Lighting Details</h5>
+                        </Row>
+                        <Row>
+                            <Col md="4">
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Veg Light: </strong>{this.state.vegLightWattage} Watt {this.state.vegLightType}</p>
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Flower Light: </strong>{this.state.flowerLightWattage} Watt {this.state.flowerLightType}</p>
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Canopy Technique: </strong>{this.state.canopyTechnique}</p>
+
+                                {/* <p className="my-1 dashInfo"><strong className="dashInfoTitle">Veg Light Wattage: </strong></p> */}
+                            </Col>
+                            <Col md="4">
+                            <p className="my-1 dashInfo"><strong className="dashInfoTitle">Lighting Notes: </strong>{this.state.lightNotes}</p>
+
+                                {/* <p className="my-1 dashInfo"><strong className="dashInfoTitle">Flower Light Wattage: </strong></p> */}
+                            </Col>
+                            <Col md="4">
+
+                                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Canopy Technique Notes: </strong>{this.state.canopyTechniqueNotes}</p>
+                            </Col>
+                            {/* <Col xs="3">
+
+                            </Col> */}
                         </Row>
                     </Container>
                 }

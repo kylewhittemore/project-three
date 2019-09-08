@@ -92,7 +92,7 @@ export default function Dashboard(props) {
                 </Row>
                 <Row>
                     <Col>
-                        <p className="my-1 dashInfo "><strong className="dashInfoTitle">Date Started: </strong>{formatMonDateShort(grow.dateStarted)}</p>
+                        <p className="my-1 dashInfo"><strong className="dashInfoTitle">Started: </strong>{formatMonDateShort(grow.dateStarted)}</p>
                     </Col>
                     <Col>
                         <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Water: </strong>{waterHistory.map((element, index) => index === 0 ? formatDate(element.date) : "")}</p>

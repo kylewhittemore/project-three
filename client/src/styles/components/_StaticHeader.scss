@@ -1,4 +1,17 @@
-.staticHeaderPage {
-    margin: 0px;
+.staticHeaderContainer {
+    margin-top: 20px;
+    padding: 18px;
+    width: 95%;
+    background-color: rgba(247, 247, 247, 0.276);
+    box-shadow: .5px .5px 2px gray;
+}
+
+.staticImage {
+    max-height: auto;
+    max-width: 85%;
+}
+
+.staticImage {
+    padding: 0;
 }
 
