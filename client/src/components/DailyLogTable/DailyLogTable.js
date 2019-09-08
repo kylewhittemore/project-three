@@ -93,13 +93,13 @@ export default function DailyLogTable(props) {
                                     :
                                     <i style={styles.placeholder} className="p-1 far fa-sticky-note"></i>
                                 } */}
-                                <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
+                                <i style={styles.icon} className="px-4 py-2 fas fa-eye" onClick={event => {
                                     event.preventDefault()
                                     // updateLog(log._id).then(getLogs)
                                     props.history.push(`/dailylog/?log_id=${log._id}`)
                                 }}
                                 ></i>
-                                <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {
+                                <i style={styles.icon} className="px-4 py-2 far fa-trash-alt" onClick={event => {
                                     event.preventDefault()
                                     deleteLog(log._id).then(getLogs)
                                 }}
