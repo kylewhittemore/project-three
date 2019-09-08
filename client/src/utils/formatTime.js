@@ -10,7 +10,7 @@ export function diffNow(datetime) {
 
 export function longFmt(datetime) {
             let convertedDate = moment(datetime, "YYYY-MM-DDTHH:mm:ss.SSS")
-            const response = convertedDate.format("dddd, MMMM Do YYYY")
+            const response = convertedDate.format("ddd, MMM Do YYYY")
             return response
 
     }

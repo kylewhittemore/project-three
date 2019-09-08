@@ -66,29 +66,29 @@ useEffect (() => {
                     label:'Hi Temps',
                     data: hiTemp ? hiTemp : null,
                     borderColor: "#2930EB", 
-                    pointRadius: 0,
+                    pointRadius: 2,
                     fill: false
                 },{
                     label:'Lo Temps',
                     data: loTemp ? loTemp : null,
                     borderColor: "#B40EFF",
-                    pointRadius: 0,
+                    pointRadius: 2,
                     fill: false
                     },
                     {
                     label:'Hi Humidity',
                     data: hiHumidity ? hiHumidity : null,
                     borderColor: "#FF581F",
-                    pointRadius: 0,
+                    pointRadius: 1.5,
                     fill: false
                 },{
                     label:'Lo Humidity',
                     data: loHumidity ? loHumidity : null,
                     borderColor: "#FF7D13",
-                    pointRadius: 0,
+                    pointRadius: 1.5,
                     fill: false
                 }
-            ]
+            ],
         }
         return tempChartData
     }
@@ -99,13 +99,16 @@ useEffect (() => {
             <Line
                 data={ buildTempChart }
                 height={300}
+                // width={300}
                 options={{
                     title:{
                         display:true,
                         text:'Tempurature & Humidity',
                         fontSize:25
                     },
-                    maintainAspectRatio: true
+                    maintainAspectRatio: false,
+                    responsive: true
+
                 }}
             />
         </div>

@@ -4,7 +4,10 @@ import Axios from 'axios';
 import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import fmt from '../../utils/formatTime'
+import DashboardChart from '../DashboardChart/DashboardChart'
+
 import { set } from 'mongoose';
+
 
 // import moment from 'moment'
 // const t = require('../../utils/formatTime')
@@ -69,26 +72,15 @@ export default function Dashboard(props) {
         return fmt.shortFmt(date)
     }
 
-    function ListData() {
-        return (
-                <ListGroup>
-                    <ListGroup.Item><strong>Strain: </strong>{grow.strainName}</ListGroup.Item>
-                    <ListGroup.Item><strong>Last Date Watered: </strong>{waterHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</ListGroup.Item>
-                    <ListGroup.Item><strong>Last Data Fed: </strong>{feedHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</ListGroup.Item>
-                    <ListGroup.Item><strong>Last Date Transplanted: </strong>{transplantHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</ListGroup.Item>
-                    <ListGroup.Item><strong>Last Data Defoliated: </strong>{defoliateHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</ListGroup.Item>
-                    <ListGroup.Item><strong>Last Date Flipped: </strong>{flipHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</ListGroup.Item>
-                    <ListGroup.Item><strong>Last Data Flushed: </strong>{flushHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</ListGroup.Item>
-                </ListGroup>
-        )
-    }
-
     return (
-
-        <Container>
-            <Row>
+        <div>
+        <Container className="titleContainer">
+            <Row className="mb-2">
+                <Col>
+                    <h2 className="text-left seasonTitle">{grow.seasonName}</h2>
+                </Col>
                 <Col className="text-right">
-                    <Button onClick={event => {
+                    <Button className="btn-info text-white" onClick={event => {
                         event.preventDefault()
                         props.history.push(`/newseason/?grow_id=${growId}`)
                     }} variant="outline-dark" size="sm">Edit</Button>
@@ -96,24 +88,42 @@ export default function Dashboard(props) {
             </Row>
             <Row>
                 <Col>
-                    <h2 className="text-center">{grow.seasonName}</h2>
+                    <p className="my-1 dashInfo"><strong className="dashInfoTitle">Date Started: </strong>{formatDateShort(grow.dateStarted)}</p>
+                </Col>
+                <Col>
+                    <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Water: </strong>{waterHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</p>
+                </Col>
+                <Col>
+                    <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Transplant: </strong>{transplantHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</p>
                 </Col>
             </Row>
             <Row>
-                <Col md={6} className="text-center">
-                    <p><strong>Date Strated: </strong>{formatDateShort(grow.dateStarted)}</p>
+                <Col>
+                    <p className="my-1 dashInfo"><strong className="dashInfoTitle">Harvest: </strong>{formatDateShort(grow.dateCompleted)}</p>
                 </Col>
-                <Col md={6} className="text-center">
-                    <p><strong>Date Completed: </strong>{formatDateShort(grow.dateCompleted)}</p>
+                <Col>
+                    <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Feed: </strong>{feedHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</p>
+                </Col>
+                <Col>
+                    <p className="my-1 dashInfo"><strong className="dashInfoTitle">1st Day of Flower: </strong>{flipHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</p>
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Strain: </strong>{grow.strainName}</p>
+                </Col>
+                <Col>
+                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Flush: </strong>{flushHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</p>
+                </Col>
+                <Col>
+                <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Defoliated: </strong>{defoliateHistory.map((element, index) => index === 0 ? formatDate(element.date) : "" )}</p>
+                </Col>
+            </Row>
+            </Container>
+            <Container>
 
-            <Row>
-                <Col md={12} >
-                    <ListData />
-                </Col>
-            </Row>
+            <DashboardChart {...props}/>
         </Container>
-
+        </div>
     )
 }
