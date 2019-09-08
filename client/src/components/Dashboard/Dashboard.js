@@ -13,6 +13,7 @@ export default function Dashboard(props) {
 
     const [grow, setGrow] = useState({})
     const [growId, setGrowId] = useState({})
+    const [allDates, setAllDates] = useState([])
     const [waterHistory, setWaterHistory] = useState([])
     const [feedHistory, setFeedHistory] = useState([])
     const [transplantHistory, setTransplantHistory] = useState([])
@@ -21,6 +22,8 @@ export default function Dashboard(props) {
     const [flushHistory, setFlushHistory] = useState([])
 
     useEffect(() => {
+
+        let tempAllDates = []
 
         async function fetchGrow(growId) {
             let response = await Axios.get(`/api/grow/${growId}`)
@@ -39,6 +42,9 @@ export default function Dashboard(props) {
             setGrow(response.data)
             setGrowId(response.data._id)
             console.log("USER DATA", response.data)
+            tempAllDates = response.data.dailyLogs.map(log => log.date)
+            console.log("ALL DATES: ", tempAllDates)
+            setAllDates(tempAllDates)
             setWaterHistory(response.data.dailyLogs.filter(log => log.didWater))
             setFeedHistory(response.data.dailyLogs.filter(log => log.didFeed))
             setTransplantHistory(response.data.dailyLogs.filter(log => log.didFlip))
@@ -112,6 +118,16 @@ export default function Dashboard(props) {
                 <Col md={12} >
                     <ListData />
                 </Col>
+            </Row>
+                {allDates.map(element => {
+                    return (
+                        <ListGroup>
+                            <ListGroup.Item> {element} </ListGroup.Item> 
+                        </ListGroup>
+                    )
+                })}
+            <Row>
+                    
             </Row>
         </Container>
 
