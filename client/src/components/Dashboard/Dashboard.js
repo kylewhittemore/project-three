@@ -72,12 +72,16 @@ export default function Dashboard(props) {
         return fmt.shortFmt(date)
     }
 
+    function formatMonDateShort(date) {
+        return fmt.shortMonFmt(date);
+    };
+
     return (
         <div>
             <Container className="titleContainer">
                 <Row className="mb-2">
                     <Col>
-                        <h2 className="text-left seasonTitle">{grow.seasonName}</h2>
+                        <h2 className="text-left seasonTitle text-capitalize">{grow.seasonName}</h2>
                     </Col>
                     <Col className="text-right">
                         <Button className="btn-info text-white" onClick={event => {
@@ -88,7 +92,7 @@ export default function Dashboard(props) {
                 </Row>
                 <Row>
                     <Col>
-                        <p className="my-1 dashInfo"><strong className="dashInfoTitle">Date Started: </strong>{formatDateShort(grow.dateStarted)}</p>
+                        <p className="my-1 dashInfo "><strong className="dashInfoTitle">Date Started: </strong>{formatMonDateShort(grow.dateStarted)}</p>
                     </Col>
                     <Col>
                         <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Water: </strong>{waterHistory.map((element, index) => index === 0 ? formatDate(element.date) : "")}</p>
@@ -99,7 +103,7 @@ export default function Dashboard(props) {
                 </Row>
                 <Row>
                     <Col>
-                        <p className="my-1 dashInfo"><strong className="dashInfoTitle">Harvest: </strong>{formatDateShort(grow.dateCompleted)}</p>
+                        <p className="my-1 dashInfo"><strong className="dashInfoTitle">Harvest: </strong>{formatMonDateShort(grow.dateCompleted)}</p>
                     </Col>
                     <Col>
                         <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Feed: </strong>{feedHistory.map((element, index) => index === 0 ? formatDate(element.date) : "")}</p>
@@ -110,7 +114,7 @@ export default function Dashboard(props) {
                 </Row>
                 <Row>
                     <Col>
-                        <p className="my-1 dashInfo"><strong className="dashInfoTitle">Strain: </strong>{grow.strainName}</p>
+                        <p className="my-1 dashInfo text-capitalize"><strong className="dashInfoTitle">Strain: </strong>{grow.strainName}</p>
                     </Col>
                     <Col>
                         <p className="my-1 dashInfo"><strong className="dashInfoTitle">Last Flush: </strong>{flushHistory.map((element, index) => index === 0 ? formatDate(element.date) : "")}</p>

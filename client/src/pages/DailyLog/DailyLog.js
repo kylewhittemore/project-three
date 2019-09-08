@@ -5,6 +5,7 @@ import DailyLogForm from '../../components/DailyLogForm/DailyLogForm'
 import LeftSliderBar from "../../components/LeftSliderBar/LeftSliderBar";
 import { Redirect } from 'react-router-dom'
 import Axios from 'axios'
+import DailyLogView from "../../components/DailyLogView";
 
 function DailyLogPage(props) {
 
@@ -12,6 +13,8 @@ function DailyLogPage(props) {
     const [growId, setGrowId] = useState('')
     const [logId, setLogId] = useState('')
     const [loading, setLoading] = useState(false)
+    const [relevantLog, setRelevantLog] = useState({})
+    const [editMode, setEditMode] = useState(false)
 
     useEffect(() => {
         async function fetchUser() {
@@ -26,7 +29,7 @@ function DailyLogPage(props) {
             let data = response.data
             return data;
         }
-        
+
         fetchUser().then(user => {
             if (!user._id) {
                 return (
@@ -41,10 +44,11 @@ function DailyLogPage(props) {
                 let url = window.location.href
 
                 if (url.indexOf("?log_id=") !== -1) {
-                    let logId = url.split("=")[1]
-                    setLogId(logId)
-                    fetchLog(logId)
+                    let tmpLogId = url.split("=")[1]
+                    setLogId(tmpLogId)
+                    fetchLog(tmpLogId)
                         .then(log => {
+                            console.log("DAILY LOG:  ", log)
                             setGrowId(log.grow)
                         })
                         .catch(err => console.log(err))
@@ -52,6 +56,7 @@ function DailyLogPage(props) {
                 else if (url.indexOf("?grow_id=") !== -1) {
                     setGrowId(url.split("=")[1])
                 } else {
+                    setEditMode(true)
                     setGrowId(user.defaultGrow)
                 }
             })
@@ -60,16 +65,27 @@ function DailyLogPage(props) {
             })
     }, []);
 
+    const handleEditModeChange = bool => setEditMode(bool)
+
     return (
         <>
             <LeftSliderBar {...props} />
             <div className="align-me">
-                <DailyLogForm {...props}
-                    growId={growId}
-                    logId={logId}
-                    userId={user._id}
-                    defaultGrow={user.defaultGrow}
-                />
+                {editMode ?
+
+                    <DailyLogForm {...props}
+                        growId={growId}
+                        logId={logId}
+                        userId={user._id}
+                        defaultGrow={user.defaultGrow}
+                        log={relevantLog}
+                        handleEditModeChange={handleEditModeChange}
+                    />
+                    :
+                    <DailyLogView
+                        handleEditModeChange={handleEditModeChange}
+                    />
+                }
             </div>
         </>
     );

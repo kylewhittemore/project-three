@@ -23,7 +23,7 @@ export default function DailyLogTable(props) {
         async function fetchLogs() {
             setLoading(true);
 
-            let response = await Axios.get(`/api/daily/grow/${props.growId}`); // userId
+            let response = await Axios.get(`/api/daily/grow/${props.growId}`)
             console.log("logs", response)
             let data = response.data
             return data;
@@ -48,13 +48,7 @@ export default function DailyLogTable(props) {
         return response
     }
 
-    async function getNotes(id) {
-        let response = await Axios.get(`/api/daily/${id}`)
-        return response.data.notes
-    }
-
     function formatDateShort(date) {
-        // return moment(date, "YYYY-MM-DDTHH:mm:ss.SSS").format("MM/DD/YY")
         return fmt.shortFmt(date)
     }
 
@@ -75,31 +69,18 @@ export default function DailyLogTable(props) {
 
             <tbody>
                 {logs.map(log => {
-                    // console.log(log.grow.seasonName)
                     return (
                         <tr key={log._id}>
-                            {/* <td>{log.logId}</td> */}
-                            <td>{formatDateShort(log.date)}</td>
-                            {/* <td>{log.date.slice(0, 10)}</td> */}
-                            <td>{log.notes.length > 30 ? log.notes.slice(0, 30) + "..." : log.notes}</td>
-                            {/* <td>{log.grow.seasonName}</td> */}
-                            <td>
-                                {/* {log.notes ? <i style={styles.icon} className="p-1 far fa-sticky-note" onClick={event => {
-                                    event.preventDefault()
-                                    getNotes(log._id).then(notes => console.log(notes))
 
-                                }}
-                                ></i>
-                                    :
-                                    <i style={styles.placeholder} className="p-1 far fa-sticky-note"></i>
-                                } */}
-                                <i style={styles.icon} className="p-1 far fa-edit" onClick={event => {
+                            <td>{formatDateShort(log.date)}</td>
+                            <td>{log.notes.length > 30 ? log.notes.slice(0, 30) + "..." : log.notes}</td>
+                            <td>
+                                <i style={styles.icon} className="px-4 py-2 fas fa-eye" onClick={event => {
                                     event.preventDefault()
-                                    // updateLog(log._id).then(getLogs)
                                     props.history.push(`/dailylog/?log_id=${log._id}`)
                                 }}
                                 ></i>
-                                <i style={styles.icon} className="p-1 far fa-trash-alt" onClick={event => {
+                                <i style={styles.icon} className="px-4 py-2 far fa-trash-alt" onClick={event => {
                                     event.preventDefault()
                                     deleteLog(log._id).then(getLogs)
                                 }}
@@ -112,7 +93,6 @@ export default function DailyLogTable(props) {
         )
     }
 
-    // If the logs are loading display a spinner, otherwise render the table from state
     return (
         loading ?
             <LoadingSpinner />
