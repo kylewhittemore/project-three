@@ -23,7 +23,6 @@ export default function DailyLogView(props) {
 
         if (url.indexOf("?log_id=") !== -1) {
             let tmpLogId = url.split("=")[1]
-            // setLogId(tmpLogId)
             fetchLog(tmpLogId)
                 .then(log => {
                     console.log("DAILY LOG:  ", log)
@@ -102,8 +101,6 @@ export default function DailyLogView(props) {
                 <Col>
                     <Figure>
                         <Figure.Image
-                            // width={171}
-                            // height={180}
                             alt="171x180"
                             src={`https://project-three-logger-photos.s3.amazonaws.com/${displayObj.s3Id}`}
                         >
@@ -116,14 +113,23 @@ export default function DailyLogView(props) {
                 <EventRender />
             </Row>
             <Row>
+                <p><strong>Plant Appearance: </strong>{log.plantAppearance}</p>
+            </Row>
+            <Row>
+                {log.notes ?
+                    <>
+                        <h4>Notes:</h4>
+                        <p><strong>{log.notes}</strong></p>
+                    </>
+                    :
+                    <></>}
+            </Row>
+            <Row>
                 <Col>
-                    {log.notes ?
-                        <>
-                            <h4>Notes:</h4>
-                            <p><strong>{log.notes}</strong></p>
-                        </>
-                        :
-                        <></>}
+                    <p><strong>Hi/Lo Temperature: </strong>{`${displayObj.hiTemp}/${displayObj.loTemp}`}</p>
+                </Col>
+                <Col>
+                    <p><strong>Hi/Lo Humidity: </strong>{`${displayObj.hiHumidity}/${displayObj.loHumidity}`}</p>
                 </Col>
             </Row>
         </Container>

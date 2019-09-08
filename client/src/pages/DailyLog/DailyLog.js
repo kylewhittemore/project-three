@@ -56,6 +56,7 @@ function DailyLogPage(props) {
                 else if (url.indexOf("?grow_id=") !== -1) {
                     setGrowId(url.split("=")[1])
                 } else {
+                    setEditMode(true)
                     setGrowId(user.defaultGrow)
                 }
             })
@@ -82,7 +83,6 @@ function DailyLogPage(props) {
                     />
                     :
                     <DailyLogView
-                        // logId={logId}
                         handleEditModeChange={handleEditModeChange}
                     />
                 }
