@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Table from 'react-bootstrap/Table'
+import { Container, Table } from 'react-bootstrap'
 import Axios from 'axios'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import fmt from '../../utils/formatTime'
@@ -56,9 +56,9 @@ export default function DailyLogTable(props) {
         return (
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Notes</th>
-                    <th></th>
+                    <th style={{width: "15%"}} className="text-center">Date</th>
+                    <th style={{width: "70%"}} className="text-center">Notes</th>
+                    <th style={{width: "15%"}} className="text-center">Options</th>
                 </tr>
             </thead>
         )
@@ -72,9 +72,9 @@ export default function DailyLogTable(props) {
                     return (
                         <tr key={log._id}>
 
-                            <td>{formatDateShort(log.date)}</td>
+                            <td className="text-center">{formatDateShort(log.date)}</td>
                             <td>{log.notes.length > 30 ? log.notes.slice(0, 30) + "..." : log.notes}</td>
-                            <td>
+                            <td className="text-center">
                                 <i style={styles.icon} className="px-4 py-2 fas fa-eye" onClick={event => {
                                     event.preventDefault()
                                     props.history.push(`/dailylog/?log_id=${log._id}`)
@@ -90,6 +90,7 @@ export default function DailyLogTable(props) {
                     )
                 })}
             </tbody>
+
         )
     }
 
@@ -97,11 +98,12 @@ export default function DailyLogTable(props) {
         loading ?
             <LoadingSpinner />
             :
-
-            <Table>
-                <TableHead />
+        <Container>
+            <Table striped bordered hover size="sm" responsive>
+                <TableHead/>
                 <TableBody />
             </Table>
+        </Container>
 
     )
 
