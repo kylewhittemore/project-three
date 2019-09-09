@@ -124,7 +124,7 @@ export default function Dashboard(props) {
                     </Col>
                 </Row>
             </Container>
-            <Container className="chartContainer">
+            <Container className="chartContainer mx-auto">
                 <DashboardChart {...props} />
             </Container>
         </div>
