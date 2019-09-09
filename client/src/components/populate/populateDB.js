@@ -9,8 +9,8 @@ const Populate = () => {
 
 
     
-const growId = '5d71cb3efed91156e43e2098'  //JJ - murmuring thicket
-const userId = '5d71c74bb1a8b04f6c6a3dc6'  //test123
+const growId = '5d71cb3efed91156e43e2098'  //mlab 
+const userId = '5d71c74bb1a8b04f6c6a3dc6'  //mlab user: demo123
 
 async function postLogToDB(element, growId) {
     let response = await Axios.post(`/api/daily/${growId}`, element)
@@ -56,12 +56,12 @@ async function putEnvToLog(element) {
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // LOAD ENVIRONMENTAL DATA ***>>> requires dailyLog for DATE exists
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-envdata.forEach(element => {
-    putEnvToLog(element) 
-    .then(response => {
-            console.log(response)
-    })
-    .catch(err => console.log(err))
+envdata.forEach((element, index) => {
+    setTimeout(() => {
+        putEnvToLog(element) 
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
+    }, index*250)   // 250 milliseconds
 })
 //
 // +++ END
