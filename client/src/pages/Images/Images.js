@@ -47,7 +47,7 @@ function ImagesPage(props) {
     return (
         <>
             <LeftSliderBar {...props} />
-            <div className="align-me">
+            <div>
                 <PhotoCarousel {...props}
                     growId={growId}
                     userId={userId}

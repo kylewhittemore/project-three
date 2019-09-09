@@ -55,11 +55,11 @@ export default function GrowTable(props) {
                     <div key={grow._id}>
                         <Container className="seasonBox">
                             <Row >
-                                <Col className="boxTop">
+                                <Col sm="6" className="boxTop">
                                     <h2 className="font-italic text-capitalize">{grow.seasonName}</h2>
                                     {/* <p >System Id: {grow._id}</p> */}
                                 </Col>
-                                <Col className="boxTop" md="auto">
+                                <Col sm="6" className="boxTop text-right">
                                     <div >
                                         <Button className="btn-primary gt-button btn-sm" onClick={event => {
                                             event.preventDefault()
@@ -82,14 +82,14 @@ export default function GrowTable(props) {
                                     </div>
                                 </Col>
                             </Row>
-                            <Row >
-                                <Col className="boxBottom my-auto d-block">
-                                    <Figure className="mx-auto d-block">
+                            <Row className="pb-3">
+                                <Col className="my-auto d-block">
+                                    <Figure className="mx-auto my-auto d-block">
                                     {grow.coverImage ? 
                                         <Figure.Image
-                                            className="mx-auto d-block img-fluid"
-                                            width={152}
-                                            height={152}
+                                            className="mx-auto my-auto d-block img-fluid"
+                                            // width={152}
+                                            // height={152}
                                             alt="171x180"
                                             src={`https://project-three-logger-photos.s3.amazonaws.com/${grow.coverImage}`}
                                         />
@@ -99,6 +99,7 @@ export default function GrowTable(props) {
                                         height={152}
                                         alt="171x180"
                                         src="./leaf.png"
+                                        className="mx-auto my-auto img-fluid"
                                         />
                                     }
                                         {/* <Figure.Caption>
@@ -106,7 +107,7 @@ export default function GrowTable(props) {
                                 </Figure.Caption> */}
                                     </Figure>
                                 </Col>
-                                <Col className="boxBottom" md={8}>
+                                <Col className="boxBottom my-auto" md={8}>
                                     <ListGroup>
                                         <ListGroup.Item className="text-capitalize"><strong>Strain Name:</strong> {grow.strainName}</ListGroup.Item>
                                         <ListGroup.Item className="text-capitalize"><strong>Breeder:</strong> {grow.breeder}</ListGroup.Item>

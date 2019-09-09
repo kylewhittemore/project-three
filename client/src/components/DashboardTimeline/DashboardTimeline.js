@@ -20,7 +20,7 @@ export default function Dashboard(props) {
     // const [dataPoints, setDataPoints] = useState([hardcodeDataPoints])
     const [chartData, setChartData] = useState({})
 
-    const eventList = ['Flip', 'Flush', 'Transplant', 'Flower', 'Feed', 'Water']
+    const eventList = ['Flip', 'Flush', 'Transplant', 'Defoliate', 'Feed', 'Water']
 
     useEffect(() => {
 
@@ -28,17 +28,17 @@ export default function Dashboard(props) {
 
         async function fetchGrow(growId) {
             let response = await Axios.get(`/api/grow/${growId}`)
-            if (props.growId) { 
+            if (props.growId) {
                 setGrow(response)
                 setGrowId(response._id)
             }
             return response
         }
 
-        var mapDataPoint = function(date, event) {
+        var mapDataPoint = function (date, event) {
             return {
-              x: tempAllDates.indexOf(date),
-              y: eventList.indexOf(event)
+                x: tempAllDates.indexOf(date),
+                y: eventList.indexOf(event)
             }
         }
 
@@ -66,7 +66,7 @@ export default function Dashboard(props) {
             tempArray = response.data.dailyLogs.filter(log => log.didFlip)
             tempArray.forEach(log => tempDataPoints.push(mapDataPoint(log.date, 'Flip')))
             tempArray = response.data.dailyLogs.filter(log => log.didDefoliate)
-            tempArray.forEach(log => tempDataPoints.push(mapDataPoint(log.date, 'Flower')))
+            tempArray.forEach(log => tempDataPoints.push(mapDataPoint(log.date, 'Defoliate')))
             tempArray = response.data.dailyLogs.filter(log => log.didFlush)
             tempArray.forEach(log => tempDataPoints.push(mapDataPoint(log.date, 'Flush')))
             tempArray = response.data.dailyLogs.filter(log => log.didTransplant)
@@ -79,8 +79,8 @@ export default function Dashboard(props) {
                     borderColor: '#2196f3', // Add custom color border            
                     backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
                 }]
-            }) 
-            
+            })
+
             return response
         }
 
@@ -107,7 +107,7 @@ export default function Dashboard(props) {
 
 
     // function buildChart() {
-        
+
     //     const chartData = {
     //     datasets: [{
     //             label: 'Population', // Name the series
@@ -115,7 +115,7 @@ export default function Dashboard(props) {
     //             borderColor: '#2196f3', // Add custom color border            
     //             backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
     //         }]
-            
+
     //     }
     //     return chartData
     // }
@@ -132,16 +132,20 @@ export default function Dashboard(props) {
 
     return (
 
-        <Container>
-            
-            <Scatter 
+        <Container className="timelineContainer mx-auto">
+
+            <Scatter
                 data={chartData}
                 options={{
                     responsive: true,
-                    legend: { display: false},
+                    maintainAspectRatio: true,
+                    legend: { display: false },
                     title: {
                         display: true,
-                        text: 'Event Timeline'
+                        text: 'Event Timeline',
+                        fontSize: 20,
+                        padding: 30,
+                        fontColor: "#000000"
                     },
                     scales: {
                         xAxes: [{
@@ -149,28 +153,34 @@ export default function Dashboard(props) {
                             position: 'bottom',
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Date'
+                                // labelString: 'Date',
+                                fontColor: "black",
+                                fontSize: 18
                             },
                             ticks: {
                                 min: 0,
-                                max: {allDates}.length,
-                                callback: function(value) {
+                                max: { allDates }.length,
+                                callback: function (value) {
                                     return xTick(value)
-                                }
+                                },
+                                fontColor: "black"
                             }
                         }],
                         yAxes: [{
                             type: 'linear',
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Events'
-                            },
+                            // scaleLabel: {
+                            //     display: true,
+                            //     labelString: 'Events',
+                            //     fontColor: "black",
+                            //     fontSize: 18
+                            // },
                             ticks: {
                                 min: 0,
                                 max: 5,
-                                callback: function(value) {
+                                callback: function (value) {
                                     return yTick(value);
-                                }
+                                },
+                                fontColor: "black"
                             },
                         }]
                         // tooltips: {
@@ -180,7 +190,8 @@ export default function Dashboard(props) {
                         //        }
                         //     }
                         //  }
-                    }}}
+                    }
+                }}
             />
 
         </Container>

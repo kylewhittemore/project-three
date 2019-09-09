@@ -130,7 +130,7 @@ class StaticHeader extends Component {
 
                         <Row>
                             <Col md="3" className="mx-auto my-auto">
-                                <h5 className="text-center mb-0 pb-0">Environment and Lighting Details</h5>
+                                <h5 className="text-center mb-0 pb-0"><strong>Environment and Lighting Details:</strong></h5>
                             </Col>
 
                             <Col md="3" className="my-auto">
@@ -139,13 +139,13 @@ class StaticHeader extends Component {
                             </Col>
 
                             <Col md="3" className="my-auto">
-                                <p className="my-1 text-center headerInfo"><strong className="headerInfoTitle">Lighting Notes</strong></p>
-                                <p>{this.state.lightNotes}</p>
+                                <p className="my-1 headerInfo"><strong className="headerInfoTitle">Lighting Notes: </strong>{this.state.lightNotes}</p>
+                                {/* <p className="notes">{this.state.lightNotes}</p> */}
                             </Col>
 
                             <Col md="3" className="my-auto">
-                                <p className="my-1 text-center headerInfo"><strong className="headerInfoTitle">Canopy Notes</strong></p>
-                                <p>{this.state.canopyTechniqueNotes}</p>
+                                <p className="my-1 headerInfo"><strong className="headerInfoTitle">Canopy Notes: </strong>{this.state.canopyTechniqueNotes}</p>
+                                {/* <p className="notes">{this.state.canopyTechniqueNotes}</p> */}
                             </Col>
 
                         </Row>

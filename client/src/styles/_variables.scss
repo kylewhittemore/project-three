@@ -17,7 +17,9 @@ $theme-colors: (
   "success": #00a300,
   "danger": #ff2600,
   "warning": #ffc400,
-  "info": #0077e6
+  "info": #0077e6,
+  "fall1": hsl(31, 100%, 50%),
+  "fall2": rgb(119, 0, 255)
 );
 
 $enable-gradients: true;
