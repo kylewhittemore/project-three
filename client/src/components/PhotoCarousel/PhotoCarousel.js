@@ -48,7 +48,7 @@ export default function PhotoCarousel(props) {
                 enter={scaleDown.enter}
                 entered={scaleDown.entered}
                 leaved={scaleDown.leaved}
-                className="images mx-auto"
+                className="images mx-auto mb-3"
               >
                 {photos.map(photo => (
                   <Figure
