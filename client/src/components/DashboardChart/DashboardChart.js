@@ -34,14 +34,14 @@ useEffect (() => {
             let user = data.data.user
             let response = await fetchGrow(user.defaultGrow)
             setGrow(response.data)
-            console.log(response.data)
+            // console.log(response.data)
             
             // consider using a ternary in the .mao fn's below
-            setDateLogged(response.data.dailyLogs.map(({date})=>t.shortFmt(date)))
-            setHiTemp(response.data.dailyLogs.map(({temp})=>temp.hi))
-            setLoTemp(response.data.dailyLogs.map(({temp})=>temp.lo))
-            setHiHumidity(response.data.dailyLogs.map(({humidity})=>humidity.hi))
-            setLoHumidity(response.data.dailyLogs.map(({humidity})=>humidity.lo))
+            setDateLogged(response.data.dailyLogs.map(({date})=>t.shortFmt(date)).reverse())
+            setHiTemp(response.data.dailyLogs.map(({temp})=>temp.hi).reverse())
+            setLoTemp(response.data.dailyLogs.map(({temp})=>temp.lo).reverse())
+            setHiHumidity(response.data.dailyLogs.map(({humidity})=>humidity.hi).reverse())
+            setLoHumidity(response.data.dailyLogs.map(({humidity})=>humidity.lo).reverse())
             return response
         }
 
@@ -58,8 +58,8 @@ useEffect (() => {
     }, [])
 
 
-    function buildTempChart () {
-        const tempChartData = {
+    function buildChart () {
+        const chartData = {
             labels: dateLogged ? dateLogged : null,
             datasets:[
                 {
@@ -94,14 +94,14 @@ useEffect (() => {
                 }
             ],
         }
-        return tempChartData
+        return chartData
     }
 
     
     return (
         <div>
             <Line
-                data={ buildTempChart }
+                data={ buildChart }
                 // height="auto"
                 // width={300}
                 options={{
