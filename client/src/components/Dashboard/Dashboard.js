@@ -131,10 +131,10 @@ export default function Dashboard(props) {
                     </Col>
                 </Row>
             </Container>
-            <Container className="chartContainer mx-auto">
+            <Container className="linechartContainer mx-auto">
                 <DashboardChart {...props} />
             </Container>
-            <Container className="chartContainer">
+            <Container className="scatchartContainer mx-auto">
                 <DashboardTimeline {...props} />
             </Container>
         </div>

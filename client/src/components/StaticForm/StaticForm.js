@@ -6,7 +6,6 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Axios from "axios";
 import AddPhotos from "../AddPhotos/AddPhotos";
-import "./style.css";
 
 class StaticForm extends Component {
 

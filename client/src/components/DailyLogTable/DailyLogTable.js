@@ -73,7 +73,7 @@ export default function DailyLogTable(props) {
                         <tr key={log._id}>
 
                             <td className="text-center">{formatDateShort(log.date)}</td>
-                            <td>{log.notes.length > 30 ? log.notes.slice(0, 30) + "..." : log.notes}</td>
+                            <td>{log.notes.length > 70 ? log.notes.slice(0, 70) + "..." : log.notes}</td>
                             <td className="text-center">
                                 <i style={styles.icon} className="px-4 py-2 fas fa-eye" onClick={event => {
                                     event.preventDefault()
