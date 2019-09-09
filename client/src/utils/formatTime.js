@@ -15,6 +15,13 @@ export function longFmt(datetime) {
 
     }
 
+export function longestFmt(datetime) {
+            let convertedDate = moment(datetime, "YYYY-MM-DDTHH:mm:ss.SSS")
+            const response = convertedDate.format("dddd, MMMM Do YYYY, h:mm a")
+            return response
+
+    }
+
 export function shortFmt(datetime) {
             let convertedDate = moment(datetime, "YYYY-MM-DDTHH:mm:ss.SSS")
             const response = convertedDate.format("MM/DD/YY")
@@ -29,4 +36,4 @@ export function shortMonFmt(datetime) {
 
     }
 
-export default { diffNow, longFmt, shortFmt, shortMonFmt }
+export default { diffNow, longFmt, shortFmt, shortMonFmt, longestFmt }

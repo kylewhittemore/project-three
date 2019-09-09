@@ -41,7 +41,7 @@ export default function DailyLogView(props) {
 
     }, []);
 
-    const dateConverter = date => fmt.longFmt(date)
+    const dateConverter = date => fmt.longestFmt(date)
 
     const EventRender = () => {
 
@@ -63,6 +63,7 @@ export default function DailyLogView(props) {
         return (
             eventArray.length > 3 ?
                 <>
+
                     <Col>
                         {eventArr1.map((event, index) => <p key={Date.now + index}><strong>{event}</strong></p>)}
                     </Col>
@@ -72,24 +73,27 @@ export default function DailyLogView(props) {
                 </>
                 :
                 <>
-                    <Col>
+                <Row>
+
+                    <Col md="6">
                         {eventArray.map((event, index) => <p key={Date.now + index}><strong>{event}</strong></p>)}
                     </Col>
-                    <Col className="col-md-3">
+                    <Col md="6">
                         <div></div>
                     </Col>
+                </Row>
                 </>
         )
     }
 
     return (
-        <Container className="mx-auto">
+        <Container className="mx-auto dailyLogViewContainer">
             <Row>
-                <Col className="mx-auto text-center">
+                <Col md="10" className="mx-auto">
                     <h2 className="text-capitalize">{displayObj.grow}</h2>
                     <h4>{dateConverter(log.date)}</h4>
                 </Col>
-                <Col className="text-right">
+                <Col md="2" className="text-right">
                     <Button className="text-right btn-info"
                         onClick={event => {
                             event.preventDefault()
@@ -105,6 +109,7 @@ export default function DailyLogView(props) {
                                 <Figure.Image
                                     alt=""
                                     src={`https://project-three-logger-photos.s3.amazonaws.com/${displayObj.s3Id}`}
+                                    className="img-fluid"
                                 >
                                 </Figure.Image>
                                 <Figure.Caption>{log.caption}</Figure.Caption>
@@ -116,31 +121,36 @@ export default function DailyLogView(props) {
                                 alt=""
                                 src="./leaf.png"
                             />
-                            
+
                         }
                     </Figure>
                 </Col>
             </Row>
-            <Row>
+            <Row >
                 <EventRender />
             </Row>
             <Row>
-                <p><strong>Plant Appearance: </strong>{log.plantAppearance}</p>
-            </Row>
-            <Row>
-                {log.notes ?
-                    <>
-                        <p><strong>Notes: </strong>{log.notes}</p>
-                    </>
-                    :
-                    <></>}
-            </Row>
-            <Row>
-                <Col>
-                    <p><strong>Hi/Lo Temperature: </strong>{`${displayObj.hiTemp}/${displayObj.loTemp}`}</p>
+                <Col md="4" className="text-center">
+                    <p><strong>Plant Appearance</strong></p>
+                    <p>{log.plantAppearance}</p>
                 </Col>
-                <Col>
-                    <p><strong>Hi/Lo Humidity: </strong>{`${displayObj.hiHumidity}/${displayObj.loHumidity}`}</p>
+                <Col md="4" className="text-center">
+                    <p><strong>High/Low Temperature</strong></p>
+                    <p>{`${displayObj.hiTemp}/${displayObj.loTemp}`}</p>
+                </Col>
+                <Col md="4" className="text-center">
+                    <p><strong>High/Low Humidity</strong></p>
+                    <p>{`${displayObj.hiHumidity}/${displayObj.loHumidity}`}</p>
+                </Col>
+            </Row>
+            <Row>
+                <Col md="12">
+                    {log.notes ?
+                        <>
+                            <p className="ml-4"><strong>Notes: </strong>{log.notes}</p>
+                        </>
+                        :
+                        <></>}
                 </Col>
             </Row>
         </Container>
