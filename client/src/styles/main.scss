@@ -2,7 +2,6 @@
 
 // libraries
 @import "~bootstrap/scss/bootstrap.scss";
-// @import "~react-infinite-calendar/styles";
 
 // base
 @import "base";
@@ -21,11 +20,9 @@
 @import "components/Dashboard";
 @import "components/DailyLogView";
 @import "components/imagesPage";
+@import "components/DashChartsAll";
 // @import "components/widget";
 // @import "components/search-input";
 
 // themes
 @import "themes/colors";
-
-// demos (only for demo pages)
-// @import "demos/demos";

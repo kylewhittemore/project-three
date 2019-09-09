@@ -5,6 +5,7 @@ import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import fmt from '../../utils/formatTime'
 import DashboardChart from '../DashboardChart/DashboardChart'
+import DashboardTimeline from '../DashboardTimeline/DashboardTimeline'
 
 import { set } from 'mongoose';
 
@@ -16,6 +17,7 @@ export default function Dashboard(props) {
 
     const [grow, setGrow] = useState({})
     const [growId, setGrowId] = useState({})
+    const [allDates, setAllDates] = useState([])
     const [waterHistory, setWaterHistory] = useState([])
     const [feedHistory, setFeedHistory] = useState([])
     const [transplantHistory, setTransplantHistory] = useState([])
@@ -24,6 +26,8 @@ export default function Dashboard(props) {
     const [flushHistory, setFlushHistory] = useState([])
 
     useEffect(() => {
+
+        let tempAllDates = []
 
         async function fetchGrow(growId) {
             let response = await Axios.get(`/api/grow/${growId}`)
@@ -42,6 +46,9 @@ export default function Dashboard(props) {
             setGrow(response.data)
             setGrowId(response.data._id)
             console.log("USER DATA", response.data)
+            tempAllDates = response.data.dailyLogs.map(log => log.date)
+            console.log("number of dailyLogs:", response.data.dailyLogs.length)
+            setAllDates(tempAllDates)
             setWaterHistory(response.data.dailyLogs.filter(log => log.didWater))
             setFeedHistory(response.data.dailyLogs.filter(log => log.didFeed))
             setTransplantHistory(response.data.dailyLogs.filter(log => log.didFlip))
@@ -124,8 +131,11 @@ export default function Dashboard(props) {
                     </Col>
                 </Row>
             </Container>
-            <Container className="chartContainer">
+            <Container className="linechartContainer mx-auto">
                 <DashboardChart {...props} />
+            </Container>
+            <Container className="scatchartContainer mx-auto">
+                <DashboardTimeline {...props} />
             </Container>
         </div>
     )

@@ -34,14 +34,14 @@ useEffect (() => {
             let user = data.data.user
             let response = await fetchGrow(user.defaultGrow)
             setGrow(response.data)
-            console.log(response.data)
+            // console.log(response.data)
             
             // consider using a ternary in the .mao fn's below
-            setDateLogged(response.data.dailyLogs.map(({date})=>t.shortFmt(date)))
-            setHiTemp(response.data.dailyLogs.map(({temp})=>temp.hi))
-            setLoTemp(response.data.dailyLogs.map(({temp})=>temp.lo))
-            setHiHumidity(response.data.dailyLogs.map(({humidity})=>humidity.hi))
-            setLoHumidity(response.data.dailyLogs.map(({humidity})=>humidity.lo))
+            setDateLogged(response.data.dailyLogs.map(({date})=>t.shortFmt(date)).reverse())
+            setHiTemp(response.data.dailyLogs.map(({temp})=>temp.hi).reverse())
+            setLoTemp(response.data.dailyLogs.map(({temp})=>temp.lo).reverse())
+            setHiHumidity(response.data.dailyLogs.map(({humidity})=>humidity.hi).reverse())
+            setLoHumidity(response.data.dailyLogs.map(({humidity})=>humidity.lo).reverse())
             return response
         }
 
@@ -58,53 +58,66 @@ useEffect (() => {
     }, [])
 
 
-    function buildTempChart () {
-        const tempChartData = {
+    function buildChart () {
+        const chartData = {
             labels: dateLogged ? dateLogged : null,
             datasets:[
                 {
                     label:'High Temps',
                     data: hiTemp ? hiTemp : null,
-                    borderColor: "#2930EB", 
+                    borderColor: "#ff0000",
+                    backgroundColor: "#ff0000",
                     pointRadius: 2,
                     fill: false
                 },{
                     label:'Low Temps',
                     data: loTemp ? loTemp : null,
-                    borderColor: "#B40EFF",
+                    borderColor: "#00a6ff",
+                    backgroundColor: "#00a6ff",
                     pointRadius: 2,
                     fill: false
                     },
                     {
                     label:'High Humidity',
                     data: hiHumidity ? hiHumidity : null,
-                    borderColor: "#FF581F",
+                    borderColor: "#b50000",
+                    backgroundColor: "#b50000", 
                     pointRadius: 1.5,
                     fill: false
                 },{
                     label:'Low Humidity',
                     data: loHumidity ? loHumidity : null,
-                    borderColor: "#FF7D13",
+                    borderColor: "#0058b5",
+                    backgroundColor: "#0058b5",
+                    
                     pointRadius: 1.5,
                     fill: false
                 }
             ],
         }
-        return tempChartData
+        return chartData
     }
 
     
     return (
         <div>
             <Line
-                data={ buildTempChart }
+                data={ buildChart }
                 // height="auto"
                 // width={300}
                 options={{
                     title:{
                         display:true,
                         text:'Tempurature & Humidity',
-                        fontSize:25
+                        fontSize:20,
+                        fontColor: "#000000"
+                    },
+                    legend: {
+                        display: true,
+                        labels: {
+                            fontColor: "black",
+                            
+                        }
                     },
                     maintainAspectRatio: true,
                     responsive: true

@@ -54,7 +54,8 @@ export default function PhotoCarousel(props) {
                   <Figure
                   className="my-auto"
                   >
-                    <Figure.Image className="img-fluid my-auto" alt={photo.name} src={`https://project-three-logger-photos.s3.amazonaws.com/${photo.s3Id}`} />
+                    <Figure.Image className="img-fluid my-auto" alt={photo.name} src={`https://project-three-logger-photos.s3.amazonaws.com/${photo.s3Id}`}>
+                    </Figure.Image>
                     <Figure.Caption>{photo.caption}</Figure.Caption>
                   </Figure>
                 ))}
