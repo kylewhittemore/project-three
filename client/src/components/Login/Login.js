@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Axios from 'axios';
+import setAuth from '../../utils/setAuth';
 import './style.css';
 
 
@@ -44,8 +45,9 @@ class UserLogin extends Component {
                 // console.log(`user: ${JSON.stringify(user)}`)
                 const userId = user.id
                 localStorage.setItem('p3aajjkw-id', userId)
-                // redirect to home page
+                setAuth()
 
+                // redirect to home page
                 this.setState({ redirect: true }) 
                 // this.props.history.push('/')                
                 // Axios.defaults.headers.common['Authorization'] = token;

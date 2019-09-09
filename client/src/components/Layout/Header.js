@@ -35,25 +35,25 @@ class Header extends React.Component {
     username: ''
   };
 
-  getUserName() {
-    Axios.get('api/user/profile')
-    .then (res => {
-        this.setState ({ isAuth: true })
-        const {username, email, _id} = res.data.user
-        this.setState ( { username, email, _id })
-    })
-    .catch(console.log('Unauthenticated'))
-  }
+  // getUserName() {
+  //   Axios.get('api/user/profile')
+  //   .then (res => {
+  //       this.setState ({ isAuth: true })
+  //       const {username, email, _id} = res.data.user
+  //       this.setState ( { username, email, _id })
+  //   })
+  //   .catch(console.log('Unauthenticated'))
+  // }
 
-  componentDidMount() {
-    // isAuth();
-    this.getUserName();
+//   componentDidMount() {
+//     // isAuth();
+//     this.getUserName();
  
-};
+// };
 
-componentWillUnmount() {
-  this.getUserName();
-};
+// componentWillUnmount() {
+//   this.getUserName();
+// };
 
 
 

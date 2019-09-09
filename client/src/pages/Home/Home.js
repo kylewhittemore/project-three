@@ -14,25 +14,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
 
 function HomePage(props) {
-    // const userId = localStorage.getItem('p3aajjkw-id')
-    
-    // const [user, setUser] = useState({})
-    // const [loading, setLoading] = useState(false)
-
-    // useEffect(() => {
-       
-    //     Axios.get('api/user/profile')
-    //     .then (res => {
-    //         console.log(res)
-    //     })
-    //     .catch(console.log('Unauthenticated'))
-    // })
-
-    // if (!userId) {
-    //     return (
-    //         <Redirect to={'/'} />
-    //     )
-    // }
 
 
     return (
