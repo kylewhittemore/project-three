@@ -5,6 +5,7 @@ import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import fmt from '../../utils/formatTime'
 import DashboardChart from '../DashboardChart/DashboardChart'
+import DashboardTimeline from '../DashboardTimeline/DashboardTimeline'
 
 import { set } from 'mongoose';
 
@@ -46,7 +47,7 @@ export default function Dashboard(props) {
             setGrowId(response.data._id)
             console.log("USER DATA", response.data)
             tempAllDates = response.data.dailyLogs.map(log => log.date)
-            console.log("ALL DATES: ", tempAllDates)
+            console.log("number of dailyLogs:", response.data.dailyLogs.length)
             setAllDates(tempAllDates)
             setWaterHistory(response.data.dailyLogs.filter(log => log.didWater))
             setFeedHistory(response.data.dailyLogs.filter(log => log.didFeed))
@@ -132,6 +133,9 @@ export default function Dashboard(props) {
             </Container>
             <Container className="chartContainer">
                 <DashboardChart {...props} />
+            </Container>
+            <Container className="chartContainer">
+                <DashboardTimeline {...props} />
             </Container>
         </div>
     )
