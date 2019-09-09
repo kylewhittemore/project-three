@@ -9,8 +9,8 @@ const Populate = () => {
 
 
     
-const growId = '5d71cb3efed91156e43e2098'  //JJ - murmuring thicket
-const userId = '5d71c74bb1a8b04f6c6a3dc6'  //test123
+const growId = '5d75cafb0758bf621c0b0bc0'  //JJ - murmuring thicket
+const userId = '5d75c8adf3b5077548482596'  //demo123
 
 async function postLogToDB(element, growId) {
     let response = await Axios.post(`/api/daily/${growId}`, element)
@@ -23,10 +23,6 @@ async function postGrowToDB(element, userId) {
 }
 
 async function putEnvToLog(element) {
-    // let date = element.date
-    // let dailyLog = await Axios.post('/api/environ/', {date: element.date})
-    // let logId = dailyLog._id
-    // console.log('DATE: ', element.date, " || logId: ", logId)
     let response = await Axios.post('/api/environ/', element)
     return response.data
 }
@@ -41,28 +37,36 @@ async function putEnvToLog(element) {
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // LOAD DAILY LOGS
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// data.forEach(element => {
+// data.forEach((element, index) => {
 //     let data = element
 //     data.grow = growId
-//     postLogToDB(data, growId)
-//     .then(response => {
-//         console.log(response)
-//     })
-//     .catch(err => console.log(err))
+//     setTimeout(() => {
+//         postLogToDB(data, growId)
+//         .then(response => {
+//             console.log(response)
+//         })
+//         .catch(err => console.log(err))
+//     }, 250*index)
 // })
 //
 // +++ END
 
+
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // LOAD ENVIRONMENTAL DATA ***>>> requires dailyLog for DATE exists
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-envdata.forEach(element => {
-    putEnvToLog(element) 
-    .then(response => {
-            console.log(response)
+setTimeout(() => {
+    
+    envdata.forEach((element, index) => {
+        setTimeout(() => {
+            putEnvToLog(element) 
+            .then(response => {
+                    console.log(response.temp, response.humidity)
+            })
+            .catch(err => console.log(err))
+        }, 500*index)
     })
-    .catch(err => console.log(err))
-})
+},30000)
 //
 // +++ END
 
