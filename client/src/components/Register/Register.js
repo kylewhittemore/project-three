@@ -77,9 +77,9 @@ class UserSignup extends Component {
     render () {
 
         return ( 
-            <Container >
+            <Container className="registerContainer">
                 
-                <h1>SIGNUP PAGE</h1>
+                <h2 className="text-center pb-4">SIGNUP PAGE</h2>
                 { this.state.success ? null : 
                     <Alert variant="danger">
                         <Alert.Heading>You got an error!</Alert.Heading>
