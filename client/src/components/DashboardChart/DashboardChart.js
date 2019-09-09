@@ -65,26 +65,30 @@ useEffect (() => {
                 {
                     label:'High Temps',
                     data: hiTemp ? hiTemp : null,
-                    borderColor: "#2930EB", 
+                    borderColor: "#b50000",
+                    backgroundColor: "#b50000", 
                     pointRadius: 2,
                     fill: false
                 },{
                     label:'Low Temps',
                     data: loTemp ? loTemp : null,
-                    borderColor: "#B40EFF",
+                    borderColor: "#0058b5",
+                    backgroundColor: "#0058b5",
                     pointRadius: 2,
                     fill: false
                     },
                     {
                     label:'High Humidity',
                     data: hiHumidity ? hiHumidity : null,
-                    borderColor: "#FF581F",
+                    borderColor: "#ff0000",
+                    backgroundColor: "#ff0000",
                     pointRadius: 1.5,
                     fill: false
                 },{
                     label:'Low Humidity',
                     data: loHumidity ? loHumidity : null,
-                    borderColor: "#FF7D13",
+                    borderColor: "#00a6ff",
+                    backgroundColor: "#00a6ff",
                     pointRadius: 1.5,
                     fill: false
                 }
@@ -104,7 +108,15 @@ useEffect (() => {
                     title:{
                         display:true,
                         text:'Tempurature & Humidity',
-                        fontSize:25
+                        fontSize:25,
+                        fontColor: "#000000"
+                    },
+                    legend: {
+                        display: true,
+                        labels: {
+                            fontColor: "black",
+                            
+                        }
                     },
                     maintainAspectRatio: true,
                     responsive: true
