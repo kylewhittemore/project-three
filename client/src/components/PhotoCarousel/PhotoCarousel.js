@@ -36,9 +36,9 @@ export default function PhotoCarousel(props) {
             {loading ? <Spinner />
                 :
                 <StackGrid
-                monitorImagesLoaded
+                monitorImagesLoaded="false"
                 columnWidth={300}
-                duration={600}
+                duration={1000}
                 gutterWidth={10}
                 gutterHeight={10}
                 easing={scaleDown.cubicOut}
@@ -48,12 +48,13 @@ export default function PhotoCarousel(props) {
                 enter={scaleDown.enter}
                 entered={scaleDown.entered}
                 leaved={scaleDown.leaved}
+                className="images"
               >
                 {photos.map(photo => (
                   <Figure
-                    className="image"
+                  className="my-auto"
                   >
-                    <Figure.Image className="img-fluid" alt={photo.name} src={`https://project-three-logger-photos.s3.amazonaws.com/${photo.s3Id}`} />
+                    <Figure.Image className="img-fluid my-auto" alt={photo.name} src={`https://project-three-logger-photos.s3.amazonaws.com/${photo.s3Id}`} />
                     <Figure.Caption>{photo.caption}</Figure.Caption>
                   </Figure>
                 ))}
