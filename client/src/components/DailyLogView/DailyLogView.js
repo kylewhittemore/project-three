@@ -56,15 +56,15 @@ export default function DailyLogView(props) {
         let eventStatement
 
         eventArray.forEach((event, index) => {
-            if (index === eventArray.length - 1) { eventStatement = `${eventStatement}, and ${event}`}
-            else if (index === 0) { eventStatement = event}
-            else { eventStatement = `${eventStatement}, ${event}`}
+            if (index === eventArray.length - 1) { eventStatement = `${eventStatement}, and ${event}` }
+            else if (index === 0) { eventStatement = event }
+            else { eventStatement = `${eventStatement}, ${event}` }
         })
 
         return (
             <>
-            <p className="ml-4"><strong>Events: </strong>{eventStatement}</p>
-        </>
+                <p className="ml-4"><strong>Events: </strong>{eventStatement}</p>
+            </>
         )
     }
 
@@ -108,9 +108,6 @@ export default function DailyLogView(props) {
                     </Figure>
                 </Col>
             </Row>
-            <Row >
-                <EventRender />
-            </Row>
             <Row>
                 <Col md="4" className="text-center">
                     <p><strong>Plant Appearance</strong></p>
@@ -123,6 +120,11 @@ export default function DailyLogView(props) {
                 <Col md="4" className="text-center">
                     <p><strong>High/Low Humidity</strong></p>
                     <p>{`${displayObj.hiHumidity}/${displayObj.loHumidity}`}</p>
+                </Col>
+            </Row>
+            <Row >
+                <Col>
+                    <EventRender />
                 </Col>
             </Row>
             <Row>
