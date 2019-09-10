@@ -56,27 +56,18 @@ export default function DailyLogView(props) {
         let eventStatement
 
         eventArray.forEach((event, index) => {
-<<<<<<< HEAD
-            if (index === eventArray.length - 1) { eventStatement = `${eventStatement}, and ${event}` }
-            else if (index === 0) { eventStatement = event }
-=======
             if (index === 0 || eventArray.length === 1) { eventStatement = event }
             else if (index === eventArray.length - 1) { eventStatement = `${eventStatement}, and ${event}` }
->>>>>>> master
             else { eventStatement = `${eventStatement}, ${event}` }
         })
 
         return (
             <>
-<<<<<<< HEAD
-                <p className="ml-4"><strong>Events: </strong>{eventStatement}</p>
-=======
                 {eventStatement ?
                     <p className="ml-4"><strong>Events: </strong>{eventStatement}</p>
                     :
                     <></>
                 }
->>>>>>> master
             </>
         )
     }
