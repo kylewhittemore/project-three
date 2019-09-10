@@ -82,14 +82,18 @@ class StaticHeader extends Component {
                         <Row>
                             <Col md="3" className="my-auto p-0 text-center">
                                 <Figure className="my-auto staticImage">
-                                    <Figure.Image
-                                        // width={171}
-                                        // height={180}
-                                        className="img-fluid img-thumbnail m-0"
-                                        alt="171x180"
-                                        src={`https://project-three-logger-photos.s3.amazonaws.com/${this.state.coverImage}`}
-                                    >
-                                    </Figure.Image>
+                                    {this.state.coverImage ?
+                                        <Figure.Image
+                                            // width={171}
+                                            // height={180}
+                                            className="img-fluid img-thumbnail m-0"
+                                            alt="171x180"
+                                            src={`https://project-three-logger-photos.s3.amazonaws.com/${this.state.coverImage}`}
+                                        >
+                                        </Figure.Image>
+                                        :
+                                        <></>
+                                    }
                                 </Figure>
                             </Col>
 
