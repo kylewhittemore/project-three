@@ -69,25 +69,25 @@ class UserLogin extends Component {
         return ( 
             this.state.redirect ? <Redirect to={'/home'} />
             :
-            <Container >
+            <Container className="loginContainer bg-gradient-theme-right">
                 
-                <h1>LOGIN PAGE</h1>
+                <h2 className="text-center pt-2">Canna-Keeper Login</h2>
                 { this.state.success ? null : 
                     <Alert variant="danger">
                         <Alert.Heading>You got an error!</Alert.Heading>
                         <h4>{ this.state.errorMsg }</h4>
                     </Alert>
                 }
-                <Form onSubmit = {this.handleFormSubmit} >
-                    <Form.Row >
-                        <Form.Group controlId="formUsername" >
+                <Form className="text-center" onSubmit = {this.handleFormSubmit} >
+                    <Form.Row>
+                        <Form.Group className="mx-auto" controlId="formUsername" >
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" name="username" value={this.state.username} 
                                 onChange={this.handleInputChange}  />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row >
-                        <Form.Group controlId="formPassword">
+                        <Form.Group className="mx-auto" controlId="formPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" name="password" value={this.state.password} 
                                 onChange={this.handleInputChange} />
@@ -96,7 +96,7 @@ class UserLogin extends Component {
                     <Button className="m-2" variant="success" type="submit">
                         Submit
                     </Button>
-                    <Button className="m-2" variant="success" onClick={event => this.handleRegisterRequest(event)} type="submit">
+                    <Button className="m-2" variant="info" onClick={event => this.handleRegisterRequest(event)} type="submit">
                         Register
                     </Button>
                 </Form >

@@ -117,9 +117,6 @@ export default function DailyLogView(props) {
                     </Figure>
                 </Col>
             </Row>
-            <Row >
-                <EventRender />
-            </Row>
             <Row>
                 <Col md="4" className="text-center">
                     <p><strong>Plant Appearance</strong></p>
@@ -132,6 +129,11 @@ export default function DailyLogView(props) {
                 <Col md="4" className="text-center">
                     <p><strong>High/Low Humidity</strong></p>
                     <p>{`${displayObj.hiHumidity}/${displayObj.loHumidity}`}</p>
+                </Col>
+            </Row>
+            <Row >
+                <Col>
+                    <EventRender />
                 </Col>
             </Row>
             <Row>
