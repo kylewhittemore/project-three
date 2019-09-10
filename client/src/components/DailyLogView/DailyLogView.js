@@ -41,6 +41,12 @@ export default function DailyLogView(props) {
 
     }, []);
 
+    const styles = {
+        buttons: {
+            width: 50 + "px"
+        }
+    }
+
     const dateConverter = date => fmt.longestFmt(date)
 
     const EventRender = () => {
@@ -80,11 +86,19 @@ export default function DailyLogView(props) {
                     <h4>{dateConverter(log.date)}</h4>
                 </Col>
                 <Col md="2" className="text-right">
-                    <Button className="text-right btn-info"
-                        onClick={event => {
-                            event.preventDefault()
-                            props.handleEditModeChange(true)
-                        }} variant="outline-light" size="sm">Edit</Button>
+                    <div>
+
+                        <Button className="btn-success"
+                            onClick={event => {
+                                event.preventDefault()
+                                props.history.push(`/staticheader/?grow_id=${log.grow._id}`)
+                            }} variant="outline-light" style={styles.buttons} size="sm">Back</Button>
+                        <Button className=" btn-info"
+                            onClick={event => {
+                                event.preventDefault()
+                                props.handleEditModeChange(true)
+                            }} variant="outline-light" style={styles.buttons} size="sm">Edit</Button>
+                    </div>
                 </Col>
             </Row>
             <Row>
