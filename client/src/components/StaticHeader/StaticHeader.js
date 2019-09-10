@@ -68,7 +68,6 @@ class StaticHeader extends Component {
         console.log("DATA", data.coverImage)
     };
 
-
     render() {
 
         function formatMonDateShort(date) {
@@ -96,10 +95,15 @@ class StaticHeader extends Component {
 
                             <Col xs="9">
                                 <Row>
-                                    <Col xs="10" className="mx-auto text-left">
+                                    <Col xs="8" className="mx-auto text-left">
                                         <h2 className="text-capitalize">{this.state.seasonName}</h2>
                                     </Col>
-                                    <Col xs="2" className="text-right">
+                                    <Col xs="4" className="text-right">
+                                        <Button className="text-right btn-success"
+                                            onClick={event => {
+                                                event.preventDefault()
+                                                this.props.history.push(`/images/?grow_id=${this.props.growId}`)
+                                            }} variant="outline-light" size="sm">Images</Button>
                                         <Button className="text-right btn-info"
                                             onClick={event => {
                                                 event.preventDefault()
