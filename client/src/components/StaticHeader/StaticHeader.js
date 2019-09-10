@@ -7,6 +7,7 @@ import fmt from '../../utils/formatTime';
 import DailyLogTable from '../DailyLogTable/DailyLogTable';
 
 
+
 class StaticHeader extends Component {
 
     constructor(props) {
@@ -47,8 +48,10 @@ class StaticHeader extends Component {
         let data = response.data;
         this.setState({
             seasonName: data.seasonName,
-            dateStarted: data.dateStarted ? Moment(data.dateStarted.slice(0, 10)).format("MM-DD-YYYY") : '',
-            dateCompleted: data.dateCompleted ? Moment(data.dateCompleted.slice(0, 10)).format("MM-DD-YYYY") : '',
+            dateStarted: data.dateStarted ? data.dateStarted : '',
+            dateCompleted: data.dateCompleted ? data.dateCompleted : '',
+            // dateStarted: data.dateStarted ? Moment(data.dateStarted.slice(0, 10)).format("MM-DD-YYYY") : '',
+            // dateCompleted: data.dateCompleted ? Moment(data.dateCompleted.slice(0, 10)).format("MM-DD-YYYY") : '',
             strainName: data.strainName,
             lineage: data.lineage,
             floweringTime: data.floweringTime,
