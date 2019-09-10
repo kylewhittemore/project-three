@@ -73,7 +73,8 @@ function DailyLogPage(props) {
             <div className="align-me">
                 {editMode ?
 
-                    <DailyLogForm {...props}
+                    <DailyLogForm
+                        {...props}
                         growId={growId}
                         logId={logId}
                         userId={user._id}
@@ -83,6 +84,7 @@ function DailyLogPage(props) {
                     />
                     :
                     <DailyLogView
+                        {...props}
                         handleEditModeChange={handleEditModeChange}
                     />
                 }
