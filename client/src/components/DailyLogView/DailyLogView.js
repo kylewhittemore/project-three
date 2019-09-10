@@ -115,12 +115,7 @@ export default function DailyLogView(props) {
                                 <Figure.Caption>{log.caption}</Figure.Caption>
                             </>
                             :
-                            <Figure.Image
-                                width={152}
-                                height={152}
-                                alt=""
-                                src="./leaf.png"
-                            />
+                            <></>
 
                         }
                     </Figure>
