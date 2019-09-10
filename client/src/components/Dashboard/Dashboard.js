@@ -84,7 +84,7 @@ export default function Dashboard(props) {
     };
 
     return (
-        <div>
+        <div className="pageContainer">
             <Container className="titleContainer">
                 <Row className="mb-2">
                     <Col>
