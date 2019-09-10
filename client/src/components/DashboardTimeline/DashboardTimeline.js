@@ -122,6 +122,8 @@ export default function Dashboard(props) {
 
 
     function xTick(date) {
+        if (date > allDates.length) { date = allDates.length - 1 }
+
         return allDates ? fmt.shortFmt(allDates[date]) : ""
     }
 

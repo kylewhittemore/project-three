@@ -8,6 +8,7 @@ import Figure from 'react-bootstrap/Figure'
 import Axios from 'axios'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import Moment from "moment";
+import fmt from '../../utils/formatTime'
 
 export default function GrowTable(props) {
 
@@ -112,12 +113,14 @@ export default function GrowTable(props) {
                                         <ListGroup.Item className="text-capitalize"><strong>Strain Name:</strong> {grow.strainName}</ListGroup.Item>
                                         <ListGroup.Item className="text-capitalize"><strong>Breeder:</strong> {grow.breeder}</ListGroup.Item>
                                         <ListGroup.Item className="text-capitalize"><strong>Start Date:</strong> {grow.dateStarted
-                                            ? Moment(grow.dateStarted.slice(0, 10)).format("MM-DD-YYYY")
+                                            ? fmt.longFmt(grow.dateStarted)
+                                            // ? Moment(grow.dateStarted.slice(0, 10)).format("MM-DD-YYYY")
                                             : "Not Started"} </ListGroup.Item>
                                         <ListGroup.Item className="text-capitalize"><strong>Date Completed:</strong> {!grow.dateCompleted && !grow.dateStarted
                                             ? ''
-                                            : grow.dateCompleted
-                                                ? Moment(grow.dateCompleted.slice(0, 10)).format("MM-DD-YYYY")
+                                            : fmt.longFmt(grow.dateCompleted)
+                                                ? fmt.longFmt(grow.dateCompleted)
+                                                // ? Moment(grow.dateCompleted.slice(0, 10)).format("MM-DD-YYYY")
                                                 : "In Progress"} </ListGroup.Item>
                                     </ListGroup>
                                 </Col>
