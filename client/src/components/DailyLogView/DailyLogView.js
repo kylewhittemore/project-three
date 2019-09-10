@@ -80,6 +80,11 @@ export default function DailyLogView(props) {
                     <h4>{dateConverter(log.date)}</h4>
                 </Col>
                 <Col md="2" className="text-right">
+                    <Button className="text-right btn-warning"
+                        onClick={event => {
+                            event.preventDefault()
+                            props.history.push(`/staticheader/?grow_id=${log.grow._id}`)
+                        }} variant="outline-light" size="sm">Back</Button>
                     <Button className="text-right btn-info"
                         onClick={event => {
                             event.preventDefault()
