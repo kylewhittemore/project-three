@@ -46,43 +46,25 @@ export default function DailyLogView(props) {
     const EventRender = () => {
 
         let eventArray = []
-        if (log.didWater) { eventArray.push(` - Watered`) }
-        if (log.didTransplant) { eventArray.push(` - Transplanted`) }
-        if (log.didFeed) { eventArray.push(` - Fed`) }
-        if (log.didDefoliate) { eventArray.push(` - Defoliated`) }
-        if (log.didFlip) { eventArray.push(` - Flipped`) }
-        if (log.didFlush) { eventArray.push(` - Flushed`) }
+        if (log.didWater) { eventArray.push(`watered`) }
+        if (log.didTransplant) { eventArray.push(`transplanted`) }
+        if (log.didFeed) { eventArray.push(`fed`) }
+        if (log.didDefoliate) { eventArray.push(`defoliated`) }
+        if (log.didFlip) { eventArray.push(`flipped`) }
+        if (log.didFlush) { eventArray.push(`flushed`) }
 
-        let eventArr1, eventArr2
+        let eventStatement
 
-        if (eventArray.length > 3) {
-            eventArr1 = eventArray.slice(0, 3)
-            eventArr2 = eventArray.slice(3, eventArray.length)
-        }
+        eventArray.forEach((event, index) => {
+            if (index === eventArray.length - 1) { eventStatement = `${eventStatement}, and ${event}`}
+            else if (index === 0) { eventStatement = event}
+            else { eventStatement = `${eventStatement}, ${event}`}
+        })
 
         return (
-            eventArray.length > 3 ?
-                <>
-
-                    <Col>
-                        {eventArr1.map((event, index) => <p key={Date.now + index}><strong>{event}</strong></p>)}
-                    </Col>
-                    <Col>
-                        {eventArr2.map((event, index) => <p key={Date.now + index}><strong>{event}</strong></p>)}
-                    </Col>
-                </>
-                :
-                <>
-                <Row>
-
-                    <Col md="6">
-                        {eventArray.map((event, index) => <p key={Date.now + index}><strong>{event}</strong></p>)}
-                    </Col>
-                    <Col md="6">
-                        <div></div>
-                    </Col>
-                </Row>
-                </>
+            <>
+            <p className="ml-4"><strong>Events: </strong>{eventStatement}</p>
+        </>
         )
     }
 
