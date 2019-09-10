@@ -55,11 +55,11 @@ export default function GrowTable(props) {
                     <div key={grow._id}>
                         <Container className="seasonBox">
                             <Row >
-                                <Col sm="6" className="boxTop">
+                                <Col className="boxTop">
                                     <h2 className="font-italic text-capitalize">{grow.seasonName}</h2>
                                     {/* <p >System Id: {grow._id}</p> */}
                                 </Col>
-                                <Col sm="6" className="boxTop text-right">
+                                <Col className="boxTop text-right">
                                     <div >
                                         <Button className="btn-primary gt-button btn-sm" onClick={event => {
                                             event.preventDefault()
@@ -99,7 +99,7 @@ export default function GrowTable(props) {
                                         height={152}
                                         alt="171x180"
                                         src="./leaf.png"
-                                        className="mx-auto my-auto img-fluid"
+                                        className="mx-auto my-auto d-block img-fluid"
                                         />
                                     }
                                         {/* <Figure.Caption>

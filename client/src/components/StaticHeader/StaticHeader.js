@@ -80,7 +80,7 @@ class StaticHeader extends Component {
                     :
                     <Container className="staticHeaderContainer mx-auto">
                         <Row>
-                            <Col xs="3" className="my-auto p-0 text-center">
+                            <Col md="3" className="my-auto p-0 text-center">
                                 <Figure className="my-auto staticImage">
                                     <Figure.Image
                                         // width={171}
@@ -93,7 +93,7 @@ class StaticHeader extends Component {
                                 </Figure>
                             </Col>
 
-                            <Col xs="9">
+                            <Col md="9">
                                 <Row>
                                     <Col xs="8" className="mx-auto text-left">
                                         <h2 className="text-capitalize">{this.state.seasonName}</h2>
